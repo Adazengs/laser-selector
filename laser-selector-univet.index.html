@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filter Selector | Univet Laser</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #0d0f10;
+  --bg2:       #141618;
+  --bg3:       #1c1f22;
+  --bg4:       #23272b;
+  --border:    #2e3338;
+  --border2:   #3d4349;
+  --accent:     #3ab54a;
+  --accent-dark:#2d9140;
+  --accent-glow: rgba(58,181,74,0.15);
+  --accent-dim:  rgba(58,181,74,0.08);
+  --white:     #f4f5f6;
+  --text:      #d8dadc;
+  --text-mid:  #8c9198;
+  --text-dim:  #555c63;
+  --warn:      #d4900a;
+  --warn-bg:   rgba(212,144,10,0.08);
+  --warn-bdr:  rgba(212,144,10,0.25);
+  --success:   #2ea84e;
+  --success-bg:rgba(46,168,78,0.08);
+  --mono:      'DM Mono', monospace;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-wordmark {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.logo-wordmark span { color: var(--accent); }
+
+.logo-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border2);
+}
+
+.logo-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.topbar-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.topbar-cert {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  border: 1px solid rgba(58,181,74,0.3);
+  padding: 3px 8px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 40px 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent) 0%, transparent 60%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(58,181,74,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner { max-width: 740px; position: relative; z-index: 1; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(58,181,74,0.3);
+  background: var(--accent-dim);
+  padding: 5px 12px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,100%{opacity:1;} 50%{opacity:0.2;}
+}
+
+h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+  font-family: 'Barlow', sans-serif;
+  text-transform: none;
+  font-size: 0.75em;
+  display: block;
+  letter-spacing: 0;
+  margin-bottom: 4px;
+  opacity: 0.9;
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 500px;
+}
+
+/* ── MAIN ── */
+.main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 44px 24px 80px;
+}
+
+/* ── PROGRESS ── */
+.progress-bar {
+  display: flex;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.prog-step {
+  flex: 1;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-right: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.prog-step:last-child { border-right: none; }
+.prog-step.active { background: rgba(58,181,74,0.06); }
+.prog-step.done { background: rgba(46,168,78,0.05); }
+
+.prog-num {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--bg4);
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--border2);
+  transition: all 0.2s;
+}
+
+.prog-step.active .prog-num {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.prog-step.done .prog-num {
+  background: var(--success);
+  color: var(--white);
+  border-color: var(--success);
+}
+
+.prog-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+
+.prog-step.active .prog-label { color: var(--white); }
+.prog-step.done .prog-label { color: var(--success); }
+
+/* ── PANELS ── */
+.panel { display: none; }
+.panel.active { display: block; animation: fadeUp 0.28s ease; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── SECTION HEADER ── */
+.sec-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.sec-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 0.5px;
+  margin-bottom: 28px;
+}
+
+/* ── ALERT ── */
+.alert {
+  display: flex;
+  gap: 12px;
+  padding: 13px 16px;
+  border-radius: 5px;
+  font-size: 13px;
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+
+.alert-warn {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-bdr);
+  color: var(--warn);
+}
+
+.alert-info {
+  background: var(--success-bg);
+  border: 1px solid rgba(46,168,78,0.25);
+  color: var(--success);
+}
+
+.alert-icon { font-size: 14px; flex-shrink:0; margin-top:1px; }
+
+/* ── INPUT ── */
+.wl-field {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.wl-field:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.wl-input {
+  border: none; outline: none;
+  background: transparent;
+  padding: 14px 18px;
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--white);
+  width: 170px;
+}
+
+.wl-input::placeholder { color: var(--text-dim); }
+
+.wl-unit {
+  padding: 0 16px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--bg4);
+  border-left: 1px solid var(--border);
+  height: 100%;
+  display: flex; align-items: center;
+  font-weight: 500;
+}
+
+.input-hint {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+  font-family: var(--mono);
+}
+
+/* ── QUICK PICKS ── */
+.qp-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.qp-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.qp-chip {
+  display: flex;
+  flex-direction: column;
+  padding: 9px 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: left;
+}
+
+.qp-chip:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.qp-nm {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.qp-name {
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+/* ── NAV BUTTONS ── */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  margin-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.btn-back {
+  padding: 11px 22px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-mid);
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  transition: all 0.18s;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.btn-back:hover { border-color: var(--border2); color: var(--white); background: var(--bg3); }
+
+.btn-next {
+  padding: 11px 26px;
+  background: var(--accent);
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.18s;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+.btn-next:hover:not(:disabled) {
+  background: var(--accent-dark);
+  box-shadow: 0 6px 20px rgba(58,181,74,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-next:disabled {
+  background: var(--bg4);
+  color: var(--text-dim);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ── OD GRID ── */
+.od-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+@media (max-width:540px) { .od-grid { grid-template-columns: repeat(2,1fr); } }
+
+.od-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 16px;
+  cursor: pointer;
+  transition: all 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+
+.od-card::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+
+.od-card:hover { border-color: var(--border2); background: var(--bg4); }
+.od-card:hover::after { transform: scaleX(1); }
+
+.od-card.selected {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 20px var(--accent-glow);
+}
+
+.od-card.selected::after { transform: scaleX(1); }
+
+.od-card.od-disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.od-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.od-card.selected .od-val { color: var(--accent); }
+
+.od-power {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.od-card.selected .od-power { color: rgba(58,181,74,0.7); }
+
+.od-desc-text {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.od-info {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 5px 5px 0;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  display: none;
+}
+
+.od-info.show { display: block; }
+.od-info strong { color: var(--white); }
+
+/* ── RESULTS ── */
+.result-meta {
+  display: flex;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.rm-item {
+  flex: 1;
+  padding: 16px 20px;
+  border-right: 1px solid var(--border);
+}
+
+.rm-item:last-child { border-right: none; }
+
+.rm-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.rm-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.rm-unit {
+  font-size: 13px;
+  font-family: var(--mono);
+  color: var(--text-mid);
+  font-weight: 400;
+}
+
+/* ── RESULT CARDS ── */
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.rc {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 20px;
+  align-items: start;
+  animation: fadeUp 0.28s ease both;
+  transition: border-color 0.18s;
+}
+
+.rc:hover { border-color: var(--border2); }
+
+.rc.best {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(58,181,74,0.04) 0%, var(--bg2) 50%);
+  box-shadow: 0 0 0 1px rgba(58,181,74,0.15), 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.rc-left { text-align: center; border-right: 1px solid var(--border); padding-right: 20px; }
+
+.best-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.alt-badge {
+  display: inline-block;
+  background: var(--bg4);
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  text-transform: uppercase;
+}
+
+.rc-code {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--white);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.rc.best .rc-code { color: var(--accent); }
+
+.color-swatch {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  margin: 0 auto 4px;
+}
+
+.rc-swatch-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rc-mid h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.rc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.tag-od { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(58,181,74,0.25); }
+.tag-vlt { background: rgba(255,255,255,0.04); color: var(--text-mid); border: 1px solid var(--border); }
+.tag-mat { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); }
+
+.rc-reason {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+.rc-reason strong { color: var(--white); }
+
+.od-bar-wrap { margin-top: 12px; }
+
+.od-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.od-bar-track {
+  height: 3px;
+  background: var(--bg4);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.od-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+
+.rc-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 110px;
+}
+
+.btn-quote {
+  padding: 10px 14px;
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.18s;
+  text-align: center;
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+.btn-quote:hover {
+  background: var(--accent-dark);
+  box-shadow: 0 4px 14px rgba(58,181,74,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-spec {
+  padding: 10px 14px;
+  background: transparent;
+  color: var(--text-mid);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'Barlow', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.18s;
+  text-align: center;
+}
+
+.btn-spec:hover { border-color: var(--text-dim); color: var(--white); }
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--warn);
+  border-radius: 0 5px 5px 0;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.disclaimer strong { color: var(--warn); }
+
+/* ── EMPTY ── */
+.empty {
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.empty-icon { font-size: 40px; margin-bottom: 14px; }
+
+.empty h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.empty p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 60px;
+}
+
+.footer-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.footer-brand span { color: var(--accent); }
+
+.footer-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  text-align: right;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width:620px) {
+  .topbar { padding: 0 20px; }
+  .hero { padding: 40px 20px 36px; }
+  .main { padding: 28px 16px 60px; }
+  .rc { grid-template-columns: 1fr; }
+  .rc-left { border-right:none; border-bottom:1px solid var(--border); padding-right:0; padding-bottom:14px; display:flex; align-items:center; gap:14px; text-align:left; }
+  .rc-right { flex-direction:row; }
+  .result-meta { flex-wrap:wrap; }
+  .rm-item { min-width:120px; }
+  footer { padding: 20px; }
+  .footer-meta { text-align:left; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="logo">
+    <div class="logo-wordmark">UNI<span>VET</span></div>
+    <div class="logo-divider"></div>
+    <div class="logo-sub">Laser Protection</div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-tag">REV. 02/2024</span>
+    <span class="topbar-cert">CE · EN 207</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Filter Selector Tool</div>
+    <h1>
+      <em>Find the right protection for</em>
+      Your Laser System
+    </h1>
+    <p class="hero-desc">Enter your laser wavelength and required OD level. We'll match the correct Univet filter code from the full product database — certified to EN 207 / EN 208.</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PROGRESS -->
+  <div class="progress-bar">
+    <div class="prog-step active" id="pt1">
+      <div class="prog-num">1</div>
+      <div class="prog-label">Wavelength</div>
+    </div>
+    <div class="prog-step" id="pt2">
+      <div class="prog-num">2</div>
+      <div class="prog-label">Protection Level</div>
+    </div>
+    <div class="prog-step" id="pt3">
+      <div class="prog-num">3</div>
+      <div class="prog-label">Results</div>
+    </div>
+  </div>
+
+  <!-- PANEL 1 -->
+  <div class="panel active" id="p1">
+    <div class="sec-tag">Step 01</div>
+    <div class="sec-title">What is your laser wavelength?</div>
+
+    <div class="alert alert-warn">
+      <span class="alert-icon">⚠</span>
+      <span>Laser eyewear must precisely match your laser wavelength. An incorrect filter may offer <strong>zero protection</strong> at certain wavelengths. Always verify your machine's spec sheet before selecting.</span>
+    </div>
+
+    <div class="wl-field">
+      <input type="number" class="wl-input" id="wl-input" placeholder="1064" min="180" max="11000">
+      <div class="wl-unit">nm</div>
+    </div>
+    <div class="input-hint">Valid range: 180 – 11,000 nm &nbsp;·&nbsp; or select a common laser type below</div>
+
+    <div class="qp-label">Common laser types</div>
+    <div class="qp-grid">
+      <button class="qp-chip" onclick="setWL(10600)"><span class="qp-nm">10600 nm</span><span class="qp-name">CO₂</span></button>
+      <button class="qp-chip" onclick="setWL(2940)"><span class="qp-nm">2940 nm</span><span class="qp-name">Er:YAG</span></button>
+      <button class="qp-chip" onclick="setWL(1080)"><span class="qp-nm">1080 nm</span><span class="qp-name">Fiber</span></button>
+      <button class="qp-chip" onclick="setWL(1064)"><span class="qp-nm">1064 nm</span><span class="qp-name">Nd:YAG</span></button>
+      <button class="qp-chip" onclick="setWL(1030)"><span class="qp-nm">1030 nm</span><span class="qp-name">Yb:YAG</span></button>
+      <button class="qp-chip" onclick="setWL(940)"><span class="qp-nm">940 nm</span><span class="qp-name">Diode</span></button>
+      <button class="qp-chip" onclick="setWL(808)"><span class="qp-nm">808 nm</span><span class="qp-name">Diode</span></button>
+      <button class="qp-chip" onclick="setWL(755)"><span class="qp-nm">755 nm</span><span class="qp-name">Alexandrite</span></button>
+      <button class="qp-chip" onclick="setWL(694)"><span class="qp-nm">694 nm</span><span class="qp-name">Ruby</span></button>
+      <button class="qp-chip" onclick="setWL(650)"><span class="qp-nm">650 nm</span><span class="qp-name">Diode Red</span></button>
+      <button class="qp-chip" onclick="setWL(532)"><span class="qp-nm">532 nm</span><span class="qp-name">Nd:YAG KTP</span></button>
+      <button class="qp-chip" onclick="setWL(445)"><span class="qp-nm">445 nm</span><span class="qp-name">Diode Blue</span></button>
+      <button class="qp-chip" onclick="setWL(355)"><span class="qp-nm">355 nm</span><span class="qp-name">Nd:YAG 3×</span></button>
+      <button class="qp-chip" onclick="setWL(266)"><span class="qp-nm">266 nm</span><span class="qp-name">Nd:YAG 4×</span></button>
+      <button class="qp-chip" onclick="setWL(248)"><span class="qp-nm">248 nm</span><span class="qp-name">KrF Excimer</span></button>
+    </div>
+
+    <div class="nav-row">
+      <div></div>
+      <button class="btn-next" id="btn1next" onclick="goTo(2)" disabled>
+        Next: Protection Level
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- PANEL 2 -->
+  <div class="panel" id="p2">
+    <div class="sec-tag">Step 02</div>
+    <div class="sec-title">Required protection level</div>
+
+    <p style="font-size:13px; color:var(--text-mid); margin-bottom:22px; line-height:1.7;">OD (Optical Density) defines the filter's attenuation capacity. Each OD step = <strong style="color:var(--white)">10× more protection</strong>. Select based on your laser power output. Greyed-out levels are not available for the selected wavelength.</p>
+
+    <div class="od-grid">
+      <div class="od-card" onclick="selOD(3)" data-od="3">
+        <div class="od-val">OD 3</div>
+        <div class="od-power">Low Power</div>
+        <div class="od-desc-text">< 1W<br>Pointers, alignment</div>
+      </div>
+      <div class="od-card" onclick="selOD(4)" data-od="4">
+        <div class="od-val">OD 4</div>
+        <div class="od-power">Light Industrial</div>
+        <div class="od-desc-text">1–10W<br>Low-power engraving</div>
+      </div>
+      <div class="od-card" onclick="selOD(5)" data-od="5">
+        <div class="od-val">OD 5</div>
+        <div class="od-power">Mid Power</div>
+        <div class="od-desc-text">10–50W<br>Laser engravers</div>
+      </div>
+      <div class="od-card" onclick="selOD(6)" data-od="6">
+        <div class="od-val">OD 6</div>
+        <div class="od-power">Industrial</div>
+        <div class="od-desc-text">50–500W<br>Cutting / welding</div>
+      </div>
+      <div class="od-card" onclick="selOD(7)" data-od="7">
+        <div class="od-val">OD 7</div>
+        <div class="od-power">High Power</div>
+        <div class="od-desc-text">> 500W<br>Q-switch / medical</div>
+      </div>
+      <div class="od-card" onclick="selOD(8)" data-od="8">
+        <div class="od-val">OD 8</div>
+        <div class="od-power">Maximum</div>
+        <div class="od-desc-text">Ultra-high power<br>High peak pulse</div>
+      </div>
+    </div>
+
+    <div class="od-info" id="od-info"></div>
+
+    <div class="alert alert-warn">
+      <span class="alert-icon">⚠</span>
+      <span>Check your laser's safety class: Class 3R → OD 3 · Class 3B → OD 4–5 · Class 4 → OD 6+. <strong>If in doubt, always select a higher OD level.</strong> Over-protection is safe; insufficient protection causes permanent eye injury.</span>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(1)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M7 11L3 7l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back
+      </button>
+      <button class="btn-next" id="btn2next" onclick="goTo(3)" disabled>
+        View Recommended Filters
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- PANEL 3 -->
+  <div class="panel" id="p3">
+    <div class="sec-tag">Step 03</div>
+    <div class="sec-title">Recommended Filter Codes</div>
+    <div id="results"></div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(2)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M7 11L3 7l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Edit Criteria
+      </button>
+      <button class="btn-next" onclick="reset()" style="background:var(--bg4);color:var(--text-mid);box-shadow:none;border:1px solid var(--border2);">Start Over</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">UNI<span>VET</span> Laser</div>
+  <div class="footer-meta">
+    ISO 9001:2015 · CE Certified · Via Giovanni Prati 87, Rezzato (BS) Italy<br>
+    Data source: Laser Safety Filters Technical Data Sheet Rev. 02/2024 · For reference only
+  </div>
+</footer>
+
+<script>
+let selWL = null, chosenOD = null;
+
+const DB = [
+  { code:"UL-1001", mat:"Polycarbonate", color:"Clear", vlt:90, align:"400–780nm",
+    ranges:[{a:190,b:315,od:7},{a:9000,b:11000,od:6}] },
+  { code:"UL-1002", mat:"Polycarbonate", color:"Clear", vlt:90, align:"400–780nm",
+    ranges:[{a:9000,b:11000,od:6}] },
+  { code:"UL-1005", mat:"Polycarbonate", color:"Green", vlt:33, align:"470–650nm",
+    ranges:[{a:190,b:315,od:5},{a:315,b:430,od:5},{a:750,b:1100,od:3},{a:775,b:1100,od:4},{a:790,b:1090,od:5},{a:920,b:1075,od:6},{a:1000,b:1070,od:7},{a:1030,b:1065,od:8},{a:9000,b:11000,od:6}] },
+  { code:"UL-1007", mat:"Polycarbonate", color:"Blue", vlt:16, align:"425–555nm",
+    ranges:[{a:190,b:315,od:7},{a:315,b:375,od:6},{a:600,b:670,od:3},{a:620,b:665,od:4},{a:625,b:660,od:5},{a:629,b:658,od:6}] },
+  { code:"UL-1008", mat:"Polycarbonate", color:"Pink", vlt:19, align:"410–695nm",
+    ranges:[{a:190,b:315,od:7},{a:720,b:870,od:3},{a:730,b:865,od:4},{a:735,b:862,od:5},{a:742,b:855,od:6},{a:745,b:850,od:7},{a:750,b:845,od:8}] },
+  { code:"UL-1009", mat:"Polycarbonate", color:"Orange", vlt:38, align:"560–780nm",
+    ranges:[{a:190,b:315,od:7},{a:315,b:532,od:7},{a:315,b:535,od:6}] },
+  { code:"UL-1015", mat:"Polycarbonate", color:"Green", vlt:20, align:"450–580nm",
+    ranges:[{a:190,b:315,od:7},{a:315,b:380,od:6},{a:625,b:730,od:3},{a:685,b:722,od:4},{a:689,b:719,od:5},{a:692,b:715,od:6},{a:760,b:920,od:3},{a:775,b:900,od:4},{a:785,b:870,od:5},{a:795,b:825,od:6}] },
+  { code:"UL-1016", mat:"Polycarbonate", color:"Dark Orange", vlt:16, align:"555–695nm",
+    ranges:[{a:190,b:315,od:7},{a:315,b:532,od:8},{a:800,b:1105,od:3},{a:850,b:1090,od:4},{a:905,b:1080,od:5},{a:945,b:1070,od:6},{a:970,b:1068,od:7},{a:1000,b:1065,od:8},{a:9000,b:11000,od:6}] },
+  { code:"UL-1020", mat:"Polycarbonate", color:"Purple", vlt:12, align:"406–520nm",
+    ranges:[{a:560,b:600,od:3},{a:570,b:598,od:4},{a:574,b:597,od:5},{a:577,b:596,od:7}] },
+  { code:"UL-1022", mat:"Polycarbonate", color:"Dark Green", vlt:10, align:"—",
+    ranges:[{a:190,b:315,od:7},{a:315,b:455,od:6},{a:625,b:1170,od:3},{a:630,b:1160,od:4},{a:680,b:1125,od:5},{a:690,b:1115,od:6},{a:755,b:1100,od:7},{a:765,b:1080,od:8},{a:9000,b:11000,od:6}] },
+  { code:"UL-1029", mat:"Polycarbonate", color:"Dark Orange", vlt:10, align:"560–620nm",
+    ranges:[{a:190,b:315,od:7},{a:315,b:535,od:6},{a:680,b:1115,od:3},{a:690,b:1100,od:4},{a:715,b:1095,od:5},{a:732,b:850,od:6},{a:880,b:1085,od:8},{a:9000,b:11000,od:6}] },
+  { code:"UL-1036", mat:"Polycarbonate", color:"Light Gray", vlt:40, align:"400–700nm",
+    ranges:[{a:1060,b:1070,od:8}] },
+  { code:"UL-1037", mat:"Polycarbonate", color:"Gray", vlt:20, align:"400–700nm",
+    ranges:[{a:960,b:1135,od:3},{a:975,b:1120,od:4},{a:990,b:1110,od:5},{a:995,b:1100,od:6},{a:1010,b:1090,od:7},{a:1050,b:1080,od:8},{a:1420,b:1585,od:2},{a:1585,b:1660,od:3},{a:1660,b:3000,od:4},{a:10000,b:11000,od:6}] },
+  { code:"UL-1038", mat:"Polycarbonate", color:"Gray/Green", vlt:25, align:"400–700nm",
+    ranges:[{a:1300,b:1400,od:3},{a:1400,b:3000,od:4},{a:10000,b:11000,od:6}] },
+  { code:"UL-1044", mat:"Polycarbonate", color:"Dark Orange", vlt:15, align:"560–650nm",
+    ranges:[{a:190,b:315,od:7},{a:315,b:535,od:8},{a:765,b:1100,od:6},{a:780,b:1095,od:7},{a:790,b:1090,od:8},{a:9000,b:11000,od:6}] },
+  { code:"UL-1045", mat:"Plastic", color:"Clear", vlt:92, align:"400–780nm",
+    ranges:[{a:2750,b:2950,od:4},{a:2950,b:2985,od:3},{a:2985,b:3195,od:2},{a:3195,b:3300,od:3},{a:9000,b:11000,od:5}] },
+  { code:"UL-1052", mat:"Polycarbonate", color:"Green", vlt:20, align:"—",
+    ranges:[{a:190,b:315,od:7},{a:315,b:447,od:5},{a:447,b:450,od:4},{a:632,b:668,od:4},{a:636,b:664,od:5},{a:640,b:660,od:6},{a:760,b:1100,od:6},{a:780,b:1090,od:7},{a:790,b:1085,od:8},{a:9000,b:11000,od:6}] },
+  { code:"UL-2001", mat:"Glass", color:"Green", vlt:27, align:"380–590nm",
+    ranges:[{a:190,b:315,od:9},{a:315,b:535,od:8}] },
+  { code:"UL-2002", mat:"Glass", color:"Orange", vlt:30, align:"565–780nm",
+    ranges:[{a:190,b:315,od:9},{a:645,b:1400,od:3},{a:660,b:1400,od:4},{a:675,b:1360,od:5},{a:685,b:1345,od:6},{a:695,b:1300,od:7},{a:720,b:1250,od:8},{a:1400,b:1525,od:4},{a:2800,b:3300,od:4},{a:9000,b:11000,od:6}] },
+  { code:"UL-2004", mat:"Glass", color:"Aqua", vlt:64, align:"380–720nm",
+    ranges:[{a:190,b:280,od:9},{a:775,b:1400,od:3},{a:805,b:1400,od:4},{a:830,b:1400,od:5},{a:855,b:1400,od:6},{a:880,b:1400,od:7},{a:905,b:1400,od:8},{a:1400,b:3000,od:5},{a:9000,b:11000,od:6}] },
+  { code:"UL-2005", mat:"Glass", color:"Aqua", vlt:57, align:"380–740nm",
+    ranges:[{a:190,b:260,od:9},{a:815,b:1400,od:3},{a:850,b:1400,od:4},{a:890,b:1400,od:5},{a:930,b:1400,od:6},{a:950,b:1400,od:7},{a:990,b:1400,od:8},{a:1400,b:3000,od:5},{a:9000,b:11000,od:6}] },
+  { code:"UL-2006", mat:"Glass", color:"Dark Red", vlt:7, align:"605–780nm",
+    ranges:[{a:190,b:300,od:9},{a:685,b:1350,od:3},{a:700,b:1250,od:4},{a:720,b:1210,od:5},{a:740,b:1160,od:6},{a:750,b:1100,od:8},{a:9000,b:11000,od:6}] },
+  { code:"UL-2007", mat:"Glass", color:"Light Blue", vlt:65, align:"380–630nm",
+    ranges:[{a:190,b:315,od:9},{a:315,b:565,od:8},{a:315,b:580,od:5}] },
+  { code:"UL-2012", mat:"Glass", color:"Clear", vlt:92, align:"380–780nm",
+    ranges:[{a:9000,b:11500,od:6}] },
+  { code:"UL-2014", mat:"Glass", color:"Aqua", vlt:57, align:"335–670nm",
+    ranges:[{a:190,b:270,od:9},{a:780,b:1400,od:3},{a:810,b:1400,od:4},{a:840,b:1400,od:5},{a:860,b:1400,od:6},{a:880,b:1400,od:7},{a:900,b:1400,od:8},{a:1400,b:3300,od:5},{a:9000,b:11000,od:6}] },
+  { code:"UL-3001", mat:"Glass + Coating", color:"Aqua", vlt:70, align:"430–720nm",
+    ranges:[{a:1025,b:1100,od:9}] },
+  { code:"UL-3002", mat:"Glass + Coating", color:"Orange", vlt:15, align:"587–780nm",
+    ranges:[{a:515,b:532,od:9}] },
+  { code:"UL-3005", mat:"Glass + Coating", color:"Green", vlt:40, align:"394–600nm",
+    ranges:[{a:750,b:815,od:9},{a:815,b:975,od:8},{a:975,b:1120,od:9}] }
+];
+
+const SWATCHES = {
+  "Clear":"#e8edf2","Green":"#4ade80","Dark Green":"#16a34a","Blue":"#60a5fa",
+  "Light Blue":"#93c5fd","Pink":"#f9a8d4","Orange":"#fb923c","Dark Orange":"#ea580c",
+  "Purple":"#c084fc","Gray":"#9ca3af","Gray/Green":"#6b7280","Light Gray":"#d1d5db",
+  "Aqua":"#22d3ee","Dark Red":"#dc2626","Plastic Clear":"#e2e8f0"
+};
+
+function setWL(nm) {
+  document.getElementById('wl-input').value = nm;
+  checkWL();
+}
+
+function checkWL() {
+  const v = parseInt(document.getElementById('wl-input').value);
+  if (v >= 180 && v <= 11000) { selWL = v; document.getElementById('btn1next').disabled = false; }
+  else { selWL = null; document.getElementById('btn1next').disabled = true; }
+}
+
+document.getElementById('wl-input').addEventListener('input', checkWL);
+
+function selOD(od) {
+  chosenOD = od;
+  document.querySelectorAll('.od-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`.od-card[data-od="${od}"]`).classList.add('selected');
+  const msgs = {
+    3:"Low-power applications such as laser pointers or alignment optics, typically below 1W.",
+    4:"Light industrial or lab use, approximately 1–10W, such as low-power fiber lasers.",
+    5:"DIY laser engravers or mid-power cutters, approximately 10–50W — the most common use case.",
+    6:"Industrial metal cutting or welding lasers, 50–500W, requiring high-specification protection.",
+    7:"Very high-power industrial lasers or Q-switch pulsed medical lasers with extremely high peak power.",
+    8:"Maximum protection level for ultra-high-power systems or pulsed lasers with very high peak energy density."
+  };
+  const info = document.getElementById('od-info');
+  info.innerHTML = `<strong>OD ${od} selected — </strong>${msgs[od]} <strong style="color:var(--warn)">Safety note:</strong> If unsure, always choose a higher level.`;
+  info.classList.add('show');
+  document.getElementById('btn2next').disabled = false;
+}
+
+function getOD(p, wl) {
+  const hits = p.ranges.filter(r => wl >= r.a && wl <= r.b);
+  return hits.length ? Math.max(...hits.map(r => r.od)) : null;
+}
+
+function getAvailableODs(wl) {
+  const available = new Set();
+  for (let od = 3; od <= 9; od++) {
+    DB.forEach(p => { const g = getOD(p, wl); if (g !== null && g >= od) available.add(od); });
+  }
+  return available;
+}
+
+function refreshODCards() {
+  const available = getAvailableODs(selWL);
+  chosenOD = null;
+  document.getElementById('btn2next').disabled = true;
+  document.getElementById('od-info').classList.remove('show');
+  document.querySelectorAll('.od-card').forEach(card => {
+    const od = parseInt(card.dataset.od);
+    card.classList.remove('selected','od-disabled');
+    if (!available.has(od)) { card.classList.add('od-disabled'); card.onclick = null; }
+    else { card.onclick = () => selOD(od); }
+  });
+}
+
+function buildResults() {
+  const wl = selWL, minOD = chosenOD;
+  const matches = DB
+    .map(p => ({ ...p, got: getOD(p, wl) }))
+    .filter(p => p.got !== null && p.got >= minOD)
+    .sort((a,b) => b.got - a.got || (b.mat.includes('Glass') ? 1 : -1));
+
+  const area = document.getElementById('results');
+
+  if (!matches.length) {
+    area.innerHTML = `<div class="empty"><div class="empty-icon">◎</div><h3>No matching filters found</h3><p>No filter in the current database covers <strong>${wl} nm</strong> at OD ≥ ${minOD}.<br>Try lowering your OD requirement, or contact your Univet distributor for the latest product range.</p></div>`;
+    return;
+  }
+
+  const meta = `
+    <div class="result-meta">
+      <div class="rm-item"><div class="rm-label">Wavelength</div><div class="rm-value">${wl}<span class="rm-unit"> nm</span></div></div>
+      <div class="rm-item"><div class="rm-label">Min OD Required</div><div class="rm-value">≥ ${minOD}</div></div>
+      <div class="rm-item"><div class="rm-label">Matching Filters</div><div class="rm-value">${matches.length}<span class="rm-unit"> found</span></div></div>
+    </div>`;
+
+  const cards = matches.map((p, i) => {
+    const swatch = SWATCHES[p.color] || '#555';
+    const pct = Math.round((p.got / 9) * 100);
+    const isB = i === 0;
+    return `
+      <div class="rc ${isB ? 'best' : ''}" style="animation-delay:${i*0.07}s">
+        <div class="rc-left">
+          <div class="${isB ? 'best-badge' : 'alt-badge'}">${isB ? 'Best Match' : `Option ${i+1}`}</div>
+          <div class="rc-code">${p.code}</div>
+          <div class="color-swatch" style="background:${swatch}"></div>
+          <div class="rc-swatch-label">${p.color}</div>
+        </div>
+        <div class="rc-mid">
+          <h3>${p.mat} · VLT ${p.vlt}%</h3>
+          <div class="rc-tags">
+            <span class="tag tag-od">OD ${p.got} @ ${wl}nm</span>
+            <span class="tag tag-vlt">VLT ${p.vlt}%</span>
+            <span class="tag tag-mat">${p.mat}</span>
+          </div>
+          <div class="rc-reason">
+            ${isB
+              ? `<strong>Best match:</strong> Achieves OD ${p.got} at ${wl}nm${p.got > minOD ? `, exceeding your requirement by ${p.got - minOD} level(s) for added safety margin` : ', exactly meeting your requirement'}. VLT ${p.vlt}%${p.vlt >= 60 ? ' — excellent visibility' : p.vlt >= 30 ? ' — clear vision' : ' — suited for high-power environments'}.`
+              : `Achieves OD ${p.got} at ${wl}nm${p.got > minOD ? ` (${p.got - minOD} level(s) above requirement)` : ''}. VLT ${p.vlt}%.`
+            }
+            ${p.align !== '—' ? `<br><span style="color:var(--text-dim);font-size:11px;font-family:var(--mono)">Alignment window: ${p.align}</span>` : ''}
+          </div>
+          <div class="od-bar-wrap">
+            <div class="od-bar-labels"><span>Protection Level</span><span>OD ${p.got} / 9</span></div>
+            <div class="od-bar-track"><div class="od-bar-fill" style="width:${pct}%"></div></div>
+          </div>
+        </div>
+        <div class="rc-right">
+          <button class="btn-quote" onclick="alert('Request a quote\\nProduct: ${p.code}\\nPlease contact your Univet distributor')">Request Quote</button>
+          <button class="btn-spec" onclick="alert('Datasheet download\\nComing soon')">Datasheet</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  const disc = `<div class="disclaimer"><strong>⚠ Disclaimer:</strong> Results are generated from the Univet Laser Safety Filters Technical Data Sheet Rev. 02/2024 and are for reference only. Before purchasing, always verify the complete frame + filter combination using the frame code and confirm the CE Declaration of Conformity.</div>`;
+
+  area.innerHTML = meta + `<div class="result-list">${cards}</div>` + disc;
+}
+
+function goTo(n) {
+  for (let i=1; i<=3; i++) {
+    document.getElementById(`p${i}`).classList.remove('active');
+    const tab = document.getElementById(`pt${i}`);
+    tab.classList.remove('active','done');
+    if (i < n) { tab.classList.add('done'); tab.querySelector('.prog-num').textContent = '✓'; }
+    else if (i === n) tab.classList.add('active');
+    else tab.querySelector('.prog-num').textContent = i;
+  }
+  document.getElementById(`p${n}`).classList.add('active');
+  if (n === 2) refreshODCards();
+  if (n === 3) buildResults();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function reset() {
+  selWL = null; chosenOD = null;
+  document.getElementById('wl-input').value = '';
+  document.getElementById('btn1next').disabled = true;
+  document.getElementById('btn2next').disabled = true;
+  document.querySelectorAll('.od-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('od-info').classList.remove('show');
+  goTo(1);
+}
+</script>
+</body>
+</html>
