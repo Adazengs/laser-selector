@@ -668,6 +668,20 @@ h1 em {
   text-transform: uppercase;
 }
 
+.partial-badge {
+  display: inline-block;
+  background: rgba(212,144,10,0.15);
+  color: var(--warn);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(212,144,10,0.4);
+  text-transform: uppercase;
+}
+
 .rc-code {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
@@ -873,6 +887,69 @@ footer {
   text-align: right;
 }
 
+/* ── RANGE ROWS ── */
+.range-rows { display:flex; flex-direction:column; gap:10px; margin-bottom:12px; }
+
+.range-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.range-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.range-sep {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 0 4px;
+}
+
+.btn-remove-range {
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  color: var(--text-dim);
+  font-size: 16px;
+  width: 32px; height: 32px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.btn-remove-range:hover { border-color: var(--warn); color: var(--warn); }
+
+.btn-add-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  background: transparent;
+  border: 1px dashed var(--border2);
+  border-radius: 5px;
+  color: var(--text-mid);
+  font-size: 12px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  margin-bottom: 6px;
+}
+
+.btn-add-range:hover { border-color: var(--accent); color: var(--accent); }
+.btn-add-range:disabled { opacity: 0.35; cursor: not-allowed; }
+
 /* ── RESPONSIVE ── */
 @media (max-width:620px) {
   .topbar { padding: 0 20px; }
@@ -893,7 +970,26 @@ footer {
 <!-- TOPBAR -->
 <nav class="topbar">
   <div class="logo">
-    <div class="logo-wordmark">UNI<span>VET</span></div>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" height="28" width="auto" viewBox="0 0 1700.7871 340.15803">
+<defs>
+<clipPath id="clip_1">
+<path transform="matrix(3,0,0,-3,0,340.15803)" d="M0 113.386H566.929V0H0Z"/>
+</clipPath>
+</defs>
+<g inkscape:groupmode="layer" inkscape:label="Background">
+</g>
+<g inkscape:groupmode="layer" inkscape:label="Loghi">
+<g clip-path="url(#clip_1)">
+<path transform="matrix(3,0,0,-3,689.979,119.40181)" d="M0 0V-24.825C0-30.17 6.093-34.504 13.609-34.504 21.124-34.504 27.217-30.17 27.217-24.825V0C27.217 0 27.215 1.453 25.995 2.039 25.995 2.039 24.899 2.603 22.417 2.798 22.17 2.817 21.967 2.999 21.967 3.248 21.967 3.497 22.169 3.698 22.417 3.698H37.827C38.076 3.698 38.277 3.497 38.277 3.248 38.277 2.999 38.075 2.817 37.827 2.798 35.345 2.603 34.25 2.039 34.25 2.039 33.03 1.453 33.027 0 33.027 0V-21.599C33.027-30.403 24.003-37.54 12.871-37.54 1.739-37.54-7.285-30.403-7.285-21.599V0C-7.285 0-7.287 1.453-8.507 2.039-8.507 2.039-9.603 2.603-12.084 2.798-12.332 2.817-12.535 2.999-12.535 3.248-12.535 3.497-12.333 3.698-12.084 3.698H4.8C5.048 3.698 5.25 3.497 5.25 3.248 5.25 2.999 5.048 2.817 4.8 2.798 2.318 2.603 1.223 2.039 1.223 2.039 .002 1.453 0 0 0 0" fill="white"/>
+<path transform="matrix(3,0,0,-3,861.5228,218.85483)" d="M0 0C0 0 .002-1.369 1.222-1.954 1.222-1.954 2.318-2.518 4.8-2.713 5.047-2.733 5.25-2.915 5.25-3.163 5.25-3.412 5.048-3.614 4.8-3.614H-10.61C-10.859-3.614-11.06-3.412-11.06-3.163-11.06-2.915-10.858-2.733-10.61-2.713-8.128-2.518-7.033-1.954-7.033-1.954-5.813-1.369-5.81 0-5.81 0L-5.817 35.248C-5.817 36.086-5.138 36.765-4.301 36.765-3.941 36.765-3.61 36.639-3.35 36.43L32.384 6.1V33.235C32.384 33.235 32.381 34.604 31.161 35.19 31.161 35.19 30.066 35.753 27.584 35.949 27.336 35.968 27.134 36.15 27.134 36.399 27.134 36.647 27.336 36.849 27.584 36.849H42.994C43.242 36.849 43.444 36.647 43.444 36.399 43.444 36.15 43.242 35.968 42.994 35.949 40.512 35.753 39.417 35.19 39.417 35.19 38.196 34.604 38.194 33.235 38.194 33.235V-2.097C38.194-2.598 37.924-2.964 37.924-2.964 37.652-3.357 37.199-3.614 36.684-3.614 36.353-3.614 36.048-3.508 35.798-3.329L-.001 26.47Z" fill="white"/>
+<path transform="matrix(3,0,0,-3,1059.2822,218.85483)" d="M0 0C0 0 .002-1.369 1.222-1.954 1.222-1.954 2.318-2.518 4.8-2.713 5.047-2.733 5.25-2.915 5.25-3.163 5.25-3.412 5.048-3.614 4.8-3.614H-12.085C-12.333-3.614-12.535-3.412-12.535-3.163-12.535-2.915-12.332-2.733-12.085-2.713-9.603-2.518-8.507-1.954-8.507-1.954-7.287-1.369-7.285 0-7.285 0V33.235C-7.285 33.235-7.287 34.604-8.507 35.19-8.507 35.19-9.603 35.753-12.085 35.949-12.332 35.968-12.535 36.15-12.535 36.399-12.535 36.647-12.333 36.849-12.085 36.849H4.8C5.048 36.849 5.25 36.647 5.25 36.399 5.25 36.15 5.047 35.968 4.8 35.949 2.318 35.753 1.222 35.19 1.222 35.19 .002 34.604 0 33.235 0 33.235Z" fill="white"/>
+<path transform="matrix(3,0,0,-3,1248.3396,118.91731)" d="M0 0C1.435 2.813 6.145 2.636 6.145 2.636 6.393 2.656 6.595 2.838 6.595 3.086 6.595 3.335 6.393 3.537 6.145 3.537H-8.292C-8.541 3.537-8.743 3.335-8.743 3.086-8.743 2.838-8.54 2.656-8.292 2.636-8.292 2.636-3.22 2.677-4.355 .457L-17.897-26.133-31.495 .453C-32.43 2.885-28.708 2.636-28.708 2.636-28.46 2.656-28.258 2.838-28.258 3.086-28.258 3.335-28.459 3.537-28.708 3.537H-46.362C-46.611 3.537-46.812 3.335-46.812 3.086-46.812 2.838-46.61 2.656-46.362 2.636-46.362 2.636-41.653 2.813-40.217 0L-21.44-36.882-21.442-36.88C-21.185-37.352-20.684-37.673-20.108-37.673-19.533-37.673-19.033-37.353-18.776-36.882H-18.777Z" fill="white"/>
+<path transform="matrix(3,0,0,-3,1317.228,119.14862)" d="M0 0V-33.235C0-33.235-.002-34.604-1.222-35.19-1.222-35.19-2.318-35.753-4.8-35.949-5.047-35.968-5.25-36.15-5.25-36.399-5.25-36.647-5.048-36.849-4.799-36.849H22.763C23.184-36.849 23.533-36.539 23.595-36.135L24.517-30.816C24.517-30.816 24.517-30.816 24.517-30.816 24.521-30.793 24.523-30.77 24.523-30.747 24.523-30.495 24.319-30.291 24.068-30.291 23.863-30.291 23.691-30.426 23.633-30.611 22.664-34.01 18.959-34.128 18.959-34.128H7.097V-16.659L15.196-16.66C15.196-16.66 19.159-16.659 19.159-19.995 19.159-20.484 19.556-20.881 20.046-20.881 20.465-20.881 20.816-20.59 20.908-20.199L22.41-13.659C22.415-13.637 22.415-13.598 22.415-13.598 22.415-13.346 22.211-13.143 21.96-13.143 21.867-13.143 21.781-13.17 21.709-13.218 21.709-13.218 21.703-13.221 21.694-13.228 21.011-13.762 19.959-13.743 19.959-13.743H7.03V.937H15.201C15.201 .937 20.328 .939 20.328-2.638 20.328-3.127 20.725-3.524 21.215-3.524 21.634-3.524 21.986-3.233 22.078-2.842L23.579 3.698C23.584 3.72 23.585 3.759 23.585 3.759 23.585 4.011 23.381 4.215 23.129 4.215 23.037 4.215 22.951 4.187 22.879 4.139 22.879 4.139 22.873 4.136 22.863 4.129 22.181 3.595 21.129 3.614 21.129 3.614H-4.801C-5.05 3.614-5.252 3.412-5.252 3.163-5.252 2.915-5.049 2.733-4.801 2.713-2.32 2.518-1.224 1.954-1.224 1.954-.004 1.369-.002 0-.002 0" fill="white"/>
+<path transform="matrix(3,0,0,-3,373.36109,127.07132)" d="M0 0 27.979-36.483C27.979-36.483 29.016-37.761 29.054-38.675H49.817C49.854-37.761 50.892-36.483 50.892-36.483L79.802 1.214C80.58 2.226 79.41 3.154 79.41 3.154 75.119 6.641 52.058 10.002 52.058 10.002V8.789C63.991 6.178 61.264 2.867 61.264 2.867L39.435-25.634 16.115 4.937C15.9 5.313 15.778 5.748 15.778 6.212 15.778 7.634 16.93 8.786 18.352 8.786H19.137V10.002H-74.542V8.594L-1.561 .736C-.452 .611 0 0 0 0" fill="white"/>
+<path transform="matrix(3,0,0,-3,1428.8029,107.64603)" d="M0 0C.032 .216 .218 .381 .443 .381 .513 .381 .579 .365 .638 .337 1.939-.206 4.068-.221 4.068-.221L38.295-.22C38.295-.22 39.346-.238 40.028 .296 40.037 .303 40.044 .307 40.044 .307 40.116 .354 40.202 .382 40.294 .382 40.546 .382 40.749 .178 40.749-.074 40.749-.074 40.749-.113 40.744-.135L39.243-6.675C39.15-7.066 38.799-7.357 38.38-7.357 37.89-7.357 37.493-6.96 37.493-6.47 38.124-2.922 32.366-2.896 32.366-2.896H23.152 23.153V-37.07C23.153-37.07 23.155-38.438 24.375-39.024 24.375-39.024 25.471-39.588 27.952-39.783 28.2-39.802 28.403-39.984 28.403-40.233 28.403-40.482 28.201-40.683 27.952-40.683H11.068C10.82-40.683 10.618-40.482 10.618-40.233 10.618-39.984 10.82-39.802 11.068-39.783 13.55-39.588 14.645-39.024 14.645-39.024 15.865-38.438 15.868-37.07 15.868-37.07V-2.941H5.947C3.017-2.896 1.222-3.767 .379-6.084 .278-6.462-.067-6.74-.476-6.74-.965-6.74-1.361-6.344-1.361-5.856-1.361-5.778-1.35-5.702-1.331-5.629L.013 .057" fill="white"/>
+</g>
+</g>
+</svg>
     <div class="logo-divider"></div>
     <div class="logo-sub">Laser Protection</div>
   </div>
@@ -944,29 +1040,27 @@ footer {
       <span>Laser eyewear must precisely match your laser wavelength. An incorrect filter may offer <strong>zero protection</strong> at certain wavelengths. Always verify your machine's spec sheet before selecting.</span>
     </div>
 
-    <div class="wl-field">
-      <input type="number" class="wl-input" id="wl-input" placeholder="1064" min="180" max="11000">
-      <div class="wl-unit">nm</div>
-    </div>
-    <div class="input-hint">Valid range: 180 – 11,000 nm &nbsp;·&nbsp; or select a common laser type below</div>
+    <div class="range-rows" id="wl-ranges"></div>
+    <button class="btn-add-range" id="btn-add-range" onclick="addRange()">+ Add another range</button>
+    <div class="input-hint">Each range: 180 – 11,000 nm &nbsp;·&nbsp; Max 3 ranges</div>
 
-    <div class="qp-label">Common laser types</div>
+    <div class="qp-label" style="margin-top:24px;">Common laser types — click to fill first range</div>
     <div class="qp-grid">
-      <button class="qp-chip" onclick="setWL(10600)"><span class="qp-nm">10600 nm</span><span class="qp-name">CO₂</span></button>
-      <button class="qp-chip" onclick="setWL(2940)"><span class="qp-nm">2940 nm</span><span class="qp-name">Er:YAG</span></button>
-      <button class="qp-chip" onclick="setWL(1080)"><span class="qp-nm">1080 nm</span><span class="qp-name">Fiber</span></button>
-      <button class="qp-chip" onclick="setWL(1064)"><span class="qp-nm">1064 nm</span><span class="qp-name">Nd:YAG</span></button>
-      <button class="qp-chip" onclick="setWL(1030)"><span class="qp-nm">1030 nm</span><span class="qp-name">Yb:YAG</span></button>
-      <button class="qp-chip" onclick="setWL(940)"><span class="qp-nm">940 nm</span><span class="qp-name">Diode</span></button>
-      <button class="qp-chip" onclick="setWL(808)"><span class="qp-nm">808 nm</span><span class="qp-name">Diode</span></button>
-      <button class="qp-chip" onclick="setWL(755)"><span class="qp-nm">755 nm</span><span class="qp-name">Alexandrite</span></button>
-      <button class="qp-chip" onclick="setWL(694)"><span class="qp-nm">694 nm</span><span class="qp-name">Ruby</span></button>
-      <button class="qp-chip" onclick="setWL(650)"><span class="qp-nm">650 nm</span><span class="qp-name">Diode Red</span></button>
-      <button class="qp-chip" onclick="setWL(532)"><span class="qp-nm">532 nm</span><span class="qp-name">Nd:YAG KTP</span></button>
-      <button class="qp-chip" onclick="setWL(445)"><span class="qp-nm">445 nm</span><span class="qp-name">Diode Blue</span></button>
-      <button class="qp-chip" onclick="setWL(355)"><span class="qp-nm">355 nm</span><span class="qp-name">Nd:YAG 3×</span></button>
-      <button class="qp-chip" onclick="setWL(266)"><span class="qp-nm">266 nm</span><span class="qp-name">Nd:YAG 4×</span></button>
-      <button class="qp-chip" onclick="setWL(248)"><span class="qp-nm">248 nm</span><span class="qp-name">KrF Excimer</span></button>
+      <button class="qp-chip" onclick="setWL(10600,10600)"><span class="qp-nm">10600 nm</span><span class="qp-name">CO₂</span></button>
+      <button class="qp-chip" onclick="setWL(2940,2940)"><span class="qp-nm">2940 nm</span><span class="qp-name">Er:YAG</span></button>
+      <button class="qp-chip" onclick="setWL(1060,1080)"><span class="qp-nm">1060–1080 nm</span><span class="qp-name">Fiber</span></button>
+      <button class="qp-chip" onclick="setWL(1060,1065)"><span class="qp-nm">1060–1065 nm</span><span class="qp-name">Nd:YAG</span></button>
+      <button class="qp-chip" onclick="setWL(1025,1035)"><span class="qp-nm">1025–1035 nm</span><span class="qp-name">Yb:YAG</span></button>
+      <button class="qp-chip" onclick="setWL(935,945)"><span class="qp-nm">935–945 nm</span><span class="qp-name">Diode</span></button>
+      <button class="qp-chip" onclick="setWL(800,815)"><span class="qp-nm">800–815 nm</span><span class="qp-name">Diode</span></button>
+      <button class="qp-chip" onclick="setWL(750,760)"><span class="qp-nm">750–760 nm</span><span class="qp-name">Alexandrite</span></button>
+      <button class="qp-chip" onclick="setWL(690,700)"><span class="qp-nm">690–700 nm</span><span class="qp-name">Ruby</span></button>
+      <button class="qp-chip" onclick="setWL(645,655)"><span class="qp-nm">645–655 nm</span><span class="qp-name">Diode Red</span></button>
+      <button class="qp-chip" onclick="setWL(528,535)"><span class="qp-nm">528–535 nm</span><span class="qp-name">Nd:YAG KTP</span></button>
+      <button class="qp-chip" onclick="setWL(440,450)"><span class="qp-nm">440–450 nm</span><span class="qp-name">Diode Blue</span></button>
+      <button class="qp-chip" onclick="setWL(350,360)"><span class="qp-nm">350–360 nm</span><span class="qp-name">Nd:YAG 3×</span></button>
+      <button class="qp-chip" onclick="setWL(263,270)"><span class="qp-nm">263–270 nm</span><span class="qp-name">Nd:YAG 4×</span></button>
+      <button class="qp-chip" onclick="setWL(245,252)"><span class="qp-nm">245–252 nm</span><span class="qp-name">KrF Excimer</span></button>
     </div>
 
     <div class="nav-row">
@@ -1054,7 +1148,26 @@ footer {
 </div>
 
 <footer>
-  <div class="footer-brand">UNI<span>VET</span> Laser</div>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" height="18" width="auto" style="opacity:0.45" viewBox="0 0 1700.7871 340.15803">
+<defs>
+<clipPath id="clip_1">
+<path transform="matrix(3,0,0,-3,0,340.15803)" d="M0 113.386H566.929V0H0Z"/>
+</clipPath>
+</defs>
+<g inkscape:groupmode="layer" inkscape:label="Background">
+</g>
+<g inkscape:groupmode="layer" inkscape:label="Loghi">
+<g clip-path="url(#clip_1)">
+<path transform="matrix(3,0,0,-3,689.979,119.40181)" d="M0 0V-24.825C0-30.17 6.093-34.504 13.609-34.504 21.124-34.504 27.217-30.17 27.217-24.825V0C27.217 0 27.215 1.453 25.995 2.039 25.995 2.039 24.899 2.603 22.417 2.798 22.17 2.817 21.967 2.999 21.967 3.248 21.967 3.497 22.169 3.698 22.417 3.698H37.827C38.076 3.698 38.277 3.497 38.277 3.248 38.277 2.999 38.075 2.817 37.827 2.798 35.345 2.603 34.25 2.039 34.25 2.039 33.03 1.453 33.027 0 33.027 0V-21.599C33.027-30.403 24.003-37.54 12.871-37.54 1.739-37.54-7.285-30.403-7.285-21.599V0C-7.285 0-7.287 1.453-8.507 2.039-8.507 2.039-9.603 2.603-12.084 2.798-12.332 2.817-12.535 2.999-12.535 3.248-12.535 3.497-12.333 3.698-12.084 3.698H4.8C5.048 3.698 5.25 3.497 5.25 3.248 5.25 2.999 5.048 2.817 4.8 2.798 2.318 2.603 1.223 2.039 1.223 2.039 .002 1.453 0 0 0 0" fill="white"/>
+<path transform="matrix(3,0,0,-3,861.5228,218.85483)" d="M0 0C0 0 .002-1.369 1.222-1.954 1.222-1.954 2.318-2.518 4.8-2.713 5.047-2.733 5.25-2.915 5.25-3.163 5.25-3.412 5.048-3.614 4.8-3.614H-10.61C-10.859-3.614-11.06-3.412-11.06-3.163-11.06-2.915-10.858-2.733-10.61-2.713-8.128-2.518-7.033-1.954-7.033-1.954-5.813-1.369-5.81 0-5.81 0L-5.817 35.248C-5.817 36.086-5.138 36.765-4.301 36.765-3.941 36.765-3.61 36.639-3.35 36.43L32.384 6.1V33.235C32.384 33.235 32.381 34.604 31.161 35.19 31.161 35.19 30.066 35.753 27.584 35.949 27.336 35.968 27.134 36.15 27.134 36.399 27.134 36.647 27.336 36.849 27.584 36.849H42.994C43.242 36.849 43.444 36.647 43.444 36.399 43.444 36.15 43.242 35.968 42.994 35.949 40.512 35.753 39.417 35.19 39.417 35.19 38.196 34.604 38.194 33.235 38.194 33.235V-2.097C38.194-2.598 37.924-2.964 37.924-2.964 37.652-3.357 37.199-3.614 36.684-3.614 36.353-3.614 36.048-3.508 35.798-3.329L-.001 26.47Z" fill="white"/>
+<path transform="matrix(3,0,0,-3,1059.2822,218.85483)" d="M0 0C0 0 .002-1.369 1.222-1.954 1.222-1.954 2.318-2.518 4.8-2.713 5.047-2.733 5.25-2.915 5.25-3.163 5.25-3.412 5.048-3.614 4.8-3.614H-12.085C-12.333-3.614-12.535-3.412-12.535-3.163-12.535-2.915-12.332-2.733-12.085-2.713-9.603-2.518-8.507-1.954-8.507-1.954-7.287-1.369-7.285 0-7.285 0V33.235C-7.285 33.235-7.287 34.604-8.507 35.19-8.507 35.19-9.603 35.753-12.085 35.949-12.332 35.968-12.535 36.15-12.535 36.399-12.535 36.647-12.333 36.849-12.085 36.849H4.8C5.048 36.849 5.25 36.647 5.25 36.399 5.25 36.15 5.047 35.968 4.8 35.949 2.318 35.753 1.222 35.19 1.222 35.19 .002 34.604 0 33.235 0 33.235Z" fill="white"/>
+<path transform="matrix(3,0,0,-3,1248.3396,118.91731)" d="M0 0C1.435 2.813 6.145 2.636 6.145 2.636 6.393 2.656 6.595 2.838 6.595 3.086 6.595 3.335 6.393 3.537 6.145 3.537H-8.292C-8.541 3.537-8.743 3.335-8.743 3.086-8.743 2.838-8.54 2.656-8.292 2.636-8.292 2.636-3.22 2.677-4.355 .457L-17.897-26.133-31.495 .453C-32.43 2.885-28.708 2.636-28.708 2.636-28.46 2.656-28.258 2.838-28.258 3.086-28.258 3.335-28.459 3.537-28.708 3.537H-46.362C-46.611 3.537-46.812 3.335-46.812 3.086-46.812 2.838-46.61 2.656-46.362 2.636-46.362 2.636-41.653 2.813-40.217 0L-21.44-36.882-21.442-36.88C-21.185-37.352-20.684-37.673-20.108-37.673-19.533-37.673-19.033-37.353-18.776-36.882H-18.777Z" fill="white"/>
+<path transform="matrix(3,0,0,-3,1317.228,119.14862)" d="M0 0V-33.235C0-33.235-.002-34.604-1.222-35.19-1.222-35.19-2.318-35.753-4.8-35.949-5.047-35.968-5.25-36.15-5.25-36.399-5.25-36.647-5.048-36.849-4.799-36.849H22.763C23.184-36.849 23.533-36.539 23.595-36.135L24.517-30.816C24.517-30.816 24.517-30.816 24.517-30.816 24.521-30.793 24.523-30.77 24.523-30.747 24.523-30.495 24.319-30.291 24.068-30.291 23.863-30.291 23.691-30.426 23.633-30.611 22.664-34.01 18.959-34.128 18.959-34.128H7.097V-16.659L15.196-16.66C15.196-16.66 19.159-16.659 19.159-19.995 19.159-20.484 19.556-20.881 20.046-20.881 20.465-20.881 20.816-20.59 20.908-20.199L22.41-13.659C22.415-13.637 22.415-13.598 22.415-13.598 22.415-13.346 22.211-13.143 21.96-13.143 21.867-13.143 21.781-13.17 21.709-13.218 21.709-13.218 21.703-13.221 21.694-13.228 21.011-13.762 19.959-13.743 19.959-13.743H7.03V.937H15.201C15.201 .937 20.328 .939 20.328-2.638 20.328-3.127 20.725-3.524 21.215-3.524 21.634-3.524 21.986-3.233 22.078-2.842L23.579 3.698C23.584 3.72 23.585 3.759 23.585 3.759 23.585 4.011 23.381 4.215 23.129 4.215 23.037 4.215 22.951 4.187 22.879 4.139 22.879 4.139 22.873 4.136 22.863 4.129 22.181 3.595 21.129 3.614 21.129 3.614H-4.801C-5.05 3.614-5.252 3.412-5.252 3.163-5.252 2.915-5.049 2.733-4.801 2.713-2.32 2.518-1.224 1.954-1.224 1.954-.004 1.369-.002 0-.002 0" fill="white"/>
+<path transform="matrix(3,0,0,-3,373.36109,127.07132)" d="M0 0 27.979-36.483C27.979-36.483 29.016-37.761 29.054-38.675H49.817C49.854-37.761 50.892-36.483 50.892-36.483L79.802 1.214C80.58 2.226 79.41 3.154 79.41 3.154 75.119 6.641 52.058 10.002 52.058 10.002V8.789C63.991 6.178 61.264 2.867 61.264 2.867L39.435-25.634 16.115 4.937C15.9 5.313 15.778 5.748 15.778 6.212 15.778 7.634 16.93 8.786 18.352 8.786H19.137V10.002H-74.542V8.594L-1.561 .736C-.452 .611 0 0 0 0" fill="white"/>
+<path transform="matrix(3,0,0,-3,1428.8029,107.64603)" d="M0 0C.032 .216 .218 .381 .443 .381 .513 .381 .579 .365 .638 .337 1.939-.206 4.068-.221 4.068-.221L38.295-.22C38.295-.22 39.346-.238 40.028 .296 40.037 .303 40.044 .307 40.044 .307 40.116 .354 40.202 .382 40.294 .382 40.546 .382 40.749 .178 40.749-.074 40.749-.074 40.749-.113 40.744-.135L39.243-6.675C39.15-7.066 38.799-7.357 38.38-7.357 37.89-7.357 37.493-6.96 37.493-6.47 38.124-2.922 32.366-2.896 32.366-2.896H23.152 23.153V-37.07C23.153-37.07 23.155-38.438 24.375-39.024 24.375-39.024 25.471-39.588 27.952-39.783 28.2-39.802 28.403-39.984 28.403-40.233 28.403-40.482 28.201-40.683 27.952-40.683H11.068C10.82-40.683 10.618-40.482 10.618-40.233 10.618-39.984 10.82-39.802 11.068-39.783 13.55-39.588 14.645-39.024 14.645-39.024 15.865-38.438 15.868-37.07 15.868-37.07V-2.941H5.947C3.017-2.896 1.222-3.767 .379-6.084 .278-6.462-.067-6.74-.476-6.74-.965-6.74-1.361-6.344-1.361-5.856-1.361-5.778-1.35-5.702-1.331-5.629L.013 .057" fill="white"/>
+</g>
+</g>
+</svg>
   <div class="footer-meta">
     ISO 9001:2015 · CE Certified · Via Giovanni Prati 87, Rezzato (BS) Italy<br>
     Data source: Laser Safety Filters Technical Data Sheet Rev. 02/2024 · For reference only
@@ -1062,7 +1175,6 @@ footer {
 </footer>
 
 <script>
-let selWL = null, chosenOD = null;
 
 const DB = [
   { code:"UL-1001", mat:"Polycarbonate", color:"Clear", vlt:90, align:"400–780nm",
@@ -1129,19 +1241,95 @@ const SWATCHES = {
   "Purple":"#c084fc","Gray":"#9ca3af","Gray/Green":"#6b7280","Light Gray":"#d1d5db",
   "Aqua":"#22d3ee","Dark Red":"#dc2626","Plastic Clear":"#e2e8f0"
 };
+let selRanges = [], chosenOD = null;
 
-function setWL(nm) {
-  document.getElementById('wl-input').value = nm;
-  checkWL();
+function renderRanges() {
+  const container = document.getElementById('wl-ranges');
+  container.innerHTML = selRanges.map((r, i) => `
+    <div class="range-row" id="rrow-${i}">
+      <span class="range-label">Range ${i+1}</span>
+      <div class="wl-field">
+        <input type="number" class="wl-input" style="width:130px" placeholder="800" min="180" max="11000"
+          value="${r.from !== null ? r.from : ''}" oninput="updateRange(${i},'from',this.value)">
+        <div class="wl-unit">nm</div>
+      </div>
+      <span class="range-sep">—</span>
+      <div class="wl-field">
+        <input type="number" class="wl-input" style="width:130px" placeholder="900" min="180" max="11000"
+          value="${r.to !== null ? r.to : ''}" oninput="updateRange(${i},'to',this.value)">
+        <div class="wl-unit">nm</div>
+      </div>
+      ${selRanges.length > 1 ? `<button class="btn-remove-range" onclick="removeRange(${i})" title="Remove">×</button>` : ''}
+    </div>`).join('');
+  document.getElementById('btn-add-range').disabled = selRanges.length >= 3;
+  checkRanges();
 }
 
-function checkWL() {
-  const v = parseInt(document.getElementById('wl-input').value);
-  if (v >= 180 && v <= 11000) { selWL = v; document.getElementById('btn1next').disabled = false; }
-  else { selWL = null; document.getElementById('btn1next').disabled = true; }
+function addRange() {
+  if (selRanges.length >= 3) return;
+  selRanges.push({ from: null, to: null });
+  renderRanges();
 }
 
-document.getElementById('wl-input').addEventListener('input', checkWL);
+function removeRange(i) {
+  selRanges.splice(i, 1);
+  renderRanges();
+}
+
+function updateRange(i, key, val) {
+  const v = parseFloat(val);
+  selRanges[i][key] = (isFinite(v) && v >= 180 && v <= 11000) ? Math.round(v) : null;
+  checkRanges();
+}
+
+function checkRanges() {
+  const valid = selRanges.length > 0 && selRanges.every(r =>
+    r.from !== null && r.to !== null && r.from <= r.to
+  );
+  document.getElementById('btn1next').disabled = !valid;
+}
+
+function setWL(from, to) {
+  selRanges[0] = { from: from, to: to };
+  renderRanges();
+}
+
+// Get OD at a single point; null if not covered
+function getODatPoint(p, wl) {
+  const w = +wl;
+  const hits = p.ranges.filter(r => w >= r.a && w <= r.b);
+  return hits.length ? Math.max(...hits.map(r => r.od)) : null;
+}
+
+// Check both endpoints; return the lower OD (worst case). Null if either endpoint not covered.
+function getODforRange(p, wlMin, wlMax) {
+  const odFrom = getODatPoint(p, +wlMin);
+  const odTo   = getODatPoint(p, +wlMax);
+  if (odFrom === null || odTo === null) return null;
+  return Math.min(odFrom, odTo);
+}
+
+// Worst-case OD across all user-specified ranges
+function getODforAllRanges(p) {
+  let worst = Infinity;
+  for (const r of selRanges) {
+    const od = getODforRange(p, r.from, r.to);
+    if (od === null) return null;
+    worst = Math.min(worst, od);
+  }
+  return worst === Infinity ? null : worst;
+}
+
+function getAvailableODs() {
+  const available = new Set();
+  for (let od = 3; od <= 9; od++) {
+    DB.forEach(p => {
+      const got = getODforAllRanges(p);
+      if (got !== null && got >= od) available.add(od);
+    });
+  }
+  return available;
+}
 
 function selOD(od) {
   chosenOD = od;
@@ -1161,21 +1349,8 @@ function selOD(od) {
   document.getElementById('btn2next').disabled = false;
 }
 
-function getOD(p, wl) {
-  const hits = p.ranges.filter(r => wl >= r.a && wl <= r.b);
-  return hits.length ? Math.max(...hits.map(r => r.od)) : null;
-}
-
-function getAvailableODs(wl) {
-  const available = new Set();
-  for (let od = 3; od <= 9; od++) {
-    DB.forEach(p => { const g = getOD(p, wl); if (g !== null && g >= od) available.add(od); });
-  }
-  return available;
-}
-
 function refreshODCards() {
-  const available = getAvailableODs(selWL);
+  const available = getAvailableODs();
   chosenOD = null;
   document.getElementById('btn2next').disabled = true;
   document.getElementById('od-info').classList.remove('show');
@@ -1188,22 +1363,24 @@ function refreshODCards() {
 }
 
 function buildResults() {
-  const wl = selWL, minOD = chosenOD;
+  const minOD = chosenOD;
+  const rangeStr = selRanges.map(r => r.from === r.to ? `${r.from} nm` : `${r.from}–${r.to} nm`).join(' + ');
+
   const matches = DB
-    .map(p => ({ ...p, got: getOD(p, wl) }))
+    .map(p => ({ ...p, got: getODforAllRanges(p) }))
     .filter(p => p.got !== null && p.got >= minOD)
     .sort((a,b) => b.got - a.got || (b.mat.includes('Glass') ? 1 : -1));
 
   const area = document.getElementById('results');
 
   if (!matches.length) {
-    area.innerHTML = `<div class="empty"><div class="empty-icon">◎</div><h3>No matching filters found</h3><p>No filter in the current database covers <strong>${wl} nm</strong> at OD ≥ ${minOD}.<br>Try lowering your OD requirement, or contact your Univet distributor for the latest product range.</p></div>`;
+    area.innerHTML = `<div class="empty"><div class="empty-icon">◎</div><h3>No matching filters found</h3><p>No filter in the current database covers <strong>${rangeStr}</strong> at OD ≥ ${minOD}.<br>Try lowering your OD requirement, or contact your Univet distributor for the latest product range.</p></div>`;
     return;
   }
 
   const meta = `
     <div class="result-meta">
-      <div class="rm-item"><div class="rm-label">Wavelength</div><div class="rm-value">${wl}<span class="rm-unit"> nm</span></div></div>
+      <div class="rm-item"><div class="rm-label">Wavelength Range(s)</div><div class="rm-value" style="font-size:18px">${rangeStr}</div></div>
       <div class="rm-item"><div class="rm-label">Min OD Required</div><div class="rm-value">≥ ${minOD}</div></div>
       <div class="rm-item"><div class="rm-label">Matching Filters</div><div class="rm-value">${matches.length}<span class="rm-unit"> found</span></div></div>
     </div>`;
@@ -1223,14 +1400,14 @@ function buildResults() {
         <div class="rc-mid">
           <h3>${p.mat} · VLT ${p.vlt}%</h3>
           <div class="rc-tags">
-            <span class="tag tag-od">OD ${p.got} @ ${wl}nm</span>
+            <span class="tag tag-od">OD ${p.got} · ${rangeStr}</span>
             <span class="tag tag-vlt">VLT ${p.vlt}%</span>
             <span class="tag tag-mat">${p.mat}</span>
           </div>
           <div class="rc-reason">
             ${isB
-              ? `<strong>Best match:</strong> Achieves OD ${p.got} at ${wl}nm${p.got > minOD ? `, exceeding your requirement by ${p.got - minOD} level(s) for added safety margin` : ', exactly meeting your requirement'}. VLT ${p.vlt}%${p.vlt >= 60 ? ' — excellent visibility' : p.vlt >= 30 ? ' — clear vision' : ' — suited for high-power environments'}.`
-              : `Achieves OD ${p.got} at ${wl}nm${p.got > minOD ? ` (${p.got - minOD} level(s) above requirement)` : ''}. VLT ${p.vlt}%.`
+              ? `<strong>Best match:</strong> Achieves OD ${p.got} across ${rangeStr}${p.got > minOD ? `, exceeding your requirement by ${p.got - minOD} level(s) for added safety margin` : ', exactly meeting your requirement'}. VLT ${p.vlt}%${p.vlt >= 60 ? ' — excellent visibility' : p.vlt >= 30 ? ' — clear vision' : ' — suited for high-power environments'}.`
+              : `Achieves OD ${p.got} across ${rangeStr}${p.got > minOD ? ` (${p.got - minOD} level(s) above requirement)` : ''}. VLT ${p.vlt}%.`
             }
             ${p.align !== '—' ? `<br><span style="color:var(--text-dim);font-size:11px;font-family:var(--mono)">Alignment window: ${p.align}</span>` : ''}
           </div>
@@ -1240,8 +1417,8 @@ function buildResults() {
           </div>
         </div>
         <div class="rc-right">
-          <button class="btn-quote" onclick="alert('Request a quote\\nProduct: ${p.code}\\nPlease contact your Univet distributor')">Request Quote</button>
-          <button class="btn-spec" onclick="alert('Datasheet download\\nComing soon')">Datasheet</button>
+          <button class="btn-quote" onclick="alert('Request a quote\nProduct: ${p.code}\nPlease contact your Univet distributor')">Request Quote</button>
+          <button class="btn-spec" onclick="alert('Datasheet download\nComing soon')">Datasheet</button>
         </div>
       </div>`;
   }).join('');
@@ -1267,14 +1444,18 @@ function goTo(n) {
 }
 
 function reset() {
-  selWL = null; chosenOD = null;
-  document.getElementById('wl-input').value = '';
+  selRanges = [{ from: null, to: null }];
+  chosenOD = null;
+  renderRanges();
   document.getElementById('btn1next').disabled = true;
   document.getElementById('btn2next').disabled = true;
   document.querySelectorAll('.od-card').forEach(c => c.classList.remove('selected'));
   document.getElementById('od-info').classList.remove('show');
   goTo(1);
 }
+
+selRanges = [{ from: null, to: null }];
+renderRanges();
 </script>
 </body>
 </html>
