@@ -624,6 +624,7 @@ h1 em {
   padding: 22px;
   display: grid;
   grid-template-columns: 110px 1fr auto;
+  grid-template-rows: auto auto;
   gap: 20px;
   align-items: start;
   animation: fadeUp 0.28s ease both;
@@ -950,6 +951,96 @@ footer {
 .btn-add-range:hover { border-color: var(--accent); color: var(--accent); }
 .btn-add-range:disabled { opacity: 0.35; cursor: not-allowed; }
 
+
+/* ── FRAME PANEL ── */
+.frame-panel {
+  display: none;
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  animation: fadeUp 0.22s ease;
+}
+
+.frame-panel.open { display: block; }
+
+.frame-panel-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.frame-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.frame-table th {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.frame-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.frame-table tr:last-child td { border-bottom: none; }
+.frame-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.frame-table td:first-child { color: var(--white); font-weight: 600; }
+
+.sku-code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-mid);
+  background: var(--bg4);
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  display: inline-block;
+}
+
+.price-tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.btn-toggle-frames {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 7px 14px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: 'Barlow', sans-serif;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.18s;
+  letter-spacing: 0.3px;
+}
+
+.btn-toggle-frames:hover { border-color: var(--accent); color: var(--accent); }
+.btn-toggle-frames.open { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+.toggle-arrow { transition: transform 0.2s; font-size: 10px; }
+.btn-toggle-frames.open .toggle-arrow { transform: rotate(180deg); }
 /* ── RESPONSIVE ── */
 @media (max-width:620px) {
   .topbar { padding: 0 20px; }
@@ -1235,6 +1326,873 @@ const DB = [
     ranges:[{a:750,b:815,od:9},{a:815,b:975,od:8},{a:975,b:1120,od:9}] }
 ];
 
+
+const FRAMES_DB = {
+  "UL-1001": [
+    {
+      "sku": "561H.00.00.300",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 82
+    },
+    {
+      "sku": "561H.00.01.300",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 82
+    },
+    {
+      "sku": "562S.00.00.300",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 84
+    },
+    {
+      "sku": "562S.00.01.300",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 84
+    },
+    {
+      "sku": "5X7L.00.00.679",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 73
+    },
+    {
+      "sku": "559G.00.00.300",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 119
+    }
+  ],
+  "UL-1002": [
+    {
+      "sku": "546L.00.10.550",
+      "frame": "546",
+      "color": "White/Grey",
+      "price": 28
+    },
+    {
+      "sku": "5X7L.00.00.650",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 25
+    }
+  ],
+  "UL-1005": [
+    {
+      "sku": "561H.00.00.309",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 149
+    },
+    {
+      "sku": "561H.00.01.309",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 149
+    },
+    {
+      "sku": "562S.00.00.309",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 157
+    },
+    {
+      "sku": "562S.00.01.309",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 157
+    },
+    {
+      "sku": "546L.00.10.551",
+      "frame": "546",
+      "color": "White/Grey",
+      "price": 95
+    },
+    {
+      "sku": "5X7L.00.00.651",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 83
+    },
+    {
+      "sku": "559G.00.00.309",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 193
+    }
+  ],
+  "UL-1007": [
+    {
+      "sku": "561H.00.00.311",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 156
+    },
+    {
+      "sku": "561H.00.01.311",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 156
+    },
+    {
+      "sku": "562S.00.00.311",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 162
+    },
+    {
+      "sku": "562S.00.01.311",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 162
+    },
+    {
+      "sku": "559G.00.00.311",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 207
+    }
+  ],
+  "UL-1008": [
+    {
+      "sku": "561H.00.00.312",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 151
+    },
+    {
+      "sku": "561H.00.01.312",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 151
+    },
+    {
+      "sku": "562S.00.00.312",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 161
+    },
+    {
+      "sku": "562S.00.01.312",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 161
+    },
+    {
+      "sku": "5X7L.00.00.652",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 139
+    },
+    {
+      "sku": "559G.00.00.312",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 226
+    }
+  ],
+  "UL-1009": [
+    {
+      "sku": "561H.00.00.313",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 149
+    },
+    {
+      "sku": "561H.00.01.313",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 149
+    },
+    {
+      "sku": "562S.00.00.313",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 161
+    },
+    {
+      "sku": "562S.00.01.313",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 161
+    },
+    {
+      "sku": "546L.00.10.553",
+      "frame": "546",
+      "color": "White/Grey",
+      "price": 75
+    },
+    {
+      "sku": "5X7L.00.00.653",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 75
+    },
+    {
+      "sku": "559G.00.00.313",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 198
+    }
+  ],
+  "UL-1015": [
+    {
+      "sku": "561H.00.00.326",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 194
+    },
+    {
+      "sku": "561H.00.01.326",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 194
+    },
+    {
+      "sku": "562S.00.00.326",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 205
+    },
+    {
+      "sku": "562S.00.01.326",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 205
+    },
+    {
+      "sku": "559G.00.00.326",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 239
+    }
+  ],
+  "UL-1016": [
+    {
+      "sku": "561H.00.00.329",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 183
+    },
+    {
+      "sku": "561H.00.01.329",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 183
+    },
+    {
+      "sku": "562S.00.00.329",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 183
+    },
+    {
+      "sku": "562S.00.01.329",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 183
+    },
+    {
+      "sku": "5X7L.00.00.654",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 146
+    },
+    {
+      "sku": "559G.00.00.329",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 217
+    }
+  ],
+  "UL-1020": [
+    {
+      "sku": "546L.00.10.555",
+      "frame": "546",
+      "color": "White/Grey",
+      "price": 100
+    },
+    {
+      "sku": "5X7L.00.00.655",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 109
+    }
+  ],
+  "UL-1021": [
+    {
+      "sku": "546L.00.10.557",
+      "frame": "546",
+      "color": "White/Grey",
+      "price": 71
+    }
+  ],
+  "UL-1022": [
+    {
+      "sku": "5X7L.00.00.659",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 128
+    }
+  ],
+  "UL-1024": [
+    {
+      "sku": "561H.00.00.345",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 161
+    },
+    {
+      "sku": "561H.00.01.345",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 161
+    },
+    {
+      "sku": "562S.00.00.345",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 166
+    },
+    {
+      "sku": "562S.00.01.345",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 166
+    },
+    {
+      "sku": "559G.00.00.345",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 212
+    }
+  ],
+  "UL-1026": [
+    {
+      "sku": "561H.00.00.346",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 254
+    },
+    {
+      "sku": "561H.00.01.346",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 254
+    },
+    {
+      "sku": "562S.00.00.346",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 259
+    },
+    {
+      "sku": "562S.00.01.346",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 259
+    },
+    {
+      "sku": "559G.00.00.346",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 288
+    }
+  ],
+  "UL-1028": [
+    {
+      "sku": "561H.00.00.348",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 128
+    },
+    {
+      "sku": "561H.00.01.348",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 128
+    },
+    {
+      "sku": "562S.00.00.348",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 136
+    },
+    {
+      "sku": "562S.00.01.348",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 136
+    },
+    {
+      "sku": "559G.00.00.348",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 154
+    }
+  ],
+  "UL-1029": [
+    {
+      "sku": "561H.00.00.349",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 173
+    },
+    {
+      "sku": "561H.00.01.349",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 173
+    },
+    {
+      "sku": "562S.00.00.349",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 180
+    },
+    {
+      "sku": "562S.00.01.349",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 180
+    },
+    {
+      "sku": "559G.00.00.349",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 226
+    }
+  ],
+  "UL-1030": [
+    {
+      "sku": "561H.00.00.350",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 109
+    },
+    {
+      "sku": "561H.00.01.350",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 109
+    },
+    {
+      "sku": "562S.00.00.350",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 120
+    },
+    {
+      "sku": "562S.00.01.350",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 120
+    },
+    {
+      "sku": "559G.00.00.350",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 170
+    }
+  ],
+  "UL-1036": [
+    {
+      "sku": "5X7L.00.00.664",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 159
+    }
+  ],
+  "UL-1037": [
+    {
+      "sku": "5X7L.00.00.665",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 226
+    }
+  ],
+  "UL-1038": [
+    {
+      "sku": "5X7L.00.00.668",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 101
+    }
+  ],
+  "UL-1044": [
+    {
+      "sku": "5X7L.00.00.680",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 110
+    }
+  ],
+  "UL-1045": [
+    {
+      "sku": "561H.00.00.361",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 56
+    },
+    {
+      "sku": "561H.00.01.361",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 56
+    },
+    {
+      "sku": "562S.00.00.361",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 57
+    },
+    {
+      "sku": "562S.00.01.361",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 57
+    },
+    {
+      "sku": "559G.00.00.361",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 108
+    }
+  ],
+  "UL-1052": [
+    {
+      "sku": "5X7L.00.00.685",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 116
+    }
+  ],
+  "UL-1018": [
+    {
+      "sku": "561H.00.00.301",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 146
+    },
+    {
+      "sku": "561H.00.01.301",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 146
+    },
+    {
+      "sku": "562S.00.00.301",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 153
+    },
+    {
+      "sku": "562S.00.01.301",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 153
+    },
+    {
+      "sku": "559G.00.00.301",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 211
+    }
+  ],
+  "UL-1019": [
+    {
+      "sku": "561H.00.00.307",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 163
+    },
+    {
+      "sku": "561H.00.01.307",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 163
+    },
+    {
+      "sku": "562S.00.00.307",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 168
+    },
+    {
+      "sku": "562S.00.01.307",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 168
+    },
+    {
+      "sku": "559G.00.00.307",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 202
+    }
+  ],
+  "UL-1025": [
+    {
+      "sku": "546L.00.10.561",
+      "frame": "546",
+      "color": "White/Grey",
+      "price": 51
+    },
+    {
+      "sku": "5X7L.00.00.661",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 47
+    }
+  ],
+  "UL-1031": [
+    {
+      "sku": "561H.00.00.351",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 99
+    },
+    {
+      "sku": "561H.00.01.351",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 99
+    },
+    {
+      "sku": "562S.00.00.351",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 108
+    },
+    {
+      "sku": "562S.00.01.351",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 108
+    },
+    {
+      "sku": "559G.00.00.351",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 144
+    }
+  ],
+  "UL-1032": [
+    {
+      "sku": "561H.00.00.352",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 94
+    },
+    {
+      "sku": "561H.00.01.352",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 94
+    },
+    {
+      "sku": "562S.00.00.352",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 97
+    },
+    {
+      "sku": "562S.00.01.352",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 97
+    },
+    {
+      "sku": "559G.00.00.352",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 137
+    }
+  ],
+  "UL-1043": [
+    {
+      "sku": "5X7L.00.00.674",
+      "frame": "5X7",
+      "color": "White/Grey",
+      "price": 123
+    }
+  ],
+  "UL-2001": [
+    {
+      "sku": "561H.00.00.201",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 310
+    },
+    {
+      "sku": "561H.00.01.201",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 310
+    },
+    {
+      "sku": "562S.00.00.201",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 291
+    },
+    {
+      "sku": "562S.00.01.201",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 291
+    },
+    {
+      "sku": "559G.00.00.201",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 344
+    },
+    {
+      "sku": "616L.00.00.003",
+      "frame": "616",
+      "color": "White",
+      "price": 232
+    }
+  ],
+  "UL-2002": [
+    {
+      "sku": "559G.00.00.004",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 339
+    },
+    {
+      "sku": "616L.00.00.004",
+      "frame": "616",
+      "color": "White",
+      "price": 203
+    }
+  ],
+  "UL-2004": [
+    {
+      "sku": "561H.00.00.200",
+      "frame": "561H Sylex",
+      "color": "White/Grey",
+      "price": 322
+    },
+    {
+      "sku": "561H.00.01.200",
+      "frame": "561H Sylex",
+      "color": "Anthracite/White",
+      "price": 322
+    },
+    {
+      "sku": "562S.00.00.200",
+      "frame": "562S",
+      "color": "White/Grey",
+      "price": 301
+    },
+    {
+      "sku": "562S.00.01.200",
+      "frame": "562S",
+      "color": "Anthracite/White",
+      "price": 301
+    },
+    {
+      "sku": "559G.00.00.200",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 356
+    },
+    {
+      "sku": "616L.00.00.008",
+      "frame": "616",
+      "color": "White",
+      "price": 175
+    }
+  ],
+  "UL-2005": [
+    {
+      "sku": "559G.00.00.010",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 463
+    },
+    {
+      "sku": "616L.00.00.010",
+      "frame": "616",
+      "color": "White",
+      "price": 234
+    }
+  ],
+  "UL-2006": [
+    {
+      "sku": "559G.00.00.012",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 326
+    },
+    {
+      "sku": "616L.00.00.012",
+      "frame": "616",
+      "color": "White",
+      "price": 217
+    }
+  ],
+  "UL-2007": [
+    {
+      "sku": "559G.00.00.013",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 405
+    },
+    {
+      "sku": "616L.00.00.013",
+      "frame": "616",
+      "color": "White",
+      "price": 239
+    }
+  ],
+  "UL-2012": [
+    {
+      "sku": "559G.00.00.020",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 258
+    }
+  ],
+  "UL-2014": [
+    {
+      "sku": "559G.00.00.024",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 465
+    }
+  ],
+  "UL-3001": [
+    {
+      "sku": "559G.00.00.100",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 532
+    }
+  ],
+  "UL-3002": [
+    {
+      "sku": "559G.00.00.101",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 420
+    }
+  ],
+  "UL-3005": [
+    {
+      "sku": "559G.00.00.104",
+      "frame": "559G Goggle",
+      "color": "White/Grey",
+      "price": 824
+    }
+  ]
+};
 const SWATCHES = {
   "Clear":"#e8edf2","Green":"#4ade80","Dark Green":"#16a34a","Blue":"#60a5fa",
   "Light Blue":"#93c5fd","Pink":"#f9a8d4","Orange":"#fb923c","Dark Orange":"#ea580c",
@@ -1389,43 +2347,85 @@ function buildResults() {
     const swatch = SWATCHES[p.color] || '#555';
     const pct = Math.round((p.got / 9) * 100);
     const isB = i === 0;
-    return `
-      <div class="rc ${isB ? 'best' : ''}" style="animation-delay:${i*0.07}s">
-        <div class="rc-left">
-          <div class="${isB ? 'best-badge' : 'alt-badge'}">${isB ? 'Best Match' : `Option ${i+1}`}</div>
-          <div class="rc-code">${p.code}</div>
-          <div class="color-swatch" style="background:${swatch}"></div>
-          <div class="rc-swatch-label">${p.color}</div>
-        </div>
-        <div class="rc-mid">
-          <h3>${p.mat} · VLT ${p.vlt}%</h3>
-          <div class="rc-tags">
-            <span class="tag tag-od">OD ${p.got} · ${rangeStr}</span>
-            <span class="tag tag-vlt">VLT ${p.vlt}%</span>
-            <span class="tag tag-mat">${p.mat}</span>
-          </div>
-          <div class="rc-reason">
-            ${isB
-              ? `<strong>Best match:</strong> Achieves OD ${p.got} across ${rangeStr}${p.got > minOD ? `, exceeding your requirement by ${p.got - minOD} level(s) for added safety margin` : ', exactly meeting your requirement'}. VLT ${p.vlt}%${p.vlt >= 60 ? ' — excellent visibility' : p.vlt >= 30 ? ' — clear vision' : ' — suited for high-power environments'}.`
-              : `Achieves OD ${p.got} across ${rangeStr}${p.got > minOD ? ` (${p.got - minOD} level(s) above requirement)` : ''}. VLT ${p.vlt}%.`
-            }
-            ${p.align !== '—' ? `<br><span style="color:var(--text-dim);font-size:11px;font-family:var(--mono)">Alignment window: ${p.align}</span>` : ''}
-          </div>
-          <div class="od-bar-wrap">
-            <div class="od-bar-labels"><span>Protection Level</span><span>OD ${p.got} / 9</span></div>
-            <div class="od-bar-track"><div class="od-bar-fill" style="width:${pct}%"></div></div>
-          </div>
-        </div>
-        <div class="rc-right">
-          <button class="btn-quote" onclick="alert('Request a quote\nProduct: ${p.code}\nPlease contact your Univet distributor')">Request Quote</button>
-          <button class="btn-spec" onclick="alert('Datasheet download\nComing soon')">Datasheet</button>
-        </div>
-      </div>`;
+    const reasonText = isB
+      ? '<strong>Best match:</strong> Achieves OD ' + p.got + ' across ' + rangeStr + (p.got > minOD ? ', exceeding your requirement by ' + (p.got - minOD) + ' level(s) for added safety margin' : ', exactly meeting your requirement') + '. VLT ' + p.vlt + '%' + (p.vlt >= 60 ? ' — excellent visibility' : p.vlt >= 30 ? ' — clear vision' : ' — suited for high-power environments') + '.'
+      : 'Achieves OD ' + p.got + ' across ' + rangeStr + (p.got > minOD ? ' (' + (p.got - minOD) + ' level(s) above requirement)' : '') + '. VLT ' + p.vlt + '%.';
+    const alignText = (p.align && p.align !== '—') ? '<br><span style="color:var(--text-dim);font-size:11px;font-family:var(--mono)">Alignment window: ' + p.align + '</span>' : '';
+    const badge = isB ? '<div class="best-badge">Best Match</div>' : '<div class="alt-badge">Option ' + (i+1) + '</div>';
+
+    return '<div class="rc ' + (isB ? 'best' : '') + '" style="animation-delay:' + (i*0.07) + 's">'
+      + '<div class="rc-left">' + badge
+      + '<div class="rc-code">' + p.code + '</div>'
+      + '<div class="color-swatch" style="background:' + swatch + '"></div>'
+      + '<div class="rc-swatch-label">' + p.color + '</div></div>'
+      + '<div class="rc-mid">'
+      + '<h3>' + p.mat + ' · VLT ' + p.vlt + '%</h3>'
+      + '<div class="rc-tags">'
+      + '<span class="tag tag-od">OD ' + p.got + ' · ' + rangeStr + '</span>'
+      + '<span class="tag tag-vlt">VLT ' + p.vlt + '%</span>'
+      + '<span class="tag tag-mat">' + p.mat + '</span></div>'
+      + '<div class="rc-reason">' + reasonText + alignText + '</div>'
+      + '<div class="od-bar-wrap">'
+      + '<div class="od-bar-labels"><span>Protection Level</span><span>OD ' + p.got + ' / 9</span></div>'
+      + '<div class="od-bar-track"><div class="od-bar-fill" style="width:' + pct + '%"></div></div>'
+      + '</div></div>'
+      + '<div class="rc-right">'
+      + '<button class="btn-quote" data-code="' + p.code + '" onclick="showQuote(this)">Request Quote</button>'
+      + '<button class="btn-spec" onclick="showDatasheet()">Datasheet</button>'
+      + '</div>'
+      + '<div style="grid-column:1/-1">'
+      + '<button class="btn-toggle-frames" id="fb-' + p.code + '" data-code="' + p.code + '" onclick="toggleFrames(this)">'
+      + '<span>Select frame &amp; order code</span><span class="toggle-arrow">▼</span></button>'
+      + '<div class="frame-panel" id="fp-' + p.code + '"></div>'
+      + '</div>'
+      + '</div>';
   }).join('');
 
   const disc = `<div class="disclaimer"><strong>⚠ Disclaimer:</strong> Results are generated from the Univet Laser Safety Filters Technical Data Sheet Rev. 02/2024 and are for reference only. Before purchasing, always verify the complete frame + filter combination using the frame code and confirm the CE Declaration of Conformity.</div>`;
 
   area.innerHTML = meta + `<div class="result-list">${cards}</div>` + disc;
+}
+
+
+
+function showQuote(btn) {
+  var code = btn.getAttribute('data-code');
+  alert('Request a quote\nProduct: ' + code + '\nPlease contact your Univet distributor.');
+}
+function showDatasheet() {
+  alert('Datasheet download\nComing soon.');
+}
+function toggleFrames(el) {
+  const code  = el.getAttribute('data-code');
+  const panel = document.getElementById('fp-' + code);
+  const btn   = document.getElementById('fb-' + code);
+  if (!panel) return;
+  const isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.querySelector('.toggle-arrow').textContent = isOpen ? '▼' : '▲';
+  if (!isOpen && panel.innerHTML.trim() === '') {
+    const items = FRAMES_DB[code] || [];
+    if (!items.length) {
+      panel.innerHTML = '<p style="font-size:12px;color:var(--text-dim)">No frame data available. Please contact your distributor.</p>';
+    } else {
+      panel.innerHTML = `
+        <div class="frame-panel-title">Available frames & ordering codes</div>
+        <table class="frame-table">
+          <thead><tr>
+            <th>Frame</th><th>Order Code</th><th>Colour</th><th>Price</th>
+          </tr></thead>
+          <tbody>${items.map(item => `
+            <tr>
+              <td>${item.frame}</td>
+              <td><span class="sku-code">${item.sku}</span></td>
+              <td>${item.color}</td>
+              <td><span class="price-tag">€${item.price ?? '—'}</span></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>`;
+    }
+  }
 }
 
 function goTo(n) {
