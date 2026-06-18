@@ -7,1052 +7,211 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:        #0d0f10;
-  --bg2:       #141618;
-  --bg3:       #1c1f22;
-  --bg4:       #23272b;
-  --border:    #2e3338;
-  --border2:   #3d4349;
-  --accent:     #3ab54a;
-  --accent-dark:#2d9140;
-  --accent-glow: rgba(58,181,74,0.15);
-  --accent-dim:  rgba(58,181,74,0.08);
-  --white:     #f4f5f6;
-  --text:      #d8dadc;
-  --text-mid:  #8c9198;
-  --text-dim:  #555c63;
-  --warn:      #d4900a;
-  --warn-bg:   rgba(212,144,10,0.08);
-  --warn-bdr:  rgba(212,144,10,0.25);
-  --success:   #2ea84e;
-  --success-bg:rgba(46,168,78,0.08);
-  --mono:      'DM Mono', monospace;
+  --bg:#0d0f10; --bg2:#141618; --bg3:#1c1f22; --bg4:#23272b;
+  --border:#2e3338; --border2:#3d4349;
+  --accent:#3ab54a; --accent-dark:#2d9140;
+  --accent-glow:rgba(58,181,74,0.15); --accent-dim:rgba(58,181,74,0.08);
+  --white:#f4f5f6; --text:#d8dadc; --text-mid:#8c9198; --text-dim:#555c63;
+  --warn:#d4900a; --warn-bg:rgba(212,144,10,0.08); --warn-bdr:rgba(212,144,10,0.25);
+  --mono:'DM Mono', monospace;
 }
 
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
 html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:'Barlow',sans-serif; min-height:100vh; -webkit-font-smoothing:antialiased; }
+
+/* TOPBAR */
+.topbar { background:var(--bg2); border-bottom:1px solid var(--border); height:56px; display:flex; align-items:center; justify-content:space-between; padding:0 40px; position:sticky; top:0; z-index:100; }
+.logo { display:flex; align-items:center; gap:12px; }
+.logo-divider { width:1px; height:20px; background:var(--border2); }
+.logo-sub { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); }
+.topbar-right { display:flex; align-items:center; gap:20px; }
+.topbar-tag { font-family:var(--mono); font-size:10px; color:var(--text-dim); letter-spacing:1px; }
+.topbar-cert { font-family:var(--mono); font-size:10px; color:var(--accent); border:1px solid rgba(58,181,74,0.3); padding:3px 8px; border-radius:3px; letter-spacing:1px; }
+
+/* HERO */
+.hero { background:var(--bg2); border-bottom:1px solid var(--border); padding:48px 40px 44px; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--accent) 0%, transparent 60%); }
+.hero::after { content:''; position:absolute; top:-120px; right:-120px; width:480px; height:480px; background:radial-gradient(circle, rgba(58,181,74,0.06) 0%, transparent 65%); pointer-events:none; }
+.hero-inner { max-width:740px; position:relative; z-index:1; }
+.hero-eyebrow { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); border:1px solid rgba(58,181,74,0.3); background:var(--accent-dim); padding:5px 12px; border-radius:3px; margin-bottom:20px; }
+.hero-eyebrow::before { content:''; width:5px; height:5px; background:var(--accent); border-radius:50%; animation:blink 1.8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+h1 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:clamp(36px,6vw,56px); line-height:0.98; letter-spacing:-0.5px; text-transform:uppercase; color:var(--white); margin-bottom:14px; }
+h1 em { font-style:italic; color:var(--accent); font-weight:400; font-family:'Barlow',sans-serif; text-transform:none; font-size:0.75em; display:block; letter-spacing:0; margin-bottom:4px; opacity:0.9; }
+.hero-desc { font-size:14px; color:var(--text-mid); line-height:1.7; font-weight:300; max-width:520px; }
+
+/* MAIN */
+.main { max-width:880px; margin:0 auto; padding:36px 24px 80px; }
+
+/* MODE TOGGLE */
+.mode-toggle { display:inline-flex; background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:4px; margin-bottom:32px; }
+.mode-btn { padding:10px 20px; font-size:12px; font-weight:600; font-family:'Barlow',sans-serif; color:var(--text-dim); background:transparent; border:none; border-radius:5px; cursor:pointer; text-transform:uppercase; letter-spacing:0.5px; transition:all 0.18s; }
+.mode-btn:hover { color:var(--text); }
+.mode-btn.active { background:var(--accent); color:var(--white); box-shadow:0 2px 12px var(--accent-glow); }
+
+/* SECTION */
+.sec-tag { font-family:var(--mono); font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+.sec-title { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:26px; text-transform:uppercase; color:var(--white); letter-spacing:0.5px; margin-bottom:20px; }
+.sec-desc { font-size:13px; color:var(--text-mid); margin-bottom:24px; line-height:1.6; }
+
+/* PANEL */
+.panel { display:none; }
+.panel.active { display:block; animation:fadeUp 0.28s ease; }
+@keyframes fadeUp { from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+/* QUICK GUIDE — laser type chips */
+.laser-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; margin-bottom:28px; }
+.laser-chip { background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:12px 14px; cursor:pointer; transition:all 0.18s; text-align:left; position:relative; }
+.laser-chip:hover { border-color:var(--border2); background:var(--bg3); }
+.laser-chip.selected { border-color:var(--accent); background:var(--accent-dim); }
+.laser-chip.selected::after { content:'✓'; position:absolute; top:8px; right:10px; color:var(--accent); font-size:12px; font-weight:700; }
+.lc-name { font-size:13px; font-weight:600; color:var(--white); margin-bottom:2px; }
+.lc-nm { font-family:var(--mono); font-size:11px; color:var(--accent); }
+.laser-chip.selected .lc-nm { color:var(--accent); }
+.laser-chip:not(.selected) .lc-nm { color:var(--text-mid); }
+
+/* WAVELENGTH ROW (used in both modes) */
+.wl-rows { display:flex; flex-direction:column; gap:10px; margin-bottom:14px; }
+.wl-row { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:14px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.wl-row-num { font-family:var(--mono); font-size:10px; color:var(--text-dim); width:30px; flex-shrink:0; letter-spacing:1px; }
+.wl-row-name { font-size:13px; font-weight:600; color:var(--white); margin-right:6px; }
+
+/* SINGLE/RANGE TOGGLE (per-row) */
+.sr-toggle { display:inline-flex; background:var(--bg4); border:1px solid var(--border); border-radius:4px; padding:2px; }
+.sr-btn { padding:4px 10px; font-family:var(--mono); font-size:10px; color:var(--text-dim); background:transparent; border:none; border-radius:3px; cursor:pointer; letter-spacing:0.5px; text-transform:uppercase; }
+.sr-btn.active { background:var(--accent); color:var(--white); }
+
+.wl-input { background:var(--bg4); border:1px solid var(--border2); border-radius:4px; padding:7px 10px; font-family:var(--mono); font-size:13px; color:var(--white); width:80px; text-align:center; outline:none; transition:border-color 0.15s; }
+.wl-input:focus { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-glow); }
+.wl-input.invalid { border-color:#e25555; background:rgba(226,85,85,0.08); }
+.wl-invalid-msg { font-size:11px; color:#e25555; margin-left:6px; font-family:var(--mono); }
+.wl-input:disabled, .wl-input.disabled { opacity:0.35; pointer-events:none; }
+.wl-input.locked { background:var(--bg3); color:var(--text-mid); cursor:default; border-color:var(--border); }
+.wl-dash { color:var(--text-mid); font-size:14px; }
+.wl-dash.hidden { visibility:hidden; }
+.wl-unit { font-family:var(--mono); font-size:11px; color:var(--text-dim); }
+
+/* OD pill */
+.od-pill-wrap { position:relative; }
+.od-pill { display:inline-flex; align-items:center; gap:5px; background:var(--accent-dim); border:1px solid rgba(58,181,74,0.35); padding:5px 11px; border-radius:4px; font-family:var(--mono); font-size:11px; color:var(--accent); cursor:pointer; user-select:none; }
+.od-pill:hover { background:rgba(58,181,74,0.14); }
+.od-arrow { font-size:8px; }
+.od-menu { display:none; position:absolute; top:calc(100% + 4px); left:0; background:var(--bg3); border:1px solid var(--border2); border-radius:5px; padding:4px; z-index:50; box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+.od-menu.open { display:flex; gap:2px; flex-wrap:wrap; min-width:200px; }
+.od-opt { padding:6px 10px; font-family:var(--mono); font-size:11px; color:var(--text-mid); background:transparent; border:none; cursor:pointer; border-radius:3px; min-width:42px; }
+.od-opt:hover { background:var(--bg4); color:var(--white); }
+.od-opt.selected { background:var(--accent); color:var(--white); }
+.od-opt.disabled { opacity:0.25; cursor:not-allowed; }
+
+/* Remove button */
+.wl-remove { background:transparent; border:1px solid var(--border); color:var(--text-dim); width:28px; height:28px; border-radius:4px; font-size:14px; cursor:pointer; margin-left:auto; transition:all 0.15s; }
+.wl-remove:hover { border-color:var(--warn); color:var(--warn); }
+
+/* Add button */
+.btn-add { display:inline-flex; align-items:center; gap:6px; padding:10px 16px; background:transparent; border:1px dashed var(--border2); border-radius:5px; font-size:12px; font-family:'Barlow',sans-serif; font-weight:500; color:var(--text-mid); cursor:pointer; transition:all 0.18s; }
+.btn-add:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); background:var(--accent-dim); }
+.btn-add:disabled { opacity:0.35; cursor:not-allowed; }
+
+/* Quick picks (for Multiple mode) */
+.qp-label { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin:24px 0 12px; }
+.qp-grid { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+.qp-chip { display:flex; flex-direction:column; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:5px; cursor:pointer; transition:all 0.18s; text-align:left; }
+.qp-chip:hover { border-color:var(--accent); background:var(--accent-dim); }
+.qp-nm { font-family:var(--mono); font-size:11px; font-weight:500; color:var(--accent); line-height:1; margin-bottom:3px; }
+.qp-name { font-size:10px; color:var(--text-dim); }
+
+/* ALERT */
+.alert { display:flex; gap:10px; padding:12px 14px; border-radius:5px; font-size:12.5px; line-height:1.6; margin-bottom:20px; }
+.alert-warn { background:var(--warn-bg); border:1px solid var(--warn-bdr); color:var(--warn); }
+.alert-info { background:var(--accent-dim); border:1px solid rgba(58,181,74,0.25); color:var(--accent); }
+.alert-icon { flex-shrink:0; margin-top:1px; }
+
+/* NAV */
+.nav-row { display:flex; justify-content:space-between; align-items:center; padding-top:24px; margin-top:28px; border-top:1px solid var(--border); }
+.btn-back { padding:11px 22px; background:transparent; border:1px solid var(--border2); border-radius:5px; font-size:13px; font-weight:500; color:var(--text-mid); cursor:pointer; font-family:'Barlow',sans-serif; transition:all 0.18s; display:flex; align-items:center; gap:6px; }
+.btn-back:hover { color:var(--white); background:var(--bg3); }
+.btn-next { padding:11px 26px; background:var(--accent); border:none; border-radius:5px; font-size:13px; font-weight:600; color:var(--white); cursor:pointer; font-family:'Barlow',sans-serif; letter-spacing:0.5px; text-transform:uppercase; transition:all 0.18s; display:flex; align-items:center; gap:8px; box-shadow:0 4px 16px var(--accent-glow); }
+.btn-next:hover:not(:disabled) { background:var(--accent-dark); box-shadow:0 6px 20px rgba(58,181,74,0.3); transform:translateY(-1px); }
+.btn-next:disabled { background:var(--bg4); color:var(--text-dim); cursor:not-allowed; box-shadow:none; transform:none; }
+
+/* RESULTS */
+.result-meta { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:18px 22px; margin-bottom:20px; }
+.rm-label { font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px; }
+.rm-rows { display:flex; flex-direction:column; gap:6px; }
+.rm-row { font-family:var(--mono); font-size:13px; color:var(--white); display:flex; gap:14px; }
+.rm-row-name { color:var(--text-mid); min-width:140px; }
+.rm-row-od { color:var(--accent); font-weight:600; }
+.rm-summary { font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-top:12px; padding-top:12px; border-top:1px solid var(--border); }
+.rm-found { color:var(--accent); font-weight:600; font-size:14px; }
+
+.result-list { display:flex; flex-direction:column; gap:12px; margin-bottom:20px; }
+.rc { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:20px; display:grid; grid-template-columns:100px 1fr auto; grid-template-rows:auto auto; gap:18px; align-items:start; animation:fadeUp 0.28s ease both; transition:border-color 0.18s; }
+.rc:hover { border-color:var(--border2); }
+.rc.best { border-color:var(--accent); background:linear-gradient(135deg, rgba(58,181,74,0.04) 0%, var(--bg2) 50%); box-shadow:0 0 0 1px rgba(58,181,74,0.15), 0 4px 24px rgba(0,0,0,0.3); }
+.rc-left { text-align:center; border-right:1px solid var(--border); padding-right:18px; }
+.best-badge, .alt-badge { display:inline-block; font-family:var(--mono); font-size:8px; font-weight:500; letter-spacing:1.5px; padding:3px 8px; border-radius:2px; margin-bottom:10px; text-transform:uppercase; }
+.best-badge { background:var(--accent); color:var(--white); }
+.alt-badge { background:var(--bg4); color:var(--text-dim); border:1px solid var(--border); }
+.rc-code { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:22px; color:var(--white); letter-spacing:1px; margin-bottom:8px; text-transform:uppercase; }
+.rc.best .rc-code { color:var(--accent); }
+.color-swatch { width:24px; height:24px; border-radius:50%; border:1px solid rgba(255,255,255,0.12); margin:0 auto 4px; }
+.rc-swatch-label { font-family:var(--mono); font-size:9px; color:var(--text-dim); text-transform:uppercase; }
+.rc-mid h3 { font-size:14px; font-weight:600; color:var(--white); margin-bottom:8px; }
+.rc-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.tag { font-family:var(--mono); font-size:10px; padding:3px 8px; border-radius:3px; font-weight:500; }
+.tag-od { background:var(--accent-dim); color:var(--accent); border:1px solid rgba(58,181,74,0.25); }
+.tag-vlt { background:rgba(255,255,255,0.04); color:var(--text-mid); border:1px solid var(--border); }
+.tag-mat { background:rgba(255,255,255,0.04); color:var(--text-dim); border:1px solid var(--border); }
+.rc-reason { font-size:12.5px; color:var(--text-mid); line-height:1.6; }
+.rc-reason strong { color:var(--white); }
+.rc-right { display:flex; flex-direction:column; gap:8px; min-width:100px; }
+.btn-quote { padding:9px 14px; background:var(--accent); color:var(--white); border:none; border-radius:4px; font-size:11px; font-weight:600; cursor:pointer; font-family:'Barlow',sans-serif; text-transform:uppercase; letter-spacing:0.5px; }
+.btn-quote:hover { background:var(--accent-dark); }
+.btn-spec { padding:9px 14px; background:transparent; color:var(--text-mid); border:1px solid var(--border2); border-radius:4px; font-size:11px; cursor:pointer; font-family:'Barlow',sans-serif; text-transform:uppercase; letter-spacing:0.5px; }
+.btn-spec:hover { color:var(--white); }
+
+/* FRAME PANEL */
+.frame-panel { display:none; margin-top:14px; border-top:1px solid var(--border); padding-top:14px; }
+.frame-panel.open { display:block; }
+.frame-panel-title { font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin-bottom:10px; }
+.frame-table { width:100%; border-collapse:collapse; font-size:12px; }
+.frame-table th { font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-dim); text-align:left; padding:6px 10px; border-bottom:1px solid var(--border); }
+.frame-table td { padding:8px 10px; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text); }
+.frame-table tr:last-child td { border-bottom:none; }
+.frame-table tr:hover td { background:rgba(255,255,255,0.02); }
+.frame-table td:first-child { color:var(--white); font-weight:600; }
+.sku-code { font-family:var(--mono); font-size:11px; color:var(--text-mid); background:var(--bg4); padding:2px 7px; border-radius:3px; border:1px solid var(--border); }
+.price-tag { font-family:var(--mono); font-size:12px; color:var(--accent); font-weight:600; }
+.btn-toggle-frames { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:7px 14px; background:transparent; border:1px solid var(--border2); border-radius:4px; font-size:11px; font-family:'Barlow',sans-serif; color:var(--text-mid); cursor:pointer; transition:all 0.18s; }
+.btn-toggle-frames:hover { border-color:var(--accent); color:var(--accent); }
+.btn-toggle-frames.open { border-color:var(--accent); color:var(--accent); background:var(--accent-dim); }
+.toggle-arrow { transition:transform 0.2s; font-size:10px; }
+.btn-toggle-frames.open .toggle-arrow { transform:rotate(180deg); }
+
+/* Empty / disclaimer */
+.empty { text-align:center; padding:60px 24px; background:var(--bg2); border:1px solid var(--border); border-radius:8px; }
+.empty-icon { font-size:40px; margin-bottom:14px; }
+.empty h3 { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:22px; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
+.empty p { font-size:13px; color:var(--text-mid); line-height:1.7; }
+.disclaimer { background:var(--bg3); border:1px solid var(--border); border-left:3px solid var(--warn); border-radius:0 5px 5px 0; padding:14px 16px; font-size:12px; color:var(--text-dim); line-height:1.65; }
+.disclaimer strong { color:var(--warn); }
+
+/* Footer */
+footer { background:var(--bg2); border-top:1px solid var(--border); padding:28px 40px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:60px; }
+.footer-meta { font-family:var(--mono); font-size:10px; color:var(--text-dim); line-height:1.7; text-align:right; }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Barlow', sans-serif;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ── TOPBAR ── */
-.topbar {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-wordmark {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--white);
-}
-
-.logo-wordmark span { color: var(--accent); }
-
-.logo-divider {
-  width: 1px;
-  height: 20px;
-  background: var(--border2);
-}
-
-.logo-sub {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.topbar-tag {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-}
-
-.topbar-cert {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--accent);
-  border: 1px solid rgba(58,181,74,0.3);
-  padding: 3px 8px;
-  border-radius: 3px;
-  letter-spacing: 1px;
-}
-
-/* ── HERO ── */
-.hero {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  padding: 56px 40px 52px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent) 0%, transparent 60%);
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  top: -120px; right: -120px;
-  width: 480px; height: 480px;
-  background: radial-gradient(circle, rgba(58,181,74,0.06) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.hero-inner { max-width: 740px; position: relative; z-index: 1; }
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid rgba(58,181,74,0.3);
-  background: var(--accent-dim);
-  padding: 5px 12px;
-  border-radius: 3px;
-  margin-bottom: 24px;
-}
-
-.hero-eyebrow::before {
-  content: '';
-  width: 5px; height: 5px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: blink 1.8s ease-in-out infinite;
-}
-
-@keyframes blink {
-  0%,100%{opacity:1;} 50%{opacity:0.2;}
-}
-
-h1 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: clamp(40px, 7vw, 68px);
-  line-height: 0.95;
-  letter-spacing: -0.5px;
-  text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 18px;
-}
-
-h1 em {
-  font-style: italic;
-  color: var(--accent);
-  font-weight: 400;
-  font-family: 'Barlow', sans-serif;
-  text-transform: none;
-  font-size: 0.75em;
-  display: block;
-  letter-spacing: 0;
-  margin-bottom: 4px;
-  opacity: 0.9;
-}
-
-.hero-desc {
-  font-size: 15px;
-  color: var(--text-mid);
-  line-height: 1.7;
-  font-weight: 300;
-  max-width: 500px;
-}
-
-/* ── MAIN ── */
-.main {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 44px 24px 80px;
-}
-
-/* ── PROGRESS ── */
-.progress-bar {
-  display: flex;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 40px;
-}
-
-.prog-step {
-  flex: 1;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-right: 1px solid var(--border);
-  transition: background 0.2s;
-}
-
-.prog-step:last-child { border-right: none; }
-.prog-step.active { background: rgba(58,181,74,0.06); }
-.prog-step.done { background: rgba(46,168,78,0.05); }
-
-.prog-num {
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  background: var(--bg4);
-  color: var(--text-dim);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  border: 1px solid var(--border2);
-  transition: all 0.2s;
-}
-
-.prog-step.active .prog-num {
-  background: var(--accent);
-  color: var(--white);
-  border-color: var(--accent);
-  box-shadow: 0 0 12px var(--accent-glow);
-}
-
-.prog-step.done .prog-num {
-  background: var(--success);
-  color: var(--white);
-  border-color: var(--success);
-}
-
-.prog-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-dim);
-  letter-spacing: 0.3px;
-  transition: color 0.2s;
-}
-
-.prog-step.active .prog-label { color: var(--white); }
-.prog-step.done .prog-label { color: var(--success); }
-
-/* ── PANELS ── */
-.panel { display: none; }
-.panel.active { display: block; animation: fadeUp 0.28s ease; }
-
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(14px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-
-/* ── SECTION HEADER ── */
-.sec-tag {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-
-.sec-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 30px;
-  text-transform: uppercase;
-  color: var(--white);
-  letter-spacing: 0.5px;
-  margin-bottom: 28px;
-}
-
-/* ── ALERT ── */
-.alert {
-  display: flex;
-  gap: 12px;
-  padding: 13px 16px;
-  border-radius: 5px;
-  font-size: 13px;
-  line-height: 1.65;
-  margin-bottom: 28px;
-}
-
-.alert-warn {
-  background: var(--warn-bg);
-  border: 1px solid var(--warn-bdr);
-  color: var(--warn);
-}
-
-.alert-info {
-  background: var(--success-bg);
-  border: 1px solid rgba(46,168,78,0.25);
-  color: var(--success);
-}
-
-.alert-icon { font-size: 14px; flex-shrink:0; margin-top:1px; }
-
-/* ── INPUT ── */
-.wl-field {
-  display: inline-flex;
-  align-items: center;
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 8px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.wl-field:focus-within {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.wl-input {
-  border: none; outline: none;
-  background: transparent;
-  padding: 14px 18px;
-  font-family: var(--mono);
-  font-size: 26px;
-  font-weight: 500;
-  color: var(--white);
-  width: 170px;
-}
-
-.wl-input::placeholder { color: var(--text-dim); }
-
-.wl-unit {
-  padding: 0 16px;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--text-dim);
-  background: var(--bg4);
-  border-left: 1px solid var(--border);
-  height: 100%;
-  display: flex; align-items: center;
-  font-weight: 500;
-}
-
-.input-hint {
-  font-size: 12px;
-  color: var(--text-dim);
-  margin-bottom: 24px;
-  font-family: var(--mono);
-}
-
-/* ── QUICK PICKS ── */
-.qp-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 12px;
-}
-
-.qp-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 36px;
-}
-
-.qp-chip {
-  display: flex;
-  flex-direction: column;
-  padding: 9px 14px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.18s;
-  text-align: left;
-}
-
-.qp-chip:hover {
-  border-color: var(--accent);
-  background: var(--accent-dim);
-}
-
-.qp-nm {
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--accent);
-  line-height: 1;
-  margin-bottom: 3px;
-}
-
-.qp-name {
-  font-size: 10px;
-  color: var(--text-dim);
-}
-
-/* ── NAV BUTTONS ── */
-.nav-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 28px;
-  margin-top: 32px;
-  border-top: 1px solid var(--border);
-}
-
-.btn-back {
-  padding: 11px 22px;
-  background: transparent;
-  border: 1px solid var(--border2);
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-mid);
-  cursor: pointer;
-  font-family: 'Barlow', sans-serif;
-  transition: all 0.18s;
-  display: flex; align-items: center; gap: 6px;
-}
-
-.btn-back:hover { border-color: var(--border2); color: var(--white); background: var(--bg3); }
-
-.btn-next {
-  padding: 11px 26px;
-  background: var(--accent);
-  border: none;
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--white);
-  cursor: pointer;
-  font-family: 'Barlow', sans-serif;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  transition: all 0.18s;
-  display: flex; align-items: center; gap: 8px;
-  box-shadow: 0 4px 16px var(--accent-glow);
-}
-
-.btn-next:hover:not(:disabled) {
-  background: var(--accent-dark);
-  box-shadow: 0 6px 20px rgba(58,181,74,0.3);
-  transform: translateY(-1px);
-}
-
-.btn-next:disabled {
-  background: var(--bg4);
-  color: var(--text-dim);
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
-
-/* ── OD GRID ── */
-.od-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-@media (max-width:540px) { .od-grid { grid-template-columns: repeat(2,1fr); } }
-
-.od-card {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 18px 16px;
-  cursor: pointer;
-  transition: all 0.18s;
-  position: relative;
-  overflow: hidden;
-}
-
-.od-card::after {
-  content:'';
-  position:absolute;
-  bottom:0; left:0; right:0;
-  height:2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transition: transform 0.2s;
-}
-
-.od-card:hover { border-color: var(--border2); background: var(--bg4); }
-.od-card:hover::after { transform: scaleX(1); }
-
-.od-card.selected {
-  border-color: var(--accent);
-  background: var(--accent-dim);
-  box-shadow: 0 0 0 1px var(--accent), 0 4px 20px var(--accent-glow);
-}
-
-.od-card.selected::after { transform: scaleX(1); }
-
-.od-card.od-disabled {
-  opacity: 0.28;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.od-val {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 36px;
-  color: var(--white);
-  line-height: 1;
-  margin-bottom: 4px;
-  letter-spacing: -0.5px;
-}
-
-.od-card.selected .od-val { color: var(--accent); }
-
-.od-power {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 8px;
-}
-
-.od-card.selected .od-power { color: rgba(58,181,74,0.7); }
-
-.od-desc-text {
-  font-size: 11px;
-  color: var(--text-dim);
-  line-height: 1.5;
-}
-
-.od-info {
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 5px 5px 0;
-  padding: 14px 16px;
-  font-size: 13px;
-  color: var(--text-mid);
-  line-height: 1.65;
-  margin-bottom: 24px;
-  display: none;
-}
-
-.od-info.show { display: block; }
-.od-info strong { color: var(--white); }
-
-/* ── RESULTS ── */
-.result-meta {
-  display: flex;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-
-.rm-item {
-  flex: 1;
-  padding: 16px 20px;
-  border-right: 1px solid var(--border);
-}
-
-.rm-item:last-child { border-right: none; }
-
-.rm-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 4px;
-}
-
-.rm-value {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 28px;
-  color: var(--accent);
-  line-height: 1;
-  letter-spacing: -0.5px;
-}
-
-.rm-unit {
-  font-size: 13px;
-  font-family: var(--mono);
-  color: var(--text-mid);
-  font-weight: 400;
-}
-
-/* ── RESULT CARDS ── */
-.result-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.rc {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 22px;
-  display: grid;
-  grid-template-columns: 110px 1fr auto;
-  grid-template-rows: auto auto;
-  gap: 20px;
-  align-items: start;
-  animation: fadeUp 0.28s ease both;
-  transition: border-color 0.18s;
-}
-
-.rc:hover { border-color: var(--border2); }
-
-.rc.best {
-  border-color: var(--accent);
-  background: linear-gradient(135deg, rgba(58,181,74,0.04) 0%, var(--bg2) 50%);
-  box-shadow: 0 0 0 1px rgba(58,181,74,0.15), 0 4px 24px rgba(0,0,0,0.3);
-}
-
-.rc-left { text-align: center; border-right: 1px solid var(--border); padding-right: 20px; }
-
-.best-badge {
-  display: inline-block;
-  background: var(--accent);
-  color: var(--white);
-  font-family: var(--mono);
-  font-size: 8px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  padding: 3px 8px;
-  border-radius: 2px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.alt-badge {
-  display: inline-block;
-  background: var(--bg4);
-  color: var(--text-dim);
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  padding: 3px 8px;
-  border-radius: 2px;
-  margin-bottom: 10px;
-  border: 1px solid var(--border);
-  text-transform: uppercase;
-}
-
-.partial-badge {
-  display: inline-block;
-  background: rgba(212,144,10,0.15);
-  color: var(--warn);
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  padding: 3px 8px;
-  border-radius: 2px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(212,144,10,0.4);
-  text-transform: uppercase;
-}
-
-.rc-code {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  color: var(--white);
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-}
-
-.rc.best .rc-code { color: var(--accent); }
-
-.color-swatch {
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.12);
-  margin: 0 auto 4px;
-}
-
-.rc-swatch-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.rc-mid h3 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 8px;
-  letter-spacing: 0.3px;
-}
-
-.rc-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.tag {
-  font-family: var(--mono);
-  font-size: 10px;
-  padding: 3px 8px;
-  border-radius: 3px;
-  font-weight: 500;
-}
-
-.tag-od { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(58,181,74,0.25); }
-.tag-vlt { background: rgba(255,255,255,0.04); color: var(--text-mid); border: 1px solid var(--border); }
-.tag-mat { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); }
-
-.rc-reason {
-  font-size: 13px;
-  color: var(--text-mid);
-  line-height: 1.65;
-}
-
-.rc-reason strong { color: var(--white); }
-
-.od-bar-wrap { margin-top: 12px; }
-
-.od-bar-labels {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--text-dim);
-  margin-bottom: 5px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.od-bar-track {
-  height: 3px;
-  background: var(--bg4);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.od-bar-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: width 0.7s cubic-bezier(0.22,1,0.36,1);
-}
-
-.rc-right {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 110px;
-}
-
-.btn-quote {
-  padding: 10px 14px;
-  background: var(--accent);
-  color: var(--white);
-  border: none;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Barlow', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.18s;
-  text-align: center;
-  box-shadow: 0 2px 8px var(--accent-glow);
-}
-
-.btn-quote:hover {
-  background: var(--accent-dark);
-  box-shadow: 0 4px 14px rgba(58,181,74,0.3);
-  transform: translateY(-1px);
-}
-
-.btn-spec {
-  padding: 10px 14px;
-  background: transparent;
-  color: var(--text-mid);
-  border: 1px solid var(--border2);
-  border-radius: 4px;
-  font-size: 11px;
-  cursor: pointer;
-  font-family: 'Barlow', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.18s;
-  text-align: center;
-}
-
-.btn-spec:hover { border-color: var(--text-dim); color: var(--white); }
-
-/* ── DISCLAIMER ── */
-.disclaimer {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--warn);
-  border-radius: 0 5px 5px 0;
-  padding: 14px 16px;
-  font-size: 12px;
-  color: var(--text-dim);
-  line-height: 1.65;
-}
-
-.disclaimer strong { color: var(--warn); }
-
-/* ── EMPTY ── */
-.empty {
-  text-align: center;
-  padding: 60px 24px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
-.empty-icon { font-size: 40px; margin-bottom: 14px; }
-
-.empty h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 22px;
-  text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-
-.empty p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
-
-/* ── FOOTER ── */
-footer {
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  padding: 28px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 60px;
-}
-
-.footer-brand {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.footer-brand span { color: var(--accent); }
-
-.footer-meta {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--text-dim);
-  line-height: 1.7;
-  text-align: right;
-}
-
-/* ── RANGE ROWS ── */
-.range-rows { display:flex; flex-direction:column; gap:10px; margin-bottom:12px; }
-
-.range-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.range-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  width: 52px;
-  flex-shrink: 0;
-}
-
-.range-sep {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--text-dim);
-  padding: 0 4px;
-}
-
-.btn-remove-range {
-  background: transparent;
-  border: 1px solid var(--border2);
-  border-radius: 4px;
-  color: var(--text-dim);
-  font-size: 16px;
-  width: 32px; height: 32px;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.18s;
-  flex-shrink: 0;
-  line-height: 1;
-}
-
-.btn-remove-range:hover { border-color: var(--warn); color: var(--warn); }
-
-.btn-add-range {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 16px;
-  background: transparent;
-  border: 1px dashed var(--border2);
-  border-radius: 5px;
-  color: var(--text-mid);
-  font-size: 12px;
-  font-family: 'Barlow', sans-serif;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.18s;
-  margin-bottom: 6px;
-}
-
-.btn-add-range:hover { border-color: var(--accent); color: var(--accent); }
-.btn-add-range:disabled { opacity: 0.35; cursor: not-allowed; }
-
-
-/* ── FRAME PANEL ── */
-.frame-panel {
-  display: none;
-  margin-top: 16px;
-  border-top: 1px solid var(--border);
-  padding-top: 16px;
-  animation: fadeUp 0.22s ease;
-}
-
-.frame-panel.open { display: block; }
-
-.frame-panel-title {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 12px;
-}
-
-.frame-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
-}
-
-.frame-table th {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  text-align: left;
-  padding: 6px 10px;
-  border-bottom: 1px solid var(--border);
-}
-
-.frame-table td {
-  padding: 8px 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  color: var(--text);
-  vertical-align: middle;
-}
-
-.frame-table tr:last-child td { border-bottom: none; }
-.frame-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-.frame-table td:first-child { color: var(--white); font-weight: 600; }
-
-.sku-code {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-mid);
-  background: var(--bg4);
-  padding: 2px 7px;
-  border-radius: 3px;
-  border: 1px solid var(--border);
-  display: inline-block;
-}
-
-.price-tag {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.btn-toggle-frames {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 12px;
-  padding: 7px 14px;
-  background: transparent;
-  border: 1px solid var(--border2);
-  border-radius: 4px;
-  font-size: 11px;
-  font-family: 'Barlow', sans-serif;
-  color: var(--text-mid);
-  cursor: pointer;
-  transition: all 0.18s;
-  letter-spacing: 0.3px;
-}
-
-.btn-toggle-frames:hover { border-color: var(--accent); color: var(--accent); }
-.btn-toggle-frames.open { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-
-.toggle-arrow { transition: transform 0.2s; font-size: 10px; }
-.btn-toggle-frames.open .toggle-arrow { transform: rotate(180deg); }
-/* ── RESPONSIVE ── */
 @media (max-width:620px) {
-  .topbar { padding: 0 20px; }
-  .hero { padding: 40px 20px 36px; }
-  .main { padding: 28px 16px 60px; }
-  .rc { grid-template-columns: 1fr; }
+  .topbar { padding:0 20px; }
+  .hero { padding:40px 20px 36px; }
+  .main { padding:28px 16px 60px; }
+  .rc { grid-template-columns:1fr; }
   .rc-left { border-right:none; border-bottom:1px solid var(--border); padding-right:0; padding-bottom:14px; display:flex; align-items:center; gap:14px; text-align:left; }
   .rc-right { flex-direction:row; }
-  .result-meta { flex-wrap:wrap; }
-  .rm-item { min-width:120px; }
-  footer { padding: 20px; }
+  footer { padding:20px; }
   .footer-meta { text-align:left; }
+  .wl-row { gap:8px; }
+  .wl-row-num { width:24px; }
 }
 </style>
 </head>
@@ -1061,26 +220,11 @@ footer {
 <!-- TOPBAR -->
 <nav class="topbar">
   <div class="logo">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" height="28" width="auto" viewBox="0 0 1700.7871 340.15803">
-<defs>
-<clipPath id="clip_1">
-<path transform="matrix(3,0,0,-3,0,340.15803)" d="M0 113.386H566.929V0H0Z"/>
-</clipPath>
-</defs>
-<g inkscape:groupmode="layer" inkscape:label="Background">
-</g>
-<g inkscape:groupmode="layer" inkscape:label="Loghi">
-<g clip-path="url(#clip_1)">
-<path transform="matrix(3,0,0,-3,689.979,119.40181)" d="M0 0V-24.825C0-30.17 6.093-34.504 13.609-34.504 21.124-34.504 27.217-30.17 27.217-24.825V0C27.217 0 27.215 1.453 25.995 2.039 25.995 2.039 24.899 2.603 22.417 2.798 22.17 2.817 21.967 2.999 21.967 3.248 21.967 3.497 22.169 3.698 22.417 3.698H37.827C38.076 3.698 38.277 3.497 38.277 3.248 38.277 2.999 38.075 2.817 37.827 2.798 35.345 2.603 34.25 2.039 34.25 2.039 33.03 1.453 33.027 0 33.027 0V-21.599C33.027-30.403 24.003-37.54 12.871-37.54 1.739-37.54-7.285-30.403-7.285-21.599V0C-7.285 0-7.287 1.453-8.507 2.039-8.507 2.039-9.603 2.603-12.084 2.798-12.332 2.817-12.535 2.999-12.535 3.248-12.535 3.497-12.333 3.698-12.084 3.698H4.8C5.048 3.698 5.25 3.497 5.25 3.248 5.25 2.999 5.048 2.817 4.8 2.798 2.318 2.603 1.223 2.039 1.223 2.039 .002 1.453 0 0 0 0" fill="white"/>
-<path transform="matrix(3,0,0,-3,861.5228,218.85483)" d="M0 0C0 0 .002-1.369 1.222-1.954 1.222-1.954 2.318-2.518 4.8-2.713 5.047-2.733 5.25-2.915 5.25-3.163 5.25-3.412 5.048-3.614 4.8-3.614H-10.61C-10.859-3.614-11.06-3.412-11.06-3.163-11.06-2.915-10.858-2.733-10.61-2.713-8.128-2.518-7.033-1.954-7.033-1.954-5.813-1.369-5.81 0-5.81 0L-5.817 35.248C-5.817 36.086-5.138 36.765-4.301 36.765-3.941 36.765-3.61 36.639-3.35 36.43L32.384 6.1V33.235C32.384 33.235 32.381 34.604 31.161 35.19 31.161 35.19 30.066 35.753 27.584 35.949 27.336 35.968 27.134 36.15 27.134 36.399 27.134 36.647 27.336 36.849 27.584 36.849H42.994C43.242 36.849 43.444 36.647 43.444 36.399 43.444 36.15 43.242 35.968 42.994 35.949 40.512 35.753 39.417 35.19 39.417 35.19 38.196 34.604 38.194 33.235 38.194 33.235V-2.097C38.194-2.598 37.924-2.964 37.924-2.964 37.652-3.357 37.199-3.614 36.684-3.614 36.353-3.614 36.048-3.508 35.798-3.329L-.001 26.47Z" fill="white"/>
-<path transform="matrix(3,0,0,-3,1059.2822,218.85483)" d="M0 0C0 0 .002-1.369 1.222-1.954 1.222-1.954 2.318-2.518 4.8-2.713 5.047-2.733 5.25-2.915 5.25-3.163 5.25-3.412 5.048-3.614 4.8-3.614H-12.085C-12.333-3.614-12.535-3.412-12.535-3.163-12.535-2.915-12.332-2.733-12.085-2.713-9.603-2.518-8.507-1.954-8.507-1.954-7.287-1.369-7.285 0-7.285 0V33.235C-7.285 33.235-7.287 34.604-8.507 35.19-8.507 35.19-9.603 35.753-12.085 35.949-12.332 35.968-12.535 36.15-12.535 36.399-12.535 36.647-12.333 36.849-12.085 36.849H4.8C5.048 36.849 5.25 36.647 5.25 36.399 5.25 36.15 5.047 35.968 4.8 35.949 2.318 35.753 1.222 35.19 1.222 35.19 .002 34.604 0 33.235 0 33.235Z" fill="white"/>
-<path transform="matrix(3,0,0,-3,1248.3396,118.91731)" d="M0 0C1.435 2.813 6.145 2.636 6.145 2.636 6.393 2.656 6.595 2.838 6.595 3.086 6.595 3.335 6.393 3.537 6.145 3.537H-8.292C-8.541 3.537-8.743 3.335-8.743 3.086-8.743 2.838-8.54 2.656-8.292 2.636-8.292 2.636-3.22 2.677-4.355 .457L-17.897-26.133-31.495 .453C-32.43 2.885-28.708 2.636-28.708 2.636-28.46 2.656-28.258 2.838-28.258 3.086-28.258 3.335-28.459 3.537-28.708 3.537H-46.362C-46.611 3.537-46.812 3.335-46.812 3.086-46.812 2.838-46.61 2.656-46.362 2.636-46.362 2.636-41.653 2.813-40.217 0L-21.44-36.882-21.442-36.88C-21.185-37.352-20.684-37.673-20.108-37.673-19.533-37.673-19.033-37.353-18.776-36.882H-18.777Z" fill="white"/>
-<path transform="matrix(3,0,0,-3,1317.228,119.14862)" d="M0 0V-33.235C0-33.235-.002-34.604-1.222-35.19-1.222-35.19-2.318-35.753-4.8-35.949-5.047-35.968-5.25-36.15-5.25-36.399-5.25-36.647-5.048-36.849-4.799-36.849H22.763C23.184-36.849 23.533-36.539 23.595-36.135L24.517-30.816C24.517-30.816 24.517-30.816 24.517-30.816 24.521-30.793 24.523-30.77 24.523-30.747 24.523-30.495 24.319-30.291 24.068-30.291 23.863-30.291 23.691-30.426 23.633-30.611 22.664-34.01 18.959-34.128 18.959-34.128H7.097V-16.659L15.196-16.66C15.196-16.66 19.159-16.659 19.159-19.995 19.159-20.484 19.556-20.881 20.046-20.881 20.465-20.881 20.816-20.59 20.908-20.199L22.41-13.659C22.415-13.637 22.415-13.598 22.415-13.598 22.415-13.346 22.211-13.143 21.96-13.143 21.867-13.143 21.781-13.17 21.709-13.218 21.709-13.218 21.703-13.221 21.694-13.228 21.011-13.762 19.959-13.743 19.959-13.743H7.03V.937H15.201C15.201 .937 20.328 .939 20.328-2.638 20.328-3.127 20.725-3.524 21.215-3.524 21.634-3.524 21.986-3.233 22.078-2.842L23.579 3.698C23.584 3.72 23.585 3.759 23.585 3.759 23.585 4.011 23.381 4.215 23.129 4.215 23.037 4.215 22.951 4.187 22.879 4.139 22.879 4.139 22.873 4.136 22.863 4.129 22.181 3.595 21.129 3.614 21.129 3.614H-4.801C-5.05 3.614-5.252 3.412-5.252 3.163-5.252 2.915-5.049 2.733-4.801 2.713-2.32 2.518-1.224 1.954-1.224 1.954-.004 1.369-.002 0-.002 0" fill="white"/>
-<path transform="matrix(3,0,0,-3,373.36109,127.07132)" d="M0 0 27.979-36.483C27.979-36.483 29.016-37.761 29.054-38.675H49.817C49.854-37.761 50.892-36.483 50.892-36.483L79.802 1.214C80.58 2.226 79.41 3.154 79.41 3.154 75.119 6.641 52.058 10.002 52.058 10.002V8.789C63.991 6.178 61.264 2.867 61.264 2.867L39.435-25.634 16.115 4.937C15.9 5.313 15.778 5.748 15.778 6.212 15.778 7.634 16.93 8.786 18.352 8.786H19.137V10.002H-74.542V8.594L-1.561 .736C-.452 .611 0 0 0 0" fill="white"/>
-<path transform="matrix(3,0,0,-3,1428.8029,107.64603)" d="M0 0C.032 .216 .218 .381 .443 .381 .513 .381 .579 .365 .638 .337 1.939-.206 4.068-.221 4.068-.221L38.295-.22C38.295-.22 39.346-.238 40.028 .296 40.037 .303 40.044 .307 40.044 .307 40.116 .354 40.202 .382 40.294 .382 40.546 .382 40.749 .178 40.749-.074 40.749-.074 40.749-.113 40.744-.135L39.243-6.675C39.15-7.066 38.799-7.357 38.38-7.357 37.89-7.357 37.493-6.96 37.493-6.47 38.124-2.922 32.366-2.896 32.366-2.896H23.152 23.153V-37.07C23.153-37.07 23.155-38.438 24.375-39.024 24.375-39.024 25.471-39.588 27.952-39.783 28.2-39.802 28.403-39.984 28.403-40.233 28.403-40.482 28.201-40.683 27.952-40.683H11.068C10.82-40.683 10.618-40.482 10.618-40.233 10.618-39.984 10.82-39.802 11.068-39.783 13.55-39.588 14.645-39.024 14.645-39.024 15.865-38.438 15.868-37.07 15.868-37.07V-2.941H5.947C3.017-2.896 1.222-3.767 .379-6.084 .278-6.462-.067-6.74-.476-6.74-.965-6.74-1.361-6.344-1.361-5.856-1.361-5.778-1.35-5.702-1.331-5.629L.013 .057" fill="white"/>
-</g>
-</g>
-</svg>
+    <svg height="28" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+      <line x1="0" y1="13" x2="22" y2="13" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+      <polyline points="6,13 18,32 30,13" fill="none" stroke="white" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+      <text x="40" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" letter-spacing="4" fill="white">UNIVET</text>
+    </svg>
     <div class="logo-divider"></div>
     <div class="logo-sub">Laser Protection</div>
   </div>
@@ -1094,171 +238,85 @@ footer {
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">Filter Selector Tool</div>
-    <h1>
-      <em>Find the right protection for</em>
-      Your Laser System
-    </h1>
-    <p class="hero-desc">Enter your laser wavelength and required OD level. We'll match the correct Univet filter code from the full product database — certified to EN 207 / EN 208.</p>
+    <h1><em>Find the right protection for</em>Your Laser System</h1>
+    <p class="hero-desc">Select your laser type for a quick recommendation, or define multiple wavelengths and OD values for advanced needs. Certified to EN 207 / EN 208.</p>
   </div>
 </div>
 
 <!-- MAIN -->
 <div class="main">
 
-  <!-- PROGRESS -->
-  <div class="progress-bar">
-    <div class="prog-step active" id="pt1">
-      <div class="prog-num">1</div>
-      <div class="prog-label">Wavelength</div>
-    </div>
-    <div class="prog-step" id="pt2">
-      <div class="prog-num">2</div>
-      <div class="prog-label">Protection Level</div>
-    </div>
-    <div class="prog-step" id="pt3">
-      <div class="prog-num">3</div>
-      <div class="prog-label">Results</div>
-    </div>
+  <!-- MODE TOGGLE -->
+  <div class="mode-toggle" role="tablist">
+    <button class="mode-btn active" id="mode-quick-btn" onclick="setMode('quick')">Quick Guide</button>
+    <button class="mode-btn" id="mode-multi-btn" onclick="setMode('multi')">Multiple Wavelength</button>
   </div>
 
-  <!-- PANEL 1 -->
-  <div class="panel active" id="p1">
+  <!-- QUICK GUIDE PANEL -->
+  <div class="panel active" id="panel-quick">
     <div class="sec-tag">Step 01</div>
-    <div class="sec-title">What is your laser wavelength?</div>
+    <div class="sec-title">Select your laser type(s)</div>
+    <p class="sec-desc">Pick one or more from the most common laser systems. Each selection becomes a configurable row below.</p>
 
-    <div class="alert alert-warn">
-      <span class="alert-icon">⚠</span>
-      <span>Laser eyewear must precisely match your laser wavelength. An incorrect filter may offer <strong>zero protection</strong> at certain wavelengths. Always verify your machine's spec sheet before selecting.</span>
-    </div>
+    <div class="laser-grid" id="laser-grid"></div>
 
-    <div class="range-rows" id="wl-ranges"></div>
-    <button class="btn-add-range" id="btn-add-range" onclick="addRange()">+ Add another range</button>
-    <div class="input-hint">Each range: 180 – 11,000 nm &nbsp;·&nbsp; Max 3 ranges</div>
-
-    <div class="qp-label" style="margin-top:24px;">Common laser types — click to fill first range</div>
-    <div class="qp-grid">
-      <button class="qp-chip" onclick="setWL(10600,10600)"><span class="qp-nm">10600 nm</span><span class="qp-name">CO₂</span></button>
-      <button class="qp-chip" onclick="setWL(2940,2940)"><span class="qp-nm">2940 nm</span><span class="qp-name">Er:YAG</span></button>
-      <button class="qp-chip" onclick="setWL(1060,1080)"><span class="qp-nm">1060–1080 nm</span><span class="qp-name">Fiber</span></button>
-      <button class="qp-chip" onclick="setWL(1060,1065)"><span class="qp-nm">1060–1065 nm</span><span class="qp-name">Nd:YAG</span></button>
-      <button class="qp-chip" onclick="setWL(1025,1035)"><span class="qp-nm">1025–1035 nm</span><span class="qp-name">Yb:YAG</span></button>
-      <button class="qp-chip" onclick="setWL(935,945)"><span class="qp-nm">935–945 nm</span><span class="qp-name">Diode</span></button>
-      <button class="qp-chip" onclick="setWL(800,815)"><span class="qp-nm">800–815 nm</span><span class="qp-name">Diode</span></button>
-      <button class="qp-chip" onclick="setWL(750,760)"><span class="qp-nm">750–760 nm</span><span class="qp-name">Alexandrite</span></button>
-      <button class="qp-chip" onclick="setWL(690,700)"><span class="qp-nm">690–700 nm</span><span class="qp-name">Ruby</span></button>
-      <button class="qp-chip" onclick="setWL(645,655)"><span class="qp-nm">645–655 nm</span><span class="qp-name">Diode Red</span></button>
-      <button class="qp-chip" onclick="setWL(528,535)"><span class="qp-nm">528–535 nm</span><span class="qp-name">Nd:YAG KTP</span></button>
-      <button class="qp-chip" onclick="setWL(440,450)"><span class="qp-nm">440–450 nm</span><span class="qp-name">Diode Blue</span></button>
-      <button class="qp-chip" onclick="setWL(350,360)"><span class="qp-nm">350–360 nm</span><span class="qp-name">Nd:YAG 3×</span></button>
-      <button class="qp-chip" onclick="setWL(263,270)"><span class="qp-nm">263–270 nm</span><span class="qp-name">Nd:YAG 4×</span></button>
-      <button class="qp-chip" onclick="setWL(245,252)"><span class="qp-nm">245–252 nm</span><span class="qp-name">KrF Excimer</span></button>
+    <div id="quick-rows-section" style="display:none;">
+      <div class="sec-tag" style="margin-top:8px;">Step 02</div>
+      <div class="sec-title">Configure each laser</div>
+      <p class="sec-desc">Adjust wavelength range if needed and set OD per laser. <strong style="color:var(--text-mid)">Tip:</strong> over-protection is safe; under-protection causes permanent damage.</p>
+      <div class="wl-rows" id="quick-rows"></div>
     </div>
 
     <div class="nav-row">
       <div></div>
-      <button class="btn-next" id="btn1next" onclick="goTo(2)" disabled>
-        Next: Protection Level
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <button class="btn-next" id="btn-quick-next" onclick="goToResults()" disabled>
+        View Recommended Filters →
       </button>
     </div>
   </div>
 
-  <!-- PANEL 2 -->
-  <div class="panel" id="p2">
-    <div class="sec-tag">Step 02</div>
-    <div class="sec-title">Required protection level</div>
+  <!-- MULTIPLE PANEL -->
+  <div class="panel" id="panel-multi">
+    <div class="sec-tag">Custom Specification</div>
+    <div class="sec-title">Wavelengths &amp; OD</div>
+    <p class="sec-desc">Add one or more wavelengths (single value or range) with individual OD requirements. Recommended filters will satisfy <strong style="color:var(--text)">all</strong> rows simultaneously. Max 5 rows.</p>
 
-    <p style="font-size:13px; color:var(--text-mid); margin-bottom:22px; line-height:1.7;">OD (Optical Density) defines the filter's attenuation capacity. Each OD step = <strong style="color:var(--white)">10× more protection</strong>. Select based on your laser power output. Greyed-out levels are not available for the selected wavelength.</p>
+    <div class="wl-rows" id="multi-rows"></div>
 
-    <div class="od-grid">
-      <div class="od-card" onclick="selOD(3)" data-od="3">
-        <div class="od-val">OD 3</div>
-        <div class="od-power">Low Power</div>
-        <div class="od-desc-text">< 1W<br>Pointers, alignment</div>
-      </div>
-      <div class="od-card" onclick="selOD(4)" data-od="4">
-        <div class="od-val">OD 4</div>
-        <div class="od-power">Light Industrial</div>
-        <div class="od-desc-text">1–10W<br>Low-power engraving</div>
-      </div>
-      <div class="od-card" onclick="selOD(5)" data-od="5">
-        <div class="od-val">OD 5</div>
-        <div class="od-power">Mid Power</div>
-        <div class="od-desc-text">10–50W<br>Laser engravers</div>
-      </div>
-      <div class="od-card" onclick="selOD(6)" data-od="6">
-        <div class="od-val">OD 6</div>
-        <div class="od-power">Industrial</div>
-        <div class="od-desc-text">50–500W<br>Cutting / welding</div>
-      </div>
-      <div class="od-card" onclick="selOD(7)" data-od="7">
-        <div class="od-val">OD 7</div>
-        <div class="od-power">High Power</div>
-        <div class="od-desc-text">> 500W<br>Q-switch / medical</div>
-      </div>
-      <div class="od-card" onclick="selOD(8)" data-od="8">
-        <div class="od-val">OD 8</div>
-        <div class="od-power">Maximum</div>
-        <div class="od-desc-text">Ultra-high power<br>High peak pulse</div>
-      </div>
-    </div>
+    <button class="btn-add" id="btn-add-row" onclick="addMultiRow()">
+      <span style="font-size:14px;">+</span> Add wavelength
+    </button>
 
-    <div class="od-info" id="od-info"></div>
-
-    <div class="alert alert-warn">
-      <span class="alert-icon">⚠</span>
-      <span>Check your laser's safety class: Class 3R → OD 3 · Class 3B → OD 4–5 · Class 4 → OD 6+. <strong>If in doubt, always select a higher OD level.</strong> Over-protection is safe; insufficient protection causes permanent eye injury.</span>
-    </div>
+    <div class="qp-label">Or fill from common laser types</div>
+    <div class="qp-grid" id="qp-grid"></div>
 
     <div class="nav-row">
-      <button class="btn-back" onclick="goTo(1)">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M7 11L3 7l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back
-      </button>
-      <button class="btn-next" id="btn2next" onclick="goTo(3)" disabled>
-        View Recommended Filters
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div></div>
+      <button class="btn-next" id="btn-multi-next" onclick="goToResults()" disabled>
+        View Recommended Filters →
       </button>
     </div>
   </div>
 
-  <!-- PANEL 3 -->
-  <div class="panel" id="p3">
-    <div class="sec-tag">Step 03</div>
-    <div class="sec-title">Recommended Filter Codes</div>
-    <div id="results"></div>
+  <!-- RESULTS PANEL -->
+  <div class="panel" id="panel-results">
+    <div class="sec-tag">Recommendations</div>
+    <div class="sec-title">Matching Filter Codes</div>
+    <div id="results-area"></div>
     <div class="nav-row">
-      <button class="btn-back" onclick="goTo(2)">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M7 11L3 7l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Edit Criteria
-      </button>
-      <button class="btn-next" onclick="reset()" style="background:var(--bg4);color:var(--text-mid);box-shadow:none;border:1px solid var(--border2);">Start Over</button>
+      <button class="btn-back" onclick="goToInput()">← Edit Criteria</button>
+      <button class="btn-back" onclick="resetAll()" style="border-color:var(--border); color:var(--text-dim);">Start Over</button>
     </div>
   </div>
 
 </div>
 
 <footer>
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" height="18" width="auto" style="opacity:0.45" viewBox="0 0 1700.7871 340.15803">
-<defs>
-<clipPath id="clip_1">
-<path transform="matrix(3,0,0,-3,0,340.15803)" d="M0 113.386H566.929V0H0Z"/>
-</clipPath>
-</defs>
-<g inkscape:groupmode="layer" inkscape:label="Background">
-</g>
-<g inkscape:groupmode="layer" inkscape:label="Loghi">
-<g clip-path="url(#clip_1)">
-<path transform="matrix(3,0,0,-3,689.979,119.40181)" d="M0 0V-24.825C0-30.17 6.093-34.504 13.609-34.504 21.124-34.504 27.217-30.17 27.217-24.825V0C27.217 0 27.215 1.453 25.995 2.039 25.995 2.039 24.899 2.603 22.417 2.798 22.17 2.817 21.967 2.999 21.967 3.248 21.967 3.497 22.169 3.698 22.417 3.698H37.827C38.076 3.698 38.277 3.497 38.277 3.248 38.277 2.999 38.075 2.817 37.827 2.798 35.345 2.603 34.25 2.039 34.25 2.039 33.03 1.453 33.027 0 33.027 0V-21.599C33.027-30.403 24.003-37.54 12.871-37.54 1.739-37.54-7.285-30.403-7.285-21.599V0C-7.285 0-7.287 1.453-8.507 2.039-8.507 2.039-9.603 2.603-12.084 2.798-12.332 2.817-12.535 2.999-12.535 3.248-12.535 3.497-12.333 3.698-12.084 3.698H4.8C5.048 3.698 5.25 3.497 5.25 3.248 5.25 2.999 5.048 2.817 4.8 2.798 2.318 2.603 1.223 2.039 1.223 2.039 .002 1.453 0 0 0 0" fill="white"/>
-<path transform="matrix(3,0,0,-3,861.5228,218.85483)" d="M0 0C0 0 .002-1.369 1.222-1.954 1.222-1.954 2.318-2.518 4.8-2.713 5.047-2.733 5.25-2.915 5.25-3.163 5.25-3.412 5.048-3.614 4.8-3.614H-10.61C-10.859-3.614-11.06-3.412-11.06-3.163-11.06-2.915-10.858-2.733-10.61-2.713-8.128-2.518-7.033-1.954-7.033-1.954-5.813-1.369-5.81 0-5.81 0L-5.817 35.248C-5.817 36.086-5.138 36.765-4.301 36.765-3.941 36.765-3.61 36.639-3.35 36.43L32.384 6.1V33.235C32.384 33.235 32.381 34.604 31.161 35.19 31.161 35.19 30.066 35.753 27.584 35.949 27.336 35.968 27.134 36.15 27.134 36.399 27.134 36.647 27.336 36.849 27.584 36.849H42.994C43.242 36.849 43.444 36.647 43.444 36.399 43.444 36.15 43.242 35.968 42.994 35.949 40.512 35.753 39.417 35.19 39.417 35.19 38.196 34.604 38.194 33.235 38.194 33.235V-2.097C38.194-2.598 37.924-2.964 37.924-2.964 37.652-3.357 37.199-3.614 36.684-3.614 36.353-3.614 36.048-3.508 35.798-3.329L-.001 26.47Z" fill="white"/>
-<path transform="matrix(3,0,0,-3,1059.2822,218.85483)" d="M0 0C0 0 .002-1.369 1.222-1.954 1.222-1.954 2.318-2.518 4.8-2.713 5.047-2.733 5.25-2.915 5.25-3.163 5.25-3.412 5.048-3.614 4.8-3.614H-12.085C-12.333-3.614-12.535-3.412-12.535-3.163-12.535-2.915-12.332-2.733-12.085-2.713-9.603-2.518-8.507-1.954-8.507-1.954-7.287-1.369-7.285 0-7.285 0V33.235C-7.285 33.235-7.287 34.604-8.507 35.19-8.507 35.19-9.603 35.753-12.085 35.949-12.332 35.968-12.535 36.15-12.535 36.399-12.535 36.647-12.333 36.849-12.085 36.849H4.8C5.048 36.849 5.25 36.647 5.25 36.399 5.25 36.15 5.047 35.968 4.8 35.949 2.318 35.753 1.222 35.19 1.222 35.19 .002 34.604 0 33.235 0 33.235Z" fill="white"/>
-<path transform="matrix(3,0,0,-3,1248.3396,118.91731)" d="M0 0C1.435 2.813 6.145 2.636 6.145 2.636 6.393 2.656 6.595 2.838 6.595 3.086 6.595 3.335 6.393 3.537 6.145 3.537H-8.292C-8.541 3.537-8.743 3.335-8.743 3.086-8.743 2.838-8.54 2.656-8.292 2.636-8.292 2.636-3.22 2.677-4.355 .457L-17.897-26.133-31.495 .453C-32.43 2.885-28.708 2.636-28.708 2.636-28.46 2.656-28.258 2.838-28.258 3.086-28.258 3.335-28.459 3.537-28.708 3.537H-46.362C-46.611 3.537-46.812 3.335-46.812 3.086-46.812 2.838-46.61 2.656-46.362 2.636-46.362 2.636-41.653 2.813-40.217 0L-21.44-36.882-21.442-36.88C-21.185-37.352-20.684-37.673-20.108-37.673-19.533-37.673-19.033-37.353-18.776-36.882H-18.777Z" fill="white"/>
-<path transform="matrix(3,0,0,-3,1317.228,119.14862)" d="M0 0V-33.235C0-33.235-.002-34.604-1.222-35.19-1.222-35.19-2.318-35.753-4.8-35.949-5.047-35.968-5.25-36.15-5.25-36.399-5.25-36.647-5.048-36.849-4.799-36.849H22.763C23.184-36.849 23.533-36.539 23.595-36.135L24.517-30.816C24.517-30.816 24.517-30.816 24.517-30.816 24.521-30.793 24.523-30.77 24.523-30.747 24.523-30.495 24.319-30.291 24.068-30.291 23.863-30.291 23.691-30.426 23.633-30.611 22.664-34.01 18.959-34.128 18.959-34.128H7.097V-16.659L15.196-16.66C15.196-16.66 19.159-16.659 19.159-19.995 19.159-20.484 19.556-20.881 20.046-20.881 20.465-20.881 20.816-20.59 20.908-20.199L22.41-13.659C22.415-13.637 22.415-13.598 22.415-13.598 22.415-13.346 22.211-13.143 21.96-13.143 21.867-13.143 21.781-13.17 21.709-13.218 21.709-13.218 21.703-13.221 21.694-13.228 21.011-13.762 19.959-13.743 19.959-13.743H7.03V.937H15.201C15.201 .937 20.328 .939 20.328-2.638 20.328-3.127 20.725-3.524 21.215-3.524 21.634-3.524 21.986-3.233 22.078-2.842L23.579 3.698C23.584 3.72 23.585 3.759 23.585 3.759 23.585 4.011 23.381 4.215 23.129 4.215 23.037 4.215 22.951 4.187 22.879 4.139 22.879 4.139 22.873 4.136 22.863 4.129 22.181 3.595 21.129 3.614 21.129 3.614H-4.801C-5.05 3.614-5.252 3.412-5.252 3.163-5.252 2.915-5.049 2.733-4.801 2.713-2.32 2.518-1.224 1.954-1.224 1.954-.004 1.369-.002 0-.002 0" fill="white"/>
-<path transform="matrix(3,0,0,-3,373.36109,127.07132)" d="M0 0 27.979-36.483C27.979-36.483 29.016-37.761 29.054-38.675H49.817C49.854-37.761 50.892-36.483 50.892-36.483L79.802 1.214C80.58 2.226 79.41 3.154 79.41 3.154 75.119 6.641 52.058 10.002 52.058 10.002V8.789C63.991 6.178 61.264 2.867 61.264 2.867L39.435-25.634 16.115 4.937C15.9 5.313 15.778 5.748 15.778 6.212 15.778 7.634 16.93 8.786 18.352 8.786H19.137V10.002H-74.542V8.594L-1.561 .736C-.452 .611 0 0 0 0" fill="white"/>
-<path transform="matrix(3,0,0,-3,1428.8029,107.64603)" d="M0 0C.032 .216 .218 .381 .443 .381 .513 .381 .579 .365 .638 .337 1.939-.206 4.068-.221 4.068-.221L38.295-.22C38.295-.22 39.346-.238 40.028 .296 40.037 .303 40.044 .307 40.044 .307 40.116 .354 40.202 .382 40.294 .382 40.546 .382 40.749 .178 40.749-.074 40.749-.074 40.749-.113 40.744-.135L39.243-6.675C39.15-7.066 38.799-7.357 38.38-7.357 37.89-7.357 37.493-6.96 37.493-6.47 38.124-2.922 32.366-2.896 32.366-2.896H23.152 23.153V-37.07C23.153-37.07 23.155-38.438 24.375-39.024 24.375-39.024 25.471-39.588 27.952-39.783 28.2-39.802 28.403-39.984 28.403-40.233 28.403-40.482 28.201-40.683 27.952-40.683H11.068C10.82-40.683 10.618-40.482 10.618-40.233 10.618-39.984 10.82-39.802 11.068-39.783 13.55-39.588 14.645-39.024 14.645-39.024 15.865-38.438 15.868-37.07 15.868-37.07V-2.941H5.947C3.017-2.896 1.222-3.767 .379-6.084 .278-6.462-.067-6.74-.476-6.74-.965-6.74-1.361-6.344-1.361-5.856-1.361-5.778-1.35-5.702-1.331-5.629L.013 .057" fill="white"/>
-</g>
-</g>
-</svg>
+  <svg height="20" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; opacity:0.45;">
+    <line x1="0" y1="13" x2="22" y2="13" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+    <polyline points="6,13 18,32 30,13" fill="none" stroke="white" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="40" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" letter-spacing="4" fill="white">UNIVET</text>
+  </svg>
   <div class="footer-meta">
     ISO 9001:2015 · CE Certified · Via Giovanni Prati 87, Rezzato (BS) Italy<br>
     Data source: Laser Safety Filters Technical Data Sheet Rev. 02/2024 · For reference only
@@ -1266,6 +324,24 @@ footer {
 </footer>
 
 <script>
+// ── DATA ──
+const LASER_TYPES = [
+  { id:'co2', name:'CO₂', from:10600, to:10600, kind:'single' },
+  { id:'eryag', name:'Er:YAG', from:2940, to:2940, kind:'single' },
+  { id:'fiber', name:'Fiber', from:1060, to:1080, kind:'range' },
+  { id:'ndyag', name:'Nd:YAG', from:1064, to:1064, kind:'single' },
+  { id:'ybyag', name:'Yb:YAG', from:1025, to:1035, kind:'range' },
+  { id:'diode940', name:'Diode 940', from:935, to:945, kind:'range' },
+  { id:'diode808', name:'Diode 808', from:800, to:815, kind:'range' },
+  { id:'alex', name:'Alexandrite', from:750, to:760, kind:'range' },
+  { id:'ruby', name:'Ruby', from:690, to:700, kind:'range' },
+  { id:'diodered', name:'Diode Red', from:645, to:655, kind:'range' },
+  { id:'ktp', name:'Nd:YAG KTP', from:528, to:535, kind:'range' },
+  { id:'blueLD', name:'Diode Blue', from:440, to:450, kind:'range' },
+  { id:'uv355', name:'Nd:YAG 3×', from:355, to:355, kind:'single' },
+  { id:'uv266', name:'Nd:YAG 4×', from:266, to:266, kind:'single' },
+  { id:'krf', name:'KrF Excimer', from:248, to:248, kind:'single' }
+];
 
 const DB = [
   { code:"UL-1001", mat:"Polycarbonate", color:"Clear", vlt:90, align:"400–780nm",
@@ -1323,1139 +399,511 @@ const DB = [
   { code:"UL-3002", mat:"Glass + Coating", color:"Orange", vlt:15, align:"587–780nm",
     ranges:[{a:515,b:532,od:9}] },
   { code:"UL-3005", mat:"Glass + Coating", color:"Green", vlt:40, align:"394–600nm",
-    ranges:[{a:750,b:815,od:9},{a:815,b:975,od:8},{a:975,b:1120,od:9}] }
+    ranges:[{a:750,b:815,od:9},{a:815,b:975,od:8},{a:975,b:1120,od:9}] },
+  { code:"UL-1021", mat:"Polycarbonate", color:"Light Orange", vlt:47, align:"540–780nm",
+    ranges:[{a:190,b:315,od:7},{a:315,b:465,od:6},{a:315,b:500,od:5},{a:315,b:515,od:4},{a:315,b:525,od:3}] },
+  { code:"UL-1024", mat:"Polycarbonate", color:"Light Green", vlt:60, align:"565–708nm",
+    ranges:[{a:815,b:1095,od:3},{a:880,b:1080,od:4},{a:945,b:1070,od:5},{a:990,b:1065,od:6}] },
+  { code:"UL-1026", mat:"Polycarbonate", color:"Dark Pink", vlt:10, align:"570–640nm",
+    ranges:[{a:680,b:790,od:5},{a:685,b:785,od:6},{a:690,b:780,od:7}] },
+  { code:"UL-1028", mat:"Polycarbonate", color:"Dark Blue", vlt:7, align:"451–524nm",
+    ranges:[{a:575,b:740,od:3},{a:576,b:725,od:4},{a:577,b:720,od:5},{a:578,b:715,od:6},{a:610,b:710,od:8}] },
+  { code:"UL-1030", mat:"Polycarbonate", color:"Light yellow", vlt:80, align:"405–720nm",
+    ranges:[{a:804,b:831,od:3},{a:807,b:827,od:4},{a:809,b:824,od:5},{a:810,b:820,od:6}] },
+  { code:"UL-1018", mat:"Polycarbonate", color:"Light Blue", vlt:32, align:"—", alignmentOnly:true,
+    ranges:[{a:592,b:695,od:1}] },
+  { code:"UL-1019", mat:"Polycarbonate", color:"Pink", vlt:19, align:"—", alignmentOnly:true,
+    ranges:[{a:440,b:500,od:1},{a:500,b:535,od:2},{a:535,b:570,od:1}] },
+  { code:"UL-1025", mat:"Polycarbonate", color:"Orange", vlt:45, align:"—", alignmentOnly:true,
+    ranges:[{a:528,b:534,od:2}] },
+  { code:"UL-1031", mat:"Polycarbonate", color:"Blue", vlt:15, align:"—", alignmentOnly:true,
+    ranges:[{a:400,b:430,od:1},{a:560,b:595,od:1},{a:595,b:700,od:2}] },
+  { code:"UL-1032", mat:"Polycarbonate", color:"Orange", vlt:20, align:"—", alignmentOnly:true,
+    ranges:[{a:457,b:468,od:3},{a:468,b:542,od:4}] },
+  { code:"UL-1043", mat:"Polycarbonate", color:"Grey", vlt:32, align:"—", alignmentOnly:true,
+    ranges:[{a:440,b:455,od:1},{a:521,b:540,od:1},{a:640,b:695,od:1}] },
 ];
 
-
-const FRAMES_DB = {
-  "UL-1001": [
-    {
-      "sku": "561H.00.00.300",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 82
-    },
-    {
-      "sku": "561H.00.01.300",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 82
-    },
-    {
-      "sku": "562S.00.00.300",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 84
-    },
-    {
-      "sku": "562S.00.01.300",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 84
-    },
-    {
-      "sku": "5X7L.00.00.679",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 73
-    },
-    {
-      "sku": "559G.00.00.300",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 119
-    }
-  ],
-  "UL-1002": [
-    {
-      "sku": "546L.00.10.550",
-      "frame": "546",
-      "color": "White/Grey",
-      "price": 28
-    },
-    {
-      "sku": "5X7L.00.00.650",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 25
-    }
-  ],
-  "UL-1005": [
-    {
-      "sku": "561H.00.00.309",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 149
-    },
-    {
-      "sku": "561H.00.01.309",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 149
-    },
-    {
-      "sku": "562S.00.00.309",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 157
-    },
-    {
-      "sku": "562S.00.01.309",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 157
-    },
-    {
-      "sku": "546L.00.10.551",
-      "frame": "546",
-      "color": "White/Grey",
-      "price": 95
-    },
-    {
-      "sku": "5X7L.00.00.651",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 83
-    },
-    {
-      "sku": "559G.00.00.309",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 193
-    }
-  ],
-  "UL-1007": [
-    {
-      "sku": "561H.00.00.311",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 156
-    },
-    {
-      "sku": "561H.00.01.311",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 156
-    },
-    {
-      "sku": "562S.00.00.311",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 162
-    },
-    {
-      "sku": "562S.00.01.311",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 162
-    },
-    {
-      "sku": "559G.00.00.311",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 207
-    }
-  ],
-  "UL-1008": [
-    {
-      "sku": "561H.00.00.312",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 151
-    },
-    {
-      "sku": "561H.00.01.312",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 151
-    },
-    {
-      "sku": "562S.00.00.312",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 161
-    },
-    {
-      "sku": "562S.00.01.312",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 161
-    },
-    {
-      "sku": "5X7L.00.00.652",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 139
-    },
-    {
-      "sku": "559G.00.00.312",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 226
-    }
-  ],
-  "UL-1009": [
-    {
-      "sku": "561H.00.00.313",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 149
-    },
-    {
-      "sku": "561H.00.01.313",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 149
-    },
-    {
-      "sku": "562S.00.00.313",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 161
-    },
-    {
-      "sku": "562S.00.01.313",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 161
-    },
-    {
-      "sku": "546L.00.10.553",
-      "frame": "546",
-      "color": "White/Grey",
-      "price": 75
-    },
-    {
-      "sku": "5X7L.00.00.653",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 75
-    },
-    {
-      "sku": "559G.00.00.313",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 198
-    }
-  ],
-  "UL-1015": [
-    {
-      "sku": "561H.00.00.326",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 194
-    },
-    {
-      "sku": "561H.00.01.326",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 194
-    },
-    {
-      "sku": "562S.00.00.326",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 205
-    },
-    {
-      "sku": "562S.00.01.326",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 205
-    },
-    {
-      "sku": "559G.00.00.326",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 239
-    }
-  ],
-  "UL-1016": [
-    {
-      "sku": "561H.00.00.329",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 183
-    },
-    {
-      "sku": "561H.00.01.329",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 183
-    },
-    {
-      "sku": "562S.00.00.329",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 183
-    },
-    {
-      "sku": "562S.00.01.329",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 183
-    },
-    {
-      "sku": "5X7L.00.00.654",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 146
-    },
-    {
-      "sku": "559G.00.00.329",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 217
-    }
-  ],
-  "UL-1020": [
-    {
-      "sku": "546L.00.10.555",
-      "frame": "546",
-      "color": "White/Grey",
-      "price": 100
-    },
-    {
-      "sku": "5X7L.00.00.655",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 109
-    }
-  ],
-  "UL-1021": [
-    {
-      "sku": "546L.00.10.557",
-      "frame": "546",
-      "color": "White/Grey",
-      "price": 71
-    }
-  ],
-  "UL-1022": [
-    {
-      "sku": "5X7L.00.00.659",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 128
-    }
-  ],
-  "UL-1024": [
-    {
-      "sku": "561H.00.00.345",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 161
-    },
-    {
-      "sku": "561H.00.01.345",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 161
-    },
-    {
-      "sku": "562S.00.00.345",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 166
-    },
-    {
-      "sku": "562S.00.01.345",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 166
-    },
-    {
-      "sku": "559G.00.00.345",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 212
-    }
-  ],
-  "UL-1026": [
-    {
-      "sku": "561H.00.00.346",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 254
-    },
-    {
-      "sku": "561H.00.01.346",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 254
-    },
-    {
-      "sku": "562S.00.00.346",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 259
-    },
-    {
-      "sku": "562S.00.01.346",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 259
-    },
-    {
-      "sku": "559G.00.00.346",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 288
-    }
-  ],
-  "UL-1028": [
-    {
-      "sku": "561H.00.00.348",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 128
-    },
-    {
-      "sku": "561H.00.01.348",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 128
-    },
-    {
-      "sku": "562S.00.00.348",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 136
-    },
-    {
-      "sku": "562S.00.01.348",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 136
-    },
-    {
-      "sku": "559G.00.00.348",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 154
-    }
-  ],
-  "UL-1029": [
-    {
-      "sku": "561H.00.00.349",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 173
-    },
-    {
-      "sku": "561H.00.01.349",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 173
-    },
-    {
-      "sku": "562S.00.00.349",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 180
-    },
-    {
-      "sku": "562S.00.01.349",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 180
-    },
-    {
-      "sku": "559G.00.00.349",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 226
-    }
-  ],
-  "UL-1030": [
-    {
-      "sku": "561H.00.00.350",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 109
-    },
-    {
-      "sku": "561H.00.01.350",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 109
-    },
-    {
-      "sku": "562S.00.00.350",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 120
-    },
-    {
-      "sku": "562S.00.01.350",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 120
-    },
-    {
-      "sku": "559G.00.00.350",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 170
-    }
-  ],
-  "UL-1036": [
-    {
-      "sku": "5X7L.00.00.664",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 159
-    }
-  ],
-  "UL-1037": [
-    {
-      "sku": "5X7L.00.00.665",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 226
-    }
-  ],
-  "UL-1038": [
-    {
-      "sku": "5X7L.00.00.668",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 101
-    }
-  ],
-  "UL-1044": [
-    {
-      "sku": "5X7L.00.00.680",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 110
-    }
-  ],
-  "UL-1045": [
-    {
-      "sku": "561H.00.00.361",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 56
-    },
-    {
-      "sku": "561H.00.01.361",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 56
-    },
-    {
-      "sku": "562S.00.00.361",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 57
-    },
-    {
-      "sku": "562S.00.01.361",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 57
-    },
-    {
-      "sku": "559G.00.00.361",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 108
-    }
-  ],
-  "UL-1052": [
-    {
-      "sku": "5X7L.00.00.685",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 116
-    }
-  ],
-  "UL-1018": [
-    {
-      "sku": "561H.00.00.301",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 146
-    },
-    {
-      "sku": "561H.00.01.301",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 146
-    },
-    {
-      "sku": "562S.00.00.301",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 153
-    },
-    {
-      "sku": "562S.00.01.301",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 153
-    },
-    {
-      "sku": "559G.00.00.301",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 211
-    }
-  ],
-  "UL-1019": [
-    {
-      "sku": "561H.00.00.307",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 163
-    },
-    {
-      "sku": "561H.00.01.307",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 163
-    },
-    {
-      "sku": "562S.00.00.307",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 168
-    },
-    {
-      "sku": "562S.00.01.307",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 168
-    },
-    {
-      "sku": "559G.00.00.307",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 202
-    }
-  ],
-  "UL-1025": [
-    {
-      "sku": "546L.00.10.561",
-      "frame": "546",
-      "color": "White/Grey",
-      "price": 51
-    },
-    {
-      "sku": "5X7L.00.00.661",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 47
-    }
-  ],
-  "UL-1031": [
-    {
-      "sku": "561H.00.00.351",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 99
-    },
-    {
-      "sku": "561H.00.01.351",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 99
-    },
-    {
-      "sku": "562S.00.00.351",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 108
-    },
-    {
-      "sku": "562S.00.01.351",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 108
-    },
-    {
-      "sku": "559G.00.00.351",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 144
-    }
-  ],
-  "UL-1032": [
-    {
-      "sku": "561H.00.00.352",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 94
-    },
-    {
-      "sku": "561H.00.01.352",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 94
-    },
-    {
-      "sku": "562S.00.00.352",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 97
-    },
-    {
-      "sku": "562S.00.01.352",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 97
-    },
-    {
-      "sku": "559G.00.00.352",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 137
-    }
-  ],
-  "UL-1043": [
-    {
-      "sku": "5X7L.00.00.674",
-      "frame": "5X7",
-      "color": "White/Grey",
-      "price": 123
-    }
-  ],
-  "UL-2001": [
-    {
-      "sku": "561H.00.00.201",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 310
-    },
-    {
-      "sku": "561H.00.01.201",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 310
-    },
-    {
-      "sku": "562S.00.00.201",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 291
-    },
-    {
-      "sku": "562S.00.01.201",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 291
-    },
-    {
-      "sku": "559G.00.00.201",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 344
-    },
-    {
-      "sku": "616L.00.00.003",
-      "frame": "616",
-      "color": "White",
-      "price": 232
-    }
-  ],
-  "UL-2002": [
-    {
-      "sku": "559G.00.00.004",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 339
-    },
-    {
-      "sku": "616L.00.00.004",
-      "frame": "616",
-      "color": "White",
-      "price": 203
-    }
-  ],
-  "UL-2004": [
-    {
-      "sku": "561H.00.00.200",
-      "frame": "561H Sylex",
-      "color": "White/Grey",
-      "price": 322
-    },
-    {
-      "sku": "561H.00.01.200",
-      "frame": "561H Sylex",
-      "color": "Anthracite/White",
-      "price": 322
-    },
-    {
-      "sku": "562S.00.00.200",
-      "frame": "562S",
-      "color": "White/Grey",
-      "price": 301
-    },
-    {
-      "sku": "562S.00.01.200",
-      "frame": "562S",
-      "color": "Anthracite/White",
-      "price": 301
-    },
-    {
-      "sku": "559G.00.00.200",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 356
-    },
-    {
-      "sku": "616L.00.00.008",
-      "frame": "616",
-      "color": "White",
-      "price": 175
-    }
-  ],
-  "UL-2005": [
-    {
-      "sku": "559G.00.00.010",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 463
-    },
-    {
-      "sku": "616L.00.00.010",
-      "frame": "616",
-      "color": "White",
-      "price": 234
-    }
-  ],
-  "UL-2006": [
-    {
-      "sku": "559G.00.00.012",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 326
-    },
-    {
-      "sku": "616L.00.00.012",
-      "frame": "616",
-      "color": "White",
-      "price": 217
-    }
-  ],
-  "UL-2007": [
-    {
-      "sku": "559G.00.00.013",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 405
-    },
-    {
-      "sku": "616L.00.00.013",
-      "frame": "616",
-      "color": "White",
-      "price": 239
-    }
-  ],
-  "UL-2012": [
-    {
-      "sku": "559G.00.00.020",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 258
-    }
-  ],
-  "UL-2014": [
-    {
-      "sku": "559G.00.00.024",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 465
-    }
-  ],
-  "UL-3001": [
-    {
-      "sku": "559G.00.00.100",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 532
-    }
-  ],
-  "UL-3002": [
-    {
-      "sku": "559G.00.00.101",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 420
-    }
-  ],
-  "UL-3005": [
-    {
-      "sku": "559G.00.00.104",
-      "frame": "559G Goggle",
-      "color": "White/Grey",
-      "price": 824
-    }
-  ]
-};
 const SWATCHES = {
   "Clear":"#e8edf2","Green":"#4ade80","Dark Green":"#16a34a","Blue":"#60a5fa",
   "Light Blue":"#93c5fd","Pink":"#f9a8d4","Orange":"#fb923c","Dark Orange":"#ea580c",
   "Purple":"#c084fc","Gray":"#9ca3af","Gray/Green":"#6b7280","Light Gray":"#d1d5db",
-  "Aqua":"#22d3ee","Dark Red":"#dc2626","Plastic Clear":"#e2e8f0"
+  "Aqua":"#22d3ee","Dark Red":"#dc2626"
 };
-let selRanges = [], chosenOD = null;
 
-function renderRanges() {
-  const container = document.getElementById('wl-ranges');
-  container.innerHTML = selRanges.map((r, i) => `
-    <div class="range-row" id="rrow-${i}">
-      <span class="range-label">Range ${i+1}</span>
-      <div class="wl-field">
-        <input type="number" class="wl-input" style="width:130px" placeholder="800" min="180" max="11000"
-          value="${r.from !== null ? r.from : ''}" oninput="updateRange(${i},'from',this.value)">
-        <div class="wl-unit">nm</div>
-      </div>
-      <span class="range-sep">—</span>
-      <div class="wl-field">
-        <input type="number" class="wl-input" style="width:130px" placeholder="900" min="180" max="11000"
-          value="${r.to !== null ? r.to : ''}" oninput="updateRange(${i},'to',this.value)">
-        <div class="wl-unit">nm</div>
-      </div>
-      ${selRanges.length > 1 ? `<button class="btn-remove-range" onclick="removeRange(${i})" title="Remove">×</button>` : ''}
-    </div>`).join('');
-  document.getElementById('btn-add-range').disabled = selRanges.length >= 3;
-  checkRanges();
-}
+const FRAMES_DB = {"UL-1001": [{"sku": "561H.00.00.300", "frame": "561H Sylex", "color": "White/Grey", "price": 82}, {"sku": "561H.00.01.300", "frame": "561H Sylex", "color": "Anthracite/White", "price": 82}, {"sku": "562S.00.00.300", "frame": "562S", "color": "White/Grey", "price": 84}, {"sku": "562S.00.01.300", "frame": "562S", "color": "Anthracite/White", "price": 84}, {"sku": "5X7L.00.00.679", "frame": "5X7", "color": "White/Grey", "price": 73}, {"sku": "559G.00.00.300", "frame": "559G Goggle", "color": "White/Grey", "price": 119}], "UL-1002": [{"sku": "546L.00.10.550", "frame": "546", "color": "White/Grey", "price": 28}, {"sku": "5X7L.00.00.650", "frame": "5X7", "color": "White/Grey", "price": 25}], "UL-1005": [{"sku": "561H.00.00.309", "frame": "561H Sylex", "color": "White/Grey", "price": 149}, {"sku": "561H.00.01.309", "frame": "561H Sylex", "color": "Anthracite/White", "price": 149}, {"sku": "562S.00.00.309", "frame": "562S", "color": "White/Grey", "price": 157}, {"sku": "562S.00.01.309", "frame": "562S", "color": "Anthracite/White", "price": 157}, {"sku": "546L.00.10.551", "frame": "546", "color": "White/Grey", "price": 95}, {"sku": "5X7L.00.00.651", "frame": "5X7", "color": "White/Grey", "price": 83}, {"sku": "559G.00.00.309", "frame": "559G Goggle", "color": "White/Grey", "price": 193}], "UL-1007": [{"sku": "561H.00.00.311", "frame": "561H Sylex", "color": "White/Grey", "price": 156}, {"sku": "561H.00.01.311", "frame": "561H Sylex", "color": "Anthracite/White", "price": 156}, {"sku": "562S.00.00.311", "frame": "562S", "color": "White/Grey", "price": 162}, {"sku": "562S.00.01.311", "frame": "562S", "color": "Anthracite/White", "price": 162}, {"sku": "559G.00.00.311", "frame": "559G Goggle", "color": "White/Grey", "price": 207}], "UL-1008": [{"sku": "561H.00.00.312", "frame": "561H Sylex", "color": "White/Grey", "price": 151}, {"sku": "561H.00.01.312", "frame": "561H Sylex", "color": "Anthracite/White", "price": 151}, {"sku": "562S.00.00.312", "frame": "562S", "color": "White/Grey", "price": 161}, {"sku": "562S.00.01.312", "frame": "562S", "color": "Anthracite/White", "price": 161}, {"sku": "5X7L.00.00.652", "frame": "5X7", "color": "White/Grey", "price": 139}, {"sku": "559G.00.00.312", "frame": "559G Goggle", "color": "White/Grey", "price": 226}], "UL-1009": [{"sku": "561H.00.00.313", "frame": "561H Sylex", "color": "White/Grey", "price": 149}, {"sku": "561H.00.01.313", "frame": "561H Sylex", "color": "Anthracite/White", "price": 149}, {"sku": "562S.00.00.313", "frame": "562S", "color": "White/Grey", "price": 161}, {"sku": "562S.00.01.313", "frame": "562S", "color": "Anthracite/White", "price": 161}, {"sku": "546L.00.10.553", "frame": "546", "color": "White/Grey", "price": 75}, {"sku": "5X7L.00.00.653", "frame": "5X7", "color": "White/Grey", "price": 75}, {"sku": "559G.00.00.313", "frame": "559G Goggle", "color": "White/Grey", "price": 198}], "UL-1015": [{"sku": "561H.00.00.326", "frame": "561H Sylex", "color": "White/Grey", "price": 194}, {"sku": "561H.00.01.326", "frame": "561H Sylex", "color": "Anthracite/White", "price": 194}, {"sku": "562S.00.00.326", "frame": "562S", "color": "White/Grey", "price": 205}, {"sku": "562S.00.01.326", "frame": "562S", "color": "Anthracite/White", "price": 205}, {"sku": "559G.00.00.326", "frame": "559G Goggle", "color": "White/Grey", "price": 239}], "UL-1016": [{"sku": "561H.00.00.329", "frame": "561H Sylex", "color": "White/Grey", "price": 183}, {"sku": "561H.00.01.329", "frame": "561H Sylex", "color": "Anthracite/White", "price": 183}, {"sku": "562S.00.00.329", "frame": "562S", "color": "White/Grey", "price": 183}, {"sku": "562S.00.01.329", "frame": "562S", "color": "Anthracite/White", "price": 183}, {"sku": "5X7L.00.00.654", "frame": "5X7", "color": "White/Grey", "price": 146}, {"sku": "559G.00.00.329", "frame": "559G Goggle", "color": "White/Grey", "price": 217}], "UL-1020": [{"sku": "546L.00.10.555", "frame": "546", "color": "White/Grey", "price": 100}, {"sku": "5X7L.00.00.655", "frame": "5X7", "color": "White/Grey", "price": 109}], "UL-1021": [{"sku": "546L.00.10.557", "frame": "546", "color": "White/Grey", "price": 71}], "UL-1022": [{"sku": "5X7L.00.00.659", "frame": "5X7", "color": "White/Grey", "price": 128}], "UL-1024": [{"sku": "561H.00.00.345", "frame": "561H Sylex", "color": "White/Grey", "price": 161}, {"sku": "561H.00.01.345", "frame": "561H Sylex", "color": "Anthracite/White", "price": 161}, {"sku": "562S.00.00.345", "frame": "562S", "color": "White/Grey", "price": 166}, {"sku": "562S.00.01.345", "frame": "562S", "color": "Anthracite/White", "price": 166}, {"sku": "559G.00.00.345", "frame": "559G Goggle", "color": "White/Grey", "price": 212}], "UL-1026": [{"sku": "561H.00.00.346", "frame": "561H Sylex", "color": "White/Grey", "price": 254}, {"sku": "561H.00.01.346", "frame": "561H Sylex", "color": "Anthracite/White", "price": 254}, {"sku": "562S.00.00.346", "frame": "562S", "color": "White/Grey", "price": 259}, {"sku": "562S.00.01.346", "frame": "562S", "color": "Anthracite/White", "price": 259}, {"sku": "559G.00.00.346", "frame": "559G Goggle", "color": "White/Grey", "price": 288}], "UL-1028": [{"sku": "561H.00.00.348", "frame": "561H Sylex", "color": "White/Grey", "price": 128}, {"sku": "561H.00.01.348", "frame": "561H Sylex", "color": "Anthracite/White", "price": 128}, {"sku": "562S.00.00.348", "frame": "562S", "color": "White/Grey", "price": 136}, {"sku": "562S.00.01.348", "frame": "562S", "color": "Anthracite/White", "price": 136}, {"sku": "559G.00.00.348", "frame": "559G Goggle", "color": "White/Grey", "price": 154}], "UL-1029": [{"sku": "561H.00.00.349", "frame": "561H Sylex", "color": "White/Grey", "price": 173}, {"sku": "561H.00.01.349", "frame": "561H Sylex", "color": "Anthracite/White", "price": 173}, {"sku": "562S.00.00.349", "frame": "562S", "color": "White/Grey", "price": 180}, {"sku": "562S.00.01.349", "frame": "562S", "color": "Anthracite/White", "price": 180}, {"sku": "559G.00.00.349", "frame": "559G Goggle", "color": "White/Grey", "price": 226}], "UL-1030": [{"sku": "561H.00.00.350", "frame": "561H Sylex", "color": "White/Grey", "price": 109}, {"sku": "561H.00.01.350", "frame": "561H Sylex", "color": "Anthracite/White", "price": 109}, {"sku": "562S.00.00.350", "frame": "562S", "color": "White/Grey", "price": 120}, {"sku": "562S.00.01.350", "frame": "562S", "color": "Anthracite/White", "price": 120}, {"sku": "559G.00.00.350", "frame": "559G Goggle", "color": "White/Grey", "price": 170}], "UL-1036": [{"sku": "5X7L.00.00.664", "frame": "5X7", "color": "White/Grey", "price": 159}], "UL-1037": [{"sku": "5X7L.00.00.665", "frame": "5X7", "color": "White/Grey", "price": 226}], "UL-1038": [{"sku": "5X7L.00.00.668", "frame": "5X7", "color": "White/Grey", "price": 101}], "UL-1044": [{"sku": "5X7L.00.00.680", "frame": "5X7", "color": "White/Grey", "price": 110}], "UL-1045": [{"sku": "561H.00.00.361", "frame": "561H Sylex", "color": "White/Grey", "price": 56}, {"sku": "561H.00.01.361", "frame": "561H Sylex", "color": "Anthracite/White", "price": 56}, {"sku": "562S.00.00.361", "frame": "562S", "color": "White/Grey", "price": 57}, {"sku": "562S.00.01.361", "frame": "562S", "color": "Anthracite/White", "price": 57}, {"sku": "559G.00.00.361", "frame": "559G Goggle", "color": "White/Grey", "price": 108}], "UL-1052": [{"sku": "5X7L.00.00.685", "frame": "5X7", "color": "White/Grey", "price": 116}], "UL-1018": [{"sku": "561H.00.00.301", "frame": "561H Sylex", "color": "White/Grey", "price": 146}, {"sku": "561H.00.01.301", "frame": "561H Sylex", "color": "Anthracite/White", "price": 146}, {"sku": "562S.00.00.301", "frame": "562S", "color": "White/Grey", "price": 153}, {"sku": "562S.00.01.301", "frame": "562S", "color": "Anthracite/White", "price": 153}, {"sku": "559G.00.00.301", "frame": "559G Goggle", "color": "White/Grey", "price": 211}], "UL-1019": [{"sku": "561H.00.00.307", "frame": "561H Sylex", "color": "White/Grey", "price": 163}, {"sku": "561H.00.01.307", "frame": "561H Sylex", "color": "Anthracite/White", "price": 163}, {"sku": "562S.00.00.307", "frame": "562S", "color": "White/Grey", "price": 168}, {"sku": "562S.00.01.307", "frame": "562S", "color": "Anthracite/White", "price": 168}, {"sku": "559G.00.00.307", "frame": "559G Goggle", "color": "White/Grey", "price": 202}], "UL-1025": [{"sku": "546L.00.10.561", "frame": "546", "color": "White/Grey", "price": 51}, {"sku": "5X7L.00.00.661", "frame": "5X7", "color": "White/Grey", "price": 47}], "UL-1031": [{"sku": "561H.00.00.351", "frame": "561H Sylex", "color": "White/Grey", "price": 99}, {"sku": "561H.00.01.351", "frame": "561H Sylex", "color": "Anthracite/White", "price": 99}, {"sku": "562S.00.00.351", "frame": "562S", "color": "White/Grey", "price": 108}, {"sku": "562S.00.01.351", "frame": "562S", "color": "Anthracite/White", "price": 108}, {"sku": "559G.00.00.351", "frame": "559G Goggle", "color": "White/Grey", "price": 144}], "UL-1032": [{"sku": "561H.00.00.352", "frame": "561H Sylex", "color": "White/Grey", "price": 94}, {"sku": "561H.00.01.352", "frame": "561H Sylex", "color": "Anthracite/White", "price": 94}, {"sku": "562S.00.00.352", "frame": "562S", "color": "White/Grey", "price": 97}, {"sku": "562S.00.01.352", "frame": "562S", "color": "Anthracite/White", "price": 97}, {"sku": "559G.00.00.352", "frame": "559G Goggle", "color": "White/Grey", "price": 137}], "UL-1043": [{"sku": "5X7L.00.00.674", "frame": "5X7", "color": "White/Grey", "price": 123}], "UL-2001": [{"sku": "561H.00.00.201", "frame": "561H Sylex", "color": "White/Grey", "price": 310}, {"sku": "561H.00.01.201", "frame": "561H Sylex", "color": "Anthracite/White", "price": 310}, {"sku": "562S.00.00.201", "frame": "562S", "color": "White/Grey", "price": 291}, {"sku": "562S.00.01.201", "frame": "562S", "color": "Anthracite/White", "price": 291}, {"sku": "559G.00.00.201", "frame": "559G Goggle", "color": "White/Grey", "price": 344}, {"sku": "616L.00.00.003", "frame": "616", "color": "White", "price": 232}], "UL-2002": [{"sku": "559G.00.00.004", "frame": "559G Goggle", "color": "White/Grey", "price": 339}, {"sku": "616L.00.00.004", "frame": "616", "color": "White", "price": 203}], "UL-2004": [{"sku": "561H.00.00.200", "frame": "561H Sylex", "color": "White/Grey", "price": 322}, {"sku": "561H.00.01.200", "frame": "561H Sylex", "color": "Anthracite/White", "price": 322}, {"sku": "562S.00.00.200", "frame": "562S", "color": "White/Grey", "price": 301}, {"sku": "562S.00.01.200", "frame": "562S", "color": "Anthracite/White", "price": 301}, {"sku": "559G.00.00.200", "frame": "559G Goggle", "color": "White/Grey", "price": 356}, {"sku": "616L.00.00.008", "frame": "616", "color": "White", "price": 175}], "UL-2005": [{"sku": "559G.00.00.010", "frame": "559G Goggle", "color": "White/Grey", "price": 463}, {"sku": "616L.00.00.010", "frame": "616", "color": "White", "price": 234}], "UL-2006": [{"sku": "559G.00.00.012", "frame": "559G Goggle", "color": "White/Grey", "price": 326}, {"sku": "616L.00.00.012", "frame": "616", "color": "White", "price": 217}], "UL-2007": [{"sku": "559G.00.00.013", "frame": "559G Goggle", "color": "White/Grey", "price": 405}, {"sku": "616L.00.00.013", "frame": "616", "color": "White", "price": 239}], "UL-2012": [{"sku": "559G.00.00.020", "frame": "559G Goggle", "color": "White/Grey", "price": 258}], "UL-2014": [{"sku": "559G.00.00.024", "frame": "559G Goggle", "color": "White/Grey", "price": 465}], "UL-3001": [{"sku": "559G.00.00.100", "frame": "559G Goggle", "color": "White/Grey", "price": 532}], "UL-3002": [{"sku": "559G.00.00.101", "frame": "559G Goggle", "color": "White/Grey", "price": 420}], "UL-3005": [{"sku": "559G.00.00.104", "frame": "559G Goggle", "color": "White/Grey", "price": 824}]};
 
-function addRange() {
-  if (selRanges.length >= 3) return;
-  selRanges.push({ from: null, to: null });
-  renderRanges();
-}
+// ── STATE ──
+let mode = 'quick';
+let quickSelected = new Set();           // laser type ids selected
+let quickRows = {};                       // id -> { name, kind, from, to, od }
+let multiRows = [];                       // [{ kind, from, to, od }]
+let openODMenuFor = null;                 // which row's OD menu is open
 
-function removeRange(i) {
-  selRanges.splice(i, 1);
-  renderRanges();
-}
-
-function updateRange(i, key, val) {
-  const v = parseFloat(val);
-  selRanges[i][key] = (isFinite(v) && v >= 180 && v <= 11000) ? Math.round(v) : null;
-  checkRanges();
-}
-
-function checkRanges() {
-  const valid = selRanges.length > 0 && selRanges.every(r =>
-    r.from !== null && r.to !== null && r.from <= r.to
-  );
-  document.getElementById('btn1next').disabled = !valid;
-}
-
-function setWL(from, to) {
-  selRanges[0] = { from: from, to: to };
-  renderRanges();
-}
-
-// Get OD at a single point; null if not covered
-function getODatPoint(p, wl) {
-  const w = +wl;
-  const hits = p.ranges.filter(r => w >= r.a && w <= r.b);
-  return hits.length ? Math.max(...hits.map(r => r.od)) : null;
-}
-
-// Check both endpoints; return the lower OD (worst case). Null if either endpoint not covered.
+// ── UTILITIES ──
 function getODforRange(p, wlMin, wlMax) {
-  const odFrom = getODatPoint(p, +wlMin);
-  const odTo   = getODatPoint(p, +wlMax);
-  if (odFrom === null || odTo === null) return null;
-  return Math.min(odFrom, odTo);
-}
-
-// Worst-case OD across all user-specified ranges
-function getODforAllRanges(p) {
-  let worst = Infinity;
-  for (const r of selRanges) {
-    const od = getODforRange(p, r.from, r.to);
-    if (od === null) return null;
-    worst = Math.min(worst, od);
+  // SAFETY: Find the highest OD level where the user's range [wlMin, wlMax] is
+  // fully covered by a CONTINUOUS protection band (merging adjacent/overlapping
+  // sub-ranges with OD >= target). This handles cases where a single OD level is
+  // expressed across multiple adjacent ranges (e.g. 190-315 AND 315-430 both OD 5).
+  const min = +wlMin, max = +wlMax;
+  for (let od = 9; od >= 1; od--) {
+    const segs = p.ranges.filter(r => r.od >= od).map(r => ({a:r.a, b:r.b}));
+    if (!segs.length) continue;
+    segs.sort((x,y) => x.a - y.a);
+    const merged = [{...segs[0]}];
+    for (let i = 1; i < segs.length; i++) {
+      const last = merged[merged.length - 1];
+      if (segs[i].a <= last.b) {
+        last.b = Math.max(last.b, segs[i].b);
+      } else {
+        merged.push({...segs[i]});
+      }
+    }
+    if (merged.some(m => min >= m.a && max <= m.b)) return od;
   }
-  return worst === Infinity ? null : worst;
+  return null;
 }
 
-function getAvailableODs() {
-  const available = new Set();
-  for (let od = 3; od <= 9; od++) {
-    DB.forEach(p => {
-      const got = getODforAllRanges(p);
-      if (got !== null && got >= od) available.add(od);
-    });
+// Merge rows with same wavelength range (take max OD)
+function mergeRows(rows) {
+  const merged = [];
+  rows.forEach(r => {
+    const existing = merged.find(m => m.from === r.from && m.to === r.to);
+    if (existing) {
+      if (r.od > existing.od) existing.od = r.od;
+      existing.mergedFrom = (existing.mergedFrom || [existing.name]).concat(r.name || 'row');
+    } else {
+      merged.push({ ...r });
+    }
+  });
+  return merged;
+}
+
+// What ODs are available for a row (given its wavelength)? Used to disable impossible OD options.
+function getAvailableODsForRow(from, to) {
+  const set = new Set();
+  for (let od = 1; od <= 9; od++) {
+    for (const p of DB) {
+      const got = getODforRange(p, from, to);
+      if (got !== null && got >= od) { set.add(od); break; }
+    }
   }
-  return available;
+  return set;
 }
 
-function selOD(od) {
-  chosenOD = od;
-  document.querySelectorAll('.od-card').forEach(c => c.classList.remove('selected'));
-  document.querySelector(`.od-card[data-od="${od}"]`).classList.add('selected');
-  const msgs = {
-    3:"Low-power applications such as laser pointers or alignment optics, typically below 1W.",
-    4:"Light industrial or lab use, approximately 1–10W, such as low-power fiber lasers.",
-    5:"DIY laser engravers or mid-power cutters, approximately 10–50W — the most common use case.",
-    6:"Industrial metal cutting or welding lasers, 50–500W, requiring high-specification protection.",
-    7:"Very high-power industrial lasers or Q-switch pulsed medical lasers with extremely high peak power.",
-    8:"Maximum protection level for ultra-high-power systems or pulsed lasers with very high peak energy density."
-  };
-  const info = document.getElementById('od-info');
-  info.innerHTML = `<strong>OD ${od} selected — </strong>${msgs[od]} <strong style="color:var(--warn)">Safety note:</strong> If unsure, always choose a higher level.`;
-  info.classList.add('show');
-  document.getElementById('btn2next').disabled = false;
+// ── MODE ──
+function setMode(m) {
+  mode = m;
+  document.getElementById('mode-quick-btn').classList.toggle('active', m === 'quick');
+  document.getElementById('mode-multi-btn').classList.toggle('active', m === 'multi');
+  document.getElementById('panel-quick').classList.toggle('active', m === 'quick');
+  document.getElementById('panel-multi').classList.toggle('active', m === 'multi');
+  document.getElementById('panel-results').classList.remove('active');
+  closeODMenu();
 }
 
-function refreshODCards() {
-  const available = getAvailableODs();
-  chosenOD = null;
-  document.getElementById('btn2next').disabled = true;
-  document.getElementById('od-info').classList.remove('show');
-  document.querySelectorAll('.od-card').forEach(card => {
-    const od = parseInt(card.dataset.od);
-    card.classList.remove('selected','od-disabled');
-    if (!available.has(od)) { card.classList.add('od-disabled'); card.onclick = null; }
-    else { card.onclick = () => selOD(od); }
+// ── QUICK GUIDE ──
+function renderLaserGrid() {
+  const html = LASER_TYPES.map(lt => {
+    const sel = quickSelected.has(lt.id) ? ' selected' : '';
+    const nmDisplay = lt.kind === 'single' ? `${lt.from} nm` : `${lt.from}–${lt.to} nm`;
+    return `<div class="laser-chip${sel}" data-id="${lt.id}" onclick="toggleLaserType('${lt.id}')">
+      <div class="lc-name">${lt.name}</div>
+      <div class="lc-nm">${nmDisplay}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('laser-grid').innerHTML = html;
+}
+
+function toggleLaserType(id) {
+  const lt = LASER_TYPES.find(x => x.id === id);
+  if (quickSelected.has(id)) {
+    quickSelected.delete(id);
+    delete quickRows[id];
+  } else {
+    quickSelected.add(id);
+    quickRows[id] = { name: lt.name, kind: lt.kind, from: lt.from, to: lt.to, od: null };
+  }
+  renderLaserGrid();
+  renderQuickRows();
+  validateQuick();
+}
+
+function renderQuickRows() {
+  const section = document.getElementById('quick-rows-section');
+  if (quickSelected.size === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+  const html = Array.from(quickSelected).map((id, idx) => {
+    const r = quickRows[id];
+    return renderWLRow('quick', id, idx, r, false, true);
+  }).join('');
+  document.getElementById('quick-rows').innerHTML = html;
+}
+
+// ── MULTIPLE ──
+function renderMultiRows() {
+  const html = multiRows.map((r, idx) => renderWLRow('multi', idx, idx, r, true, false)).join('');
+  document.getElementById('multi-rows').innerHTML = html;
+  document.getElementById('btn-add-row').disabled = multiRows.length >= 5;
+}
+
+function addMultiRow(preset) {
+  if (multiRows.length >= 5) return;
+  const row = preset || { kind:'single', from:null, to:null, od:null, name:null };
+  multiRows.push(row);
+  renderMultiRows();
+  validateMulti();
+}
+
+function removeMultiRow(idx) {
+  multiRows.splice(idx, 1);
+  renderMultiRows();
+  validateMulti();
+}
+
+function renderQuickPicks() {
+  const html = LASER_TYPES.map(lt => {
+    const nmDisplay = lt.kind === 'single' ? `${lt.from} nm` : `${lt.from}–${lt.to} nm`;
+    return `<div class="qp-chip" onclick="addMultiRow({kind:'${lt.kind}', from:${lt.from}, to:${lt.to}, od:null, name:'${lt.name}'})">
+      <span class="qp-nm">${nmDisplay}</span>
+      <span class="qp-name">${lt.name}</span>
+    </div>`;
+  }).join('');
+  document.getElementById('qp-grid').innerHTML = html;
+}
+
+// ── ROW RENDERER (shared) ──
+function renderWLRow(panel, key, idx, r, removable, locked) {
+  const kind = r.kind || 'single';
+  const dashClass = kind === 'single' ? 'hidden' : '';
+  const toInputDisabled = kind === 'single' ? 'disabled' : '';
+  const toInputValue = kind === 'single' ? '' : (r.to ?? '');
+  const odText = r.od !== null ? `OD ${r.od}` : 'Set OD';
+  const nameLabel = r.name ? `<span class="wl-row-name">${r.name}</span>` : '';
+  const removeBtn = removable ? `<button class="wl-remove" onclick="removeMultiRow(${idx})">×</button>` : '';
+
+  return `<div class="wl-row" data-panel="${panel}" data-key="${key}">
+    <span class="wl-row-num">#${idx+1}</span>
+    ${nameLabel}
+    <div class="sr-toggle">
+      <button class="sr-btn ${kind==='single'?'active':''}" onclick="setRowKind('${panel}','${key}','single')">Single</button>
+      <button class="sr-btn ${kind==='range'?'active':''}" onclick="setRowKind('${panel}','${key}','range')">Range</button>
+    </div>
+    <input type="number" class="wl-input ${r.invalid?'invalid':''} ${locked?'locked':''}" placeholder="nm" min="180" max="11000" value="${r.from ?? ''}"
+      ${locked?'readonly tabindex="-1"':''}
+      oninput="updateRowField('${panel}','${key}','from',this.value)" title="${locked?'Wavelength set by laser type selection':'Valid range: 180-11000 nm'}">
+    <span class="wl-dash ${dashClass}">—</span>
+    <input type="number" class="wl-input ${toInputDisabled} ${locked?'locked':''}" placeholder="nm" min="180" max="11000" value="${toInputValue}"
+      ${locked?'readonly tabindex="-1"':''} ${toInputDisabled} oninput="updateRowField('${panel}','${key}','to',this.value)">
+    <span class="wl-unit">nm</span>
+    <div class="od-pill-wrap">
+      <div class="od-pill" onclick="toggleODMenu('${panel}','${key}')">${odText} <span class="od-arrow">▼</span></div>
+      <div class="od-menu" id="odmenu-${panel}-${key}"></div>
+    </div>
+    ${removeBtn}
+  </div>`;
+}
+
+function setRowKind(panel, key, kind) {
+  const row = getRow(panel, key);
+  if (!row) return;
+  row.kind = kind;
+  if (kind === 'single') {
+    row.to = row.from;
+  } else if (kind === 'range' && panel === 'quick') {
+    // Quick mode: restore the laser type's original range
+    const lt = LASER_TYPES.find(x => x.id === key);
+    if (lt) { row.from = lt.from; row.to = lt.to; }
+  } else if (kind === 'range' && row.to === row.from) {
+    // Multi mode: give a sensible starting gap
+    row.to = row.from;
+  }
+  // Reset OD if invalid for new wavelength
+  if (row.from !== null && row.to !== null && row.od !== null) {
+    const available = getAvailableODsForRow(row.from, row.to);
+    if (!available.has(row.od)) row.od = null;
+  }
+  reRender(panel);
+  validatePanel(panel);
+}
+
+function updateRowField(panel, key, field, value) {
+  const row = getRow(panel, key);
+  if (!row) return;
+  const v = parseFloat(value);
+  const inRange = isFinite(v) && v >= 180 && v <= 11000;
+  const num = inRange ? Math.round(v) : null;
+  row[field] = num;
+  if (row.kind === 'single' && field === 'from') row.to = num;
+  // Mark invalid visually (red border) when user typed something but it's out of range
+  row.invalid = (value !== '' && !inRange);
+  // Reset OD when wavelength changes — old OD may no longer be achievable
+  if (field === 'from' || field === 'to') {
+    // User manually edited the wavelength — drop any preset laser-type name label
+    if (row.name) row.name = null;
+    if (row.od !== null) {
+      // Re-validate: is row.od still achievable for the new wavelength?
+      if (row.from !== null && row.to !== null) {
+        const available = getAvailableODsForRow(row.from, row.to);
+        if (!available.has(row.od)) {
+          row.od = null;
+          reRender(panel);
+        }
+      } else {
+        row.od = null;
+        reRender(panel);
+      }
+    }
+  }
+  validatePanel(panel);
+}
+
+function getRow(panel, key) {
+  if (panel === 'quick') return quickRows[key];
+  return multiRows[parseInt(key)];
+}
+
+function reRender(panel) {
+  if (panel === 'quick') renderQuickRows();
+  else renderMultiRows();
+}
+
+function validatePanel(panel) {
+  if (panel === 'quick') validateQuick();
+  else validateMulti();
+}
+
+// ── OD MENU ──
+function toggleODMenu(panel, key) {
+  const menuId = `odmenu-${panel}-${key}`;
+  if (openODMenuFor === menuId) {
+    closeODMenu();
+    return;
+  }
+  closeODMenu();
+  const row = getRow(panel, key);
+  if (!row || row.from === null || row.to === null) {
+    return; // can't open without wavelength
+  }
+  const menu = document.getElementById(menuId);
+  if (!menu) return;
+  const available = getAvailableODsForRow(row.from, row.to);
+  const html = [1,2,3,4,5,6,7,8,9].map(od => {
+    const disabled = !available.has(od);
+    const sel = row.od === od ? 'selected' : '';
+    return `<button class="od-opt ${sel} ${disabled?'disabled':''}" ${disabled?'disabled':''}
+      onclick="selectOD('${panel}','${key}',${od})">OD ${od}</button>`;
+  }).join('');
+  menu.innerHTML = html;
+  menu.classList.add('open');
+  openODMenuFor = menuId;
+}
+
+function selectOD(panel, key, od) {
+  const row = getRow(panel, key);
+  if (!row) return;
+  row.od = od;
+  closeODMenu();
+  reRender(panel);
+  validatePanel(panel);
+}
+
+function closeODMenu() {
+  if (openODMenuFor) {
+    const m = document.getElementById(openODMenuFor);
+    if (m) m.classList.remove('open');
+    openODMenuFor = null;
+  }
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.od-pill-wrap')) closeODMenu();
+});
+
+// ── VALIDATION ──
+function rowsValid(rows) {
+  if (rows.length === 0) return false;
+  return rows.every(r => {
+    if (r.from === null || r.from === undefined) return false;
+    if (r.to === null || r.to === undefined) return false;
+    if (r.from > r.to) return false;
+    if (r.od === null || r.od === undefined) return false;
+    return true;
   });
 }
 
+function validateQuick() {
+  const rows = Object.values(quickRows);
+  document.getElementById('btn-quick-next').disabled = !rowsValid(rows);
+}
+
+function validateMulti() {
+  document.getElementById('btn-multi-next').disabled = !rowsValid(multiRows);
+}
+
+// ── RESULTS ──
+function getActiveRows() {
+  const raw = mode === 'quick' ? Object.values(quickRows) : multiRows;
+  return mergeRows(raw);
+}
+
+function goToResults() {
+  document.getElementById('panel-quick').classList.remove('active');
+  document.getElementById('panel-multi').classList.remove('active');
+  document.getElementById('panel-results').classList.add('active');
+  buildResults();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function goToInput() {
+  document.getElementById('panel-results').classList.remove('active');
+  if (mode === 'quick') document.getElementById('panel-quick').classList.add('active');
+  else document.getElementById('panel-multi').classList.add('active');
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
 function buildResults() {
-  const minOD = chosenOD;
-  const rangeStr = selRanges.map(r => r.from === r.to ? `${r.from} nm` : `${r.from}–${r.to} nm`).join(' + ');
+  const rows = getActiveRows();
+  const area = document.getElementById('results-area');
 
-  const matches = DB
-    .map(p => ({ ...p, got: getODforAllRanges(p) }))
-    .filter(p => p.got !== null && p.got >= minOD)
-    .sort((a,b) => b.got - a.got || (b.mat.includes('Glass') ? 1 : -1));
+  // Build match list: each product gets a per-row OD breakdown
+  const matches = [];
+  for (const p of DB) {
+    const breakdown = [];
+    let okAll = true;
+    for (const r of rows) {
+      const got = getODforRange(p, r.from, r.to);
+      if (got === null || got < r.od) { okAll = false; break; }
+      breakdown.push({ row: r, got });
+    }
+    if (okAll) matches.push({ ...p, breakdown, worstGot: Math.min(...breakdown.map(b => b.got)) });
+  }
 
-  const area = document.getElementById('results');
+  matches.sort((a,b) => {
+    const odDiff = b.worstGot - a.worstGot;
+    if (odDiff !== 0) return odDiff;
+    const aGlass = a.mat.includes('Glass') ? 1 : 0;
+    const bGlass = b.mat.includes('Glass') ? 1 : 0;
+    return aGlass - bGlass;
+  });
+
+  const rowStrs = rows.map(r => {
+    const wl = r.from === r.to ? `${r.from} nm` : `${r.from}–${r.to} nm`;
+    const name = r.name ? `${r.name} ` : '';
+    const mergedNote = r.mergedFrom ? ' <span style="color:var(--text-dim); font-size:11px;">(merged)</span>' : '';
+    return `<div class="rm-row"><span class="rm-row-name">${name}${wl}</span><span class="rm-row-od">OD ≥ ${r.od}</span>${mergedNote}</div>`;
+  }).join('');
+
+  const meta = `<div class="result-meta">
+    <div class="rm-label">Required protection</div>
+    <div class="rm-rows">${rowStrs}</div>
+    <div class="rm-summary"><span class="rm-found">${matches.length}</span> ${matches.length === 1 ? 'filter matches' : 'filters match'} all requirements</div>
+  </div>`;
 
   if (!matches.length) {
-    area.innerHTML = `<div class="empty"><div class="empty-icon">◎</div><h3>No matching filters found</h3><p>No filter in the current database covers <strong>${rangeStr}</strong> at OD ≥ ${minOD}.<br>Try lowering your OD requirement, or contact your Univet distributor for the latest product range.</p></div>`;
+    area.innerHTML = meta + `<div class="empty"><div class="empty-icon">◎</div><h3>No matching filters found</h3><p>No single filter in the database satisfies all of the above requirements simultaneously.<br>Try relaxing one constraint, or contact your Univet distributor for custom options.</p></div>`;
     return;
   }
 
-  const meta = `
-    <div class="result-meta">
-      <div class="rm-item"><div class="rm-label">Wavelength Range(s)</div><div class="rm-value" style="font-size:18px">${rangeStr}</div></div>
-      <div class="rm-item"><div class="rm-label">Min OD Required</div><div class="rm-value">≥ ${minOD}</div></div>
-      <div class="rm-item"><div class="rm-label">Matching Filters</div><div class="rm-value">${matches.length}<span class="rm-unit"> found</span></div></div>
-    </div>`;
-
   const cards = matches.map((p, i) => {
     const swatch = SWATCHES[p.color] || '#555';
-    const pct = Math.round((p.got / 9) * 100);
     const isB = i === 0;
-    const reasonText = isB
-      ? '<strong>Best match:</strong> Achieves OD ' + p.got + ' across ' + rangeStr + (p.got > minOD ? ', exceeding your requirement by ' + (p.got - minOD) + ' level(s) for added safety margin' : ', exactly meeting your requirement') + '. VLT ' + p.vlt + '%' + (p.vlt >= 60 ? ' — excellent visibility' : p.vlt >= 30 ? ' — clear vision' : ' — suited for high-power environments') + '.'
-      : 'Achieves OD ' + p.got + ' across ' + rangeStr + (p.got > minOD ? ' (' + (p.got - minOD) + ' level(s) above requirement)' : '') + '. VLT ' + p.vlt + '%.';
-    const alignText = (p.align && p.align !== '—') ? '<br><span style="color:var(--text-dim);font-size:11px;font-family:var(--mono)">Alignment window: ' + p.align + '</span>' : '';
-    const badge = isB ? '<div class="best-badge">Best Match</div>' : '<div class="alt-badge">Option ' + (i+1) + '</div>';
+    const badge = isB ? '<div class="best-badge">Best Match</div>' : `<div class="alt-badge">Option ${i+1}</div>`;
+    const breakdownHtml = p.breakdown.map(b => {
+      const wl = b.row.from === b.row.to ? `${b.row.from}nm` : `${b.row.from}–${b.row.to}nm`;
+      return `<span class="tag tag-od">${wl}: OD ${b.got}</span>`;
+    }).join('');
+    const reason = isB
+      ? `<strong>Best match:</strong> Satisfies all ${rows.length} wavelength requirement${rows.length>1?'s':''} with VLT ${p.vlt}%${p.vlt >= 60 ? ' — excellent visibility' : p.vlt >= 30 ? ' — clear vision' : ' — suited for high-power environments'}.`
+      : `Satisfies all wavelength requirements. VLT ${p.vlt}%.`;
+    const alignText = (p.align && p.align !== '—') ? `<br><span style="color:var(--text-dim);font-size:11px;font-family:var(--mono)">Alignment window: ${p.align}</span>` : '';
 
-    return '<div class="rc ' + (isB ? 'best' : '') + '" style="animation-delay:' + (i*0.07) + 's">'
-      + '<div class="rc-left">' + badge
-      + '<div class="rc-code">' + p.code + '</div>'
-      + '<div class="color-swatch" style="background:' + swatch + '"></div>'
-      + '<div class="rc-swatch-label">' + p.color + '</div></div>'
-      + '<div class="rc-mid">'
-      + '<h3>' + p.mat + ' · VLT ' + p.vlt + '%</h3>'
-      + '<div class="rc-tags">'
-      + '<span class="tag tag-od">OD ' + p.got + ' · ' + rangeStr + '</span>'
-      + '<span class="tag tag-vlt">VLT ' + p.vlt + '%</span>'
-      + '<span class="tag tag-mat">' + p.mat + '</span></div>'
-      + '<div class="rc-reason">' + reasonText + alignText + '</div>'
-      + '<div class="od-bar-wrap">'
-      + '<div class="od-bar-labels"><span>Protection Level</span><span>OD ' + p.got + ' / 9</span></div>'
-      + '<div class="od-bar-track"><div class="od-bar-fill" style="width:' + pct + '%"></div></div>'
-      + '</div></div>'
-      + '<div class="rc-right">'
-      + '<button class="btn-quote" data-code="' + p.code + '" onclick="showQuote(this)">Request Quote</button>'
-      + '<button class="btn-spec" onclick="showDatasheet()">Datasheet</button>'
-      + '</div>'
-      + '<div style="grid-column:1/-1">'
-      + '<button class="btn-toggle-frames" id="fb-' + p.code + '" data-code="' + p.code + '" onclick="toggleFrames(this)">'
-      + '<span>Select frame &amp; order code</span><span class="toggle-arrow">▼</span></button>'
-      + '<div class="frame-panel" id="fp-' + p.code + '"></div>'
-      + '</div>'
-      + '</div>';
+    return `<div class="rc ${isB ? 'best' : ''}" style="animation-delay:${i*0.07}s">
+      <div class="rc-left">
+        ${badge}
+        <div class="rc-code">${p.code}</div>
+        <div class="color-swatch" style="background:${swatch}"></div>
+        <div class="rc-swatch-label">${p.color}</div>
+      </div>
+      <div class="rc-mid">
+        <h3>${p.mat} · VLT ${p.vlt}%${p.alignmentOnly ? ' <span style="background:var(--warn-bg);color:var(--warn);padding:2px 7px;border-radius:3px;font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.5px;border:1px solid var(--warn-bdr);margin-left:6px;">Alignment Only</span>' : ''}</h3>
+        <div class="rc-tags">${breakdownHtml}<span class="tag tag-vlt">VLT ${p.vlt}%</span><span class="tag tag-mat">${p.mat}</span></div>
+        <div class="rc-reason">${reason}${alignText}</div>
+      </div>
+      <div class="rc-right">
+        <button class="btn-quote" data-code="${p.code}" onclick="showQuote(this)">Request Quote</button>
+        <button class="btn-spec" onclick="showDatasheet()">Datasheet</button>
+      </div>
+      <div style="grid-column:1/-1">
+        <button class="btn-toggle-frames" id="fb-${p.code}" data-code="${p.code}" onclick="toggleFrames(this)">
+          <span>Select frame &amp; order code</span><span class="toggle-arrow">▼</span>
+        </button>
+        <div class="frame-panel" id="fp-${p.code}"></div>
+      </div>
+    </div>`;
   }).join('');
 
-  const disc = `<div class="disclaimer"><strong>⚠ Disclaimer:</strong> Results are generated from the Univet Laser Safety Filters Technical Data Sheet Rev. 02/2024 and are for reference only. Before purchasing, always verify the complete frame + filter combination using the frame code and confirm the CE Declaration of Conformity.</div>`;
+  const disclaimer = `<div class="disclaimer"><strong>⚠ Disclaimer:</strong> Results are generated from the Univet Laser Safety Filters Technical Data Sheet Rev. 02/2024 and price list 2025. For reference only. Before purchasing, verify the complete frame + filter combination using the order code and confirm the CE Declaration of Conformity.</div>`;
 
-  area.innerHTML = meta + `<div class="result-list">${cards}</div>` + disc;
+  area.innerHTML = meta + `<div class="result-list">${cards}</div>` + disclaimer;
 }
-
-
 
 function showQuote(btn) {
-  var code = btn.getAttribute('data-code');
+  const code = btn.getAttribute('data-code');
   alert('Request a quote\nProduct: ' + code + '\nPlease contact your Univet distributor.');
 }
+
 function showDatasheet() {
   alert('Datasheet download\nComing soon.');
 }
+
 function toggleFrames(el) {
-  const code  = el.getAttribute('data-code');
+  const code = el.getAttribute('data-code');
   const panel = document.getElementById('fp-' + code);
   const btn   = document.getElementById('fb-' + code);
   if (!panel) return;
   const isOpen = panel.classList.contains('open');
   panel.classList.toggle('open', !isOpen);
   btn.classList.toggle('open', !isOpen);
-  btn.querySelector('.toggle-arrow').textContent = isOpen ? '▼' : '▲';
   if (!isOpen && panel.innerHTML.trim() === '') {
     const items = FRAMES_DB[code] || [];
     if (!items.length) {
       panel.innerHTML = '<p style="font-size:12px;color:var(--text-dim)">No frame data available. Please contact your distributor.</p>';
     } else {
-      panel.innerHTML = `
-        <div class="frame-panel-title">Available frames & ordering codes</div>
-        <table class="frame-table">
-          <thead><tr>
-            <th>Frame</th><th>Order Code</th><th>Colour</th><th>Price</th>
-          </tr></thead>
-          <tbody>${items.map(item => `
-            <tr>
-              <td>${item.frame}</td>
-              <td><span class="sku-code">${item.sku}</span></td>
-              <td>${item.color}</td>
-              <td><span class="price-tag">€${item.price ?? '—'}</span></td>
-            </tr>`).join('')}
-          </tbody>
-        </table>`;
+      const rows = items.map(item => '<tr>'
+        + '<td>' + item.frame + '</td>'
+        + '<td><span class="sku-code">' + item.sku + '</span></td>'
+        + '<td>' + item.color + '</td>'
+        + '<td><span class="price-tag">€' + (item.price ?? '—') + '</span></td>'
+        + '</tr>').join('');
+      panel.innerHTML = '<div class="frame-panel-title">Available frames &amp; order codes</div>'
+        + '<table class="frame-table"><thead><tr><th>Frame</th><th>Order Code</th><th>Colour</th><th>Price</th></tr></thead>'
+        + '<tbody>' + rows + '</tbody></table>';
     }
   }
 }
 
-function goTo(n) {
-  for (let i=1; i<=3; i++) {
-    document.getElementById(`p${i}`).classList.remove('active');
-    const tab = document.getElementById(`pt${i}`);
-    tab.classList.remove('active','done');
-    if (i < n) { tab.classList.add('done'); tab.querySelector('.prog-num').textContent = '✓'; }
-    else if (i === n) tab.classList.add('active');
-    else tab.querySelector('.prog-num').textContent = i;
-  }
-  document.getElementById(`p${n}`).classList.add('active');
-  if (n === 2) refreshODCards();
-  if (n === 3) buildResults();
-  window.scrollTo({ top:0, behavior:'smooth' });
+// ── RESET ──
+function resetAll() {
+  quickSelected.clear();
+  quickRows = {};
+  multiRows = [];
+  renderLaserGrid();
+  renderQuickRows();
+  addMultiRow();
+  setMode('quick');
+  validateQuick();
+  validateMulti();
 }
 
-function reset() {
-  selRanges = [{ from: null, to: null }];
-  chosenOD = null;
-  renderRanges();
-  document.getElementById('btn1next').disabled = true;
-  document.getElementById('btn2next').disabled = true;
-  document.querySelectorAll('.od-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('od-info').classList.remove('show');
-  goTo(1);
-}
-
-selRanges = [{ from: null, to: null }];
-renderRanges();
+// ── INIT ──
+renderLaserGrid();
+renderQuickPicks();
+addMultiRow();  // start multi with one empty row
 </script>
 </body>
 </html>
