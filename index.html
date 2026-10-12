@@ -102,7 +102,6 @@ h1 em { font-style:italic; color:var(--accent); font-weight:400; font-family:'Ba
 .od-opt { padding:6px 10px; font-family:var(--mono); font-size:11px; color:var(--text-mid); background:transparent; border:none; cursor:pointer; border-radius:3px; min-width:42px; }
 .od-opt:hover { background:var(--bg4); color:var(--white); }
 .od-opt.selected { background:var(--accent); color:var(--white); }
-.od-opt.disabled { opacity:0.25; cursor:not-allowed; }
 
 /* Remove button */
 .wl-remove { background:transparent; border:1px solid var(--border); color:var(--text-dim); width:28px; height:28px; border-radius:4px; font-size:14px; cursor:pointer; margin-left:auto; transition:all 0.15s; }
@@ -480,18 +479,6 @@ function mergeRows(rows) {
   return merged;
 }
 
-// What ODs are available for a row (given its wavelength)? Used to disable impossible OD options.
-function getAvailableODsForRow(from, to) {
-  const set = new Set();
-  for (let od = 1; od <= 9; od++) {
-    for (const p of DB) {
-      const got = getODforRange(p, from, to);
-      if (got !== null && got >= od) { set.add(od); break; }
-    }
-  }
-  return set;
-}
-
 // ── MODE ──
 function setMode(m) {
   mode = m;
@@ -622,11 +609,6 @@ function setRowKind(panel, key, kind) {
     // Multi mode: give a sensible starting gap
     row.to = row.from;
   }
-  // Reset OD if invalid for new wavelength
-  if (row.from !== null && row.to !== null && row.od !== null) {
-    const available = getAvailableODsForRow(row.from, row.to);
-    if (!available.has(row.od)) row.od = null;
-  }
   reRender(panel);
   validatePanel(panel);
 }
@@ -641,23 +623,9 @@ function updateRowField(panel, key, field, value) {
   if (row.kind === 'single' && field === 'from') row.to = num;
   // Mark invalid visually (red border) when user typed something but it's out of range
   row.invalid = (value !== '' && !inRange);
-  // Reset OD when wavelength changes — old OD may no longer be achievable
   if (field === 'from' || field === 'to') {
     // User manually edited the wavelength — drop any preset laser-type name label
     if (row.name) row.name = null;
-    if (row.od !== null) {
-      // Re-validate: is row.od still achievable for the new wavelength?
-      if (row.from !== null && row.to !== null) {
-        const available = getAvailableODsForRow(row.from, row.to);
-        if (!available.has(row.od)) {
-          row.od = null;
-          reRender(panel);
-        }
-      } else {
-        row.od = null;
-        reRender(panel);
-      }
-    }
   }
   validatePanel(panel);
 }
@@ -691,11 +659,10 @@ function toggleODMenu(panel, key) {
   }
   const menu = document.getElementById(menuId);
   if (!menu) return;
-  const available = getAvailableODsForRow(row.from, row.to);
+  // OD is the user's requirement; filter availability is checked in the results.
   const html = [1,2,3,4,5,6,7,8,9].map(od => {
-    const disabled = !available.has(od);
     const sel = row.od === od ? 'selected' : '';
-    return `<button class="od-opt ${sel} ${disabled?'disabled':''}" ${disabled?'disabled':''}
+    return `<button class="od-opt ${sel}"
       onclick="selectOD('${panel}','${key}',${od})">OD ${od}</button>`;
   }).join('');
   menu.innerHTML = html;
@@ -805,7 +772,7 @@ function buildResults() {
   </div>`;
 
   if (!matches.length) {
-    area.innerHTML = meta + `<div class="empty"><div class="empty-icon">◎</div><h3>No matching filters found</h3><p>No single filter in the database satisfies all of the above requirements simultaneously.<br>Try relaxing one constraint, or contact your Univet distributor for custom options.</p></div>`;
+    area.innerHTML = meta + `<div class="empty"><div class="empty-icon">◎</div><h3>No matching filters found</h3><p>No single filter in our database meets all your wavelength and OD requirements.<br><br>Check your laser specifications. If the range you entered is too broad, narrow it to the actual operating range.<br><br>For separate wavelengths or bands, use <strong>Add wavelength</strong> to enter each one in a separate row.</p></div>`;
     return;
   }
 
